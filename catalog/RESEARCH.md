@@ -15,23 +15,27 @@ release/CI workflows, source code):
 - license file (`LICENSE`/`COPYING`)
 - ROM requirements and hashes (README)
 
-**Release asset names were not verified against the API.** The
-`verify-catalog` job in `.github/workflows/ci.yml` does that on every push
-and weekly: it fetches each release and fails unless `asset_pattern`
-matches exactly one asset. Fix any pattern it reports before relying on it.
+Release asset names were later checked against the API with
+`verify-catalog` (30 October 2026). The `verify-catalog` job in
+`.github/workflows/ci.yml` repeats that on every push and weekly: it fetches
+each release and fails unless `asset_pattern` matches exactly one asset. Fix
+any pattern it reports before relying on it.
 
-| id | repo | asset name source | status |
-|---|---|---|---|
-| zelda64recomp | Zelda64Recomp/Zelda64Recomp | assumed from N64Recomp naming | pending API check |
-| unleashedrecomp | hedge-dev/UnleashedRecomp | assumed | pending API check |
-| starfox64recomp | sonicdcer/Starfox64Recomp | assumed from N64Recomp naming | pending API check |
-| mariokart64recomp | sonicdcer/MarioKart64Recomp | assumed from N64Recomp naming | pending API check |
-| banjorecomp | BanjoRecomp/BanjoRecomp | assumed from N64Recomp naming | pending API check |
-| shipofharkinian | HarbourMasters/Shipwright | assumed (`win64`/`windows`) | pending API check |
-| 2ship2harkinian | 2ship2harkinian/2ship2harkinian | assumed (`win64`/`windows`) | pending API check |
-| starship | HarbourMasters/Starship | assumed (`win64`/`windows`) | pending API check |
-| perfect-dark | fgsfdsfgs/perfect_dark | README links `ci-dev-build/pd-x86_64-windows.zip` | name confirmed by README |
-| rmg | Rosalie241/RMG | CI artifact `RMG-Portable-Windows64-<rev>` | pending API check |
+| id | repo | Windows asset (30 October 2026) |
+|---|---|---|
+| zelda64recomp | Zelda64Recomp/Zelda64Recomp | `Zelda64Recompiled-v1.2.2-Windows.zip` |
+| unleashedrecomp | hedge-dev/UnleashedRecomp | `UnleashedRecomp-Windows.zip` |
+| starfox64recomp | sonicdcer/Starfox64Recomp | `Starfox64Recompiled-v1.0.3-Windows-RelWithDebInfo.zip` |
+| mariokart64recomp | sonicdcer/MarioKart64Recomp | `MarioKart64Recompiled-v0.9.2-Windows-RelWithDebInfo.zip` |
+| banjorecomp | BanjoRecomp/BanjoRecomp | `BanjoRecompiled-v1.0.2-Windows.zip` |
+| shipofharkinian | HarbourMasters/Shipwright | `SoH-Dewey-Bravo-Win64.zip` |
+| 2ship2harkinian | 2ship2harkinian/2ship2harkinian | `2Ship-Battler-Bravo-Win64.zip` |
+| starship | HarbourMasters/Starship | `Starship-Barnard-Alfa-Windows.zip` |
+| perfect-dark | fgsfdsfgs/perfect_dark | `pd-x86_64-windows.zip` (tag `ci-dev-build`) |
+| rmg | Rosalie241/RMG | `RMG-Portable-Windows64-v0.9.0.zip` |
+
+The sonicdcer ports add a build type (`-RelWithDebInfo`) after `-Windows`,
+so their patterns allow an optional `-<word>` suffix.
 
 ## Verified details
 
