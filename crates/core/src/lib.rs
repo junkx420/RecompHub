@@ -15,6 +15,8 @@ pub mod installed;
 pub mod job;
 pub mod paths;
 pub mod platform;
+pub mod process;
 pub mod settings;
+pub mod update;
 
 pub use error::{AppError, Result};

@@ -97,7 +97,14 @@ export type Progress =
   | { phase: "downloading"; done: number; total: number }
   | { phase: "verifying" }
   | { phase: "extracting"; done: number; total: number }
+  | { phase: "applying"; done: number; total: number }
   | { phase: "finalizing" };
+
+export interface UpdateInfo {
+  id: string;
+  installed: string;
+  latest: string;
+}
 
 export interface InstalledSummary {
   id: string;
@@ -106,7 +113,9 @@ export interface InstalledSummary {
   dir: string;
   exe: string;
   installed_at: string;
+  updated_at: string | null;
   file_count: number;
+  previous_version: string | null;
 }
 
 export type JobEvent =

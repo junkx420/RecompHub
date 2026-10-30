@@ -528,3 +528,30 @@ ul.code-list {
   font-weight: 700;
   align-self: flex-start;
 }
+/* Updates */
+.library-toolbar {
+  justify-content: flex-start;
+}
+.library-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: stretch;
+}
+.library-main .badge {
+  margin-left: 8px;
+}
+.badge-accent {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: transparent;
+}
+@media (max-width: 640px) {
+  .library-item {
+    flex-wrap: wrap;
+  }
+  .library-actions {
+    flex-direction: row;
+    width: 100%;
+  }
+}

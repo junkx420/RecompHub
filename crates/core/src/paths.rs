@@ -71,6 +71,16 @@ impl AppDirs {
         }
     }
 
+    /// The library an installed game folder belongs to. The library setting
+    /// may have changed since the install, so updates use the folder's own
+    /// library to keep staging and backups on its volume.
+    pub fn library_containing(&self, app_dir: &Path) -> LibraryDirs {
+        match app_dir.parent() {
+            Some(parent) if parent != self.default_library() => self.library(Some(parent)),
+            _ => self.library(None),
+        }
+    }
+
     /// Create the fixed app directories.
     pub fn ensure(&self) -> Result<()> {
         for dir in [self.root.clone(), self.cache(), self.logs()] {

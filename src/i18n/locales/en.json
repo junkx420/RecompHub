@@ -110,7 +110,11 @@
     "exe_not_found": "The download does not contain the expected program ({{pattern}}).",
     "foreign_content": "{{path}} already contains files that RecompHub did not install.",
     "already_installed": "{{id}} is already installed.",
-    "busy": "{{id}} is busy with another task."
+    "busy": "{{id}} is busy with another task.",
+    "not_installed": "{{id}} is not installed.",
+    "up_to_date": "{{id}} is already at {{version}}.",
+    "no_previous_version": "There is no previous version of {{id}} to restore.",
+    "game_running": "Close the game first ({{processes}} is running)."
   },
   "install": {
     "title": "Install",
@@ -130,7 +134,22 @@
       "downloading": "Downloading",
       "verifying": "Checking download…",
       "extracting": "Unpacking",
-      "finalizing": "Finishing…"
+      "finalizing": "Finishing…",
+      "applying": "Swapping files"
     }
+  },
+  "update": {
+    "check": "Check for updates",
+    "checking": "Checking…",
+    "available_one": "{{count}} update available",
+    "available_other": "{{count}} updates available",
+    "updateAll": "Update all ({{count}})",
+    "update": "Update",
+    "updateTo": "Update to {{version}}",
+    "badge": "{{version}} available",
+    "keepsData": "Saves, settings and your own files are kept. The current version is backed up first.",
+    "restore": "Restore {{version}}",
+    "restoreTitle": "Restore previous version",
+    "restoreConfirm": "Go back to {{version}}? Saves and settings are kept, and the current version is backed up so you can switch back."
   }
 }

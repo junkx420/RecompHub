@@ -37,9 +37,20 @@ impl CancelFlag {
 #[serde(tag = "phase", rename_all = "snake_case")]
 pub enum Progress {
     Resolving,
-    Downloading { done: u64, total: u64 },
+    Downloading {
+        done: u64,
+        total: u64,
+    },
     Verifying,
-    Extracting { done: u64, total: u64 },
+    Extracting {
+        done: u64,
+        total: u64,
+    },
+    /// Swapping files in the game folder (update or restore).
+    Applying {
+        done: u64,
+        total: u64,
+    },
     Finalizing,
 }
 

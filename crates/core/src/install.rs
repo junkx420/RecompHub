@@ -85,11 +85,14 @@ pub fn resolve_exe(pattern: &str, files: &[String]) -> Result<String> {
     matches.first().map(|f| (*f).clone()).ok_or_else(not_found)
 }
 
-fn stamp() -> String {
-    Utc::now().format("%Y%m%d-%H%M%S%3f").to_string()
+/// Sortable, unique-enough timestamp for folder names and revisions.
+pub(crate) fn stamp() -> String {
+    Utc::now().format("%Y%m%d-%H%M%S%6f").to_string()
 }
 
-async fn blocking<T: Send + 'static>(f: impl FnOnce() -> Result<T> + Send + 'static) -> Result<T> {
+pub(crate) async fn blocking<T: Send + 'static>(
+    f: impl FnOnce() -> Result<T> + Send + 'static,
+) -> Result<T> {
     tokio::task::spawn_blocking(f)
         .await
         .map_err(|e| AppError::InvalidInput {
@@ -135,42 +138,27 @@ pub async fn install(req: InstallRequest<'_>) -> Result<InstalledApp> {
         Preflight::Ready { .. } => false,
     };
 
-    let asset = release.asset_for(entry)?;
-    let spec = DownloadSpec::for_asset(asset);
-    let downloads = lib.staging.join("downloads");
-    let archive_path = download::download(http, &spec, &downloads, cancel, progress).await?;
-    cancel.check()?;
-
-    let work = lib.staging.join(format!("{}-{}", entry.id, stamp()));
-    let result = unpack_and_place(
-        &archive_path,
-        &asset.name,
-        &work,
-        lib,
-        entry,
-        foreign,
-        cancel,
-        progress,
-    )
-    .await;
-    // Work folder and finished download are only scaffolding; a retry
-    // downloads again, so never leave them behind.
-    let _ = tokio::fs::remove_dir_all(&work).await;
-    let _ = tokio::fs::remove_file(&archive_path).await;
-    let (target, exe, files) = result?;
+    let prepared = prepare(http, lib, entry, release, cancel, progress).await?;
+    let placed = place(&prepared, lib, entry, foreign).await;
+    // The work folder is only scaffolding; never leave it behind.
+    let _ = tokio::fs::remove_dir_all(&prepared.work).await;
+    let target = placed?;
 
     progress(Progress::Finalizing);
     let app = InstalledApp {
         id: entry.id.clone(),
         name: entry.name.clone(),
         version: release.tag_name.clone(),
-        asset_name: asset.name.clone(),
-        asset_id: asset.id,
-        asset_sha256: spec.sha256.clone(),
+        asset_name: prepared.asset_name,
+        asset_id: prepared.asset_id,
+        asset_sha256: prepared.asset_sha256,
         dir: target.clone(),
-        exe,
+        exe: prepared.exe,
         installed_at: Utc::now(),
-        files,
+        updated_at: None,
+        files: prepared.files,
+        previous: None,
+        revision: stamp(),
     };
     let mut db = InstalledDb::load(installed_file)?;
     db.apps.insert(app.id.clone(), app.clone());
@@ -183,17 +171,63 @@ pub async fn install(req: InstallRequest<'_>) -> Result<InstalledApp> {
     Ok(app)
 }
 
-#[allow(clippy::too_many_arguments)]
-async fn unpack_and_place(
+/// A release downloaded, verified and unpacked into a staging work folder.
+/// The caller removes `work` when done with it.
+pub(crate) struct Prepared {
+    pub work: PathBuf,
+    /// Folder holding the release files (inside `work`).
+    pub root: PathBuf,
+    pub exe: String,
+    pub files: BTreeMap<String, String>,
+    pub asset_name: String,
+    pub asset_id: u64,
+    pub asset_sha256: Option<String>,
+}
+
+/// Download, verify and unpack `release` into a fresh work folder in the
+/// library's staging area. Cleans up after itself on failure.
+pub(crate) async fn prepare(
+    http: &Http,
+    lib: &LibraryDirs,
+    entry: &CatalogEntry,
+    release: &Release,
+    cancel: &CancelFlag,
+    progress: ProgressFn<'_>,
+) -> Result<Prepared> {
+    let asset = release.asset_for(entry)?;
+    let spec = DownloadSpec::for_asset(asset);
+    let downloads = lib.staging.join("downloads");
+    let archive_path = download::download(http, &spec, &downloads, cancel, progress).await?;
+    let work = lib.staging.join(format!("{}-{}", entry.id, stamp()));
+    let result = unpack(&archive_path, &asset.name, &work, entry, cancel, progress).await;
+    // A finished download is never resumed, so it is only scaffolding.
+    let _ = tokio::fs::remove_file(&archive_path).await;
+    match result {
+        Ok((root, exe, files)) => Ok(Prepared {
+            work,
+            root,
+            exe,
+            files,
+            asset_name: asset.name.clone(),
+            asset_id: asset.id,
+            asset_sha256: spec.sha256,
+        }),
+        Err(err) => {
+            let _ = tokio::fs::remove_dir_all(&work).await;
+            Err(err)
+        }
+    }
+}
+
+async fn unpack(
     archive_path: &Path,
     asset_name: &str,
     work: &Path,
-    lib: &LibraryDirs,
     entry: &CatalogEntry,
-    foreign: bool,
     cancel: &CancelFlag,
     progress: ProgressFn<'_>,
 ) -> Result<(PathBuf, String, BTreeMap<String, String>)> {
+    cancel.check()?;
     let unpacked = work.join("unpacked");
     // The progress callback is borrowed and cannot move into spawn_blocking;
     // block_in_place needs the multi-threaded runtime, which Tauri uses.
@@ -207,18 +241,37 @@ async fn unpack_and_place(
         let root = root.clone();
         blocking(move || {
             let files = archive::list_files(&root)?;
-            let mut hashes = BTreeMap::new();
-            for rel in &files {
-                let path = root.join(rel);
-                hashes.insert(rel.clone(), download::sha256_file_blocking(&path)?);
-            }
+            let hashes = hash_files(&root, &files)?;
             Ok((files, hashes))
         })
         .await?
     };
     let exe = resolve_exe(&entry.exe, &files)?;
     cancel.check()?;
+    Ok((root, exe, hashes))
+}
 
+/// SHA-256 of each relative file below `root`. Blocking.
+pub(crate) fn hash_files(root: &Path, files: &[String]) -> Result<BTreeMap<String, String>> {
+    files
+        .iter()
+        .map(|rel| {
+            Ok((
+                rel.clone(),
+                download::sha256_file_blocking(&root.join(rel))?,
+            ))
+        })
+        .collect()
+}
+
+/// Move a prepared release into the library as a new game folder.
+async fn place(
+    prepared: &Prepared,
+    lib: &LibraryDirs,
+    entry: &CatalogEntry,
+    foreign: bool,
+) -> Result<PathBuf> {
+    let root = &prepared.root;
     let target = lib.app(&entry.id);
     tokio::fs::create_dir_all(&lib.apps).await.at(&lib.apps)?;
     if foreign {
@@ -234,8 +287,8 @@ async fn unpack_and_place(
         // Preflight saw it empty; an empty folder can simply go.
         tokio::fs::remove_dir(&target).await.at(&target)?;
     }
-    tokio::fs::rename(&root, &target).await.at(&target)?;
-    Ok((target, exe, hashes))
+    tokio::fs::rename(root, &target).await.at(&target)?;
+    Ok(target)
 }
 
 #[cfg(test)]

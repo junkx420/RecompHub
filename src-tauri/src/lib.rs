@@ -4,8 +4,9 @@
 mod commands;
 mod state;
 
+use recomphub_core::installed::InstalledDb;
 use recomphub_core::paths::AppDirs;
-use recomphub_core::platform;
+use recomphub_core::{platform, update};
 use state::AppState;
 use tauri::Manager;
 
@@ -31,6 +32,7 @@ pub fn run() {
             std::process::exit(1);
         }
     };
+    recover_interrupted_jobs(&state);
 
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
@@ -53,12 +55,33 @@ pub fn run() {
             commands::install,
             commands::job_cancel,
             commands::library_list,
+            commands::update,
+            commands::restore_previous,
+            commands::updates_check,
         ])
         .run(tauri::generate_context!())
         .unwrap_or_else(|err| {
             tracing::error!(%err, "tauri runtime failed");
             std::process::exit(1);
         });
+}
+
+/// Undo updates a crash interrupted, before the UI can start new jobs. Looks
+/// in the current library and in every library an installed app lives in.
+fn recover_interrupted_jobs(state: &AppState) {
+    let dirs = &state.dirs;
+    let settings = state.settings.blocking_read();
+    let mut libraries = vec![
+        dirs.library(None),
+        dirs.library(settings.library_dir.as_deref()),
+    ];
+    match InstalledDb::load(&dirs.installed_file()) {
+        Ok(db) => libraries.extend(db.apps.values().map(|a| dirs.library_containing(&a.dir))),
+        Err(err) => tracing::error!(%err, "cannot read installed.json for recovery"),
+    }
+    for line in update::recover(dirs, &libraries) {
+        tracing::warn!("recovery: {line}");
+    }
 }
 
 fn init_logging(dirs: &AppDirs) -> tracing_appender::non_blocking::WorkerGuard {

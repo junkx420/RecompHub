@@ -81,6 +81,18 @@ pub enum AppError {
     #[error("{id} is busy with another job")]
     Busy { id: String },
 
+    #[error("{id} is not installed")]
+    NotInstalled { id: String },
+
+    #[error("{id} is already at {version}")]
+    UpToDate { id: String, version: String },
+
+    #[error("{id} has no previous version to restore")]
+    NoPreviousVersion { id: String },
+
+    #[error("close the game first: {processes:?} is running")]
+    GameRunning { processes: Vec<String> },
+
     #[error("cancelled")]
     Cancelled,
 

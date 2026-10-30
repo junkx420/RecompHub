@@ -110,7 +110,11 @@
     "exe_not_found": "Der Download enthält das erwartete Programm nicht ({{pattern}}).",
     "foreign_content": "{{path}} enthält bereits Dateien, die nicht von RecompHub stammen.",
     "already_installed": "{{id}} ist bereits installiert.",
-    "busy": "{{id}} ist gerade mit einer anderen Aufgabe beschäftigt."
+    "busy": "{{id}} ist gerade mit einer anderen Aufgabe beschäftigt.",
+    "not_installed": "{{id}} ist nicht installiert.",
+    "up_to_date": "{{id}} ist bereits auf {{version}}.",
+    "no_previous_version": "Für {{id}} gibt es keine vorherige Version zum Wiederherstellen.",
+    "game_running": "Bitte zuerst das Spiel schließen ({{processes}} läuft noch)."
   },
   "install": {
     "title": "Installieren",
@@ -130,7 +134,22 @@
       "downloading": "Wird heruntergeladen",
       "verifying": "Download wird geprüft…",
       "extracting": "Wird entpackt",
-      "finalizing": "Wird abgeschlossen…"
+      "finalizing": "Wird abgeschlossen…",
+      "applying": "Dateien werden getauscht"
     }
+  },
+  "update": {
+    "check": "Nach Updates suchen",
+    "checking": "Wird geprüft…",
+    "available_one": "{{count}} Update verfügbar",
+    "available_other": "{{count}} Updates verfügbar",
+    "updateAll": "Alle aktualisieren ({{count}})",
+    "update": "Aktualisieren",
+    "updateTo": "Auf {{version}} aktualisieren",
+    "badge": "{{version}} verfügbar",
+    "keepsData": "Spielstände, Einstellungen und eigene Dateien bleiben erhalten. Die aktuelle Version wird vorher gesichert.",
+    "restore": "{{version}} wiederherstellen",
+    "restoreTitle": "Vorherige Version wiederherstellen",
+    "restoreConfirm": "Zurück zu {{version}}? Spielstände und Einstellungen bleiben erhalten, und die aktuelle Version wird gesichert, sodass du zurückwechseln kannst."
   }
 }

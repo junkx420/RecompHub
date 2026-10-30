@@ -8,6 +8,7 @@ use recomphub_core::installed::{InstalledApp, InstalledDb, InstalledSummary};
 use recomphub_core::job::{CancelFlag, Progress};
 use recomphub_core::paths::{self, LibraryDirs};
 use recomphub_core::settings::Settings;
+use recomphub_core::update::{self, UpdateInfo, UpdateRequest};
 use recomphub_core::{download, github, AppError, Result};
 use serde::Serialize;
 use std::path::PathBuf;
@@ -155,6 +156,12 @@ struct JobFailedEvent<'a> {
     error: &'a AppError,
 }
 
+enum JobKind {
+    Install(InstallOptions),
+    Update,
+    Restore,
+}
+
 /// Start installing `id`. Returns the job id at once; the outcome arrives as
 /// `job:progress`, `job:finished` or `job:failed` events.
 #[tauri::command]
@@ -164,7 +171,40 @@ pub async fn install(
     id: String,
     options: Option<InstallOptions>,
 ) -> Result<u64> {
-    let entry = catalog_entry(&state, &id).await?;
+    start_job(
+        app,
+        &state,
+        id,
+        JobKind::Install(options.unwrap_or_default()),
+    )
+    .await
+}
+
+/// Start updating `id` to its latest release (events as for `install`).
+#[tauri::command]
+pub async fn update(app: AppHandle, state: State<'_, AppState>, id: String) -> Result<u64> {
+    start_job(app, &state, id, JobKind::Update).await
+}
+
+/// Start restoring the version before the last update (events as for `install`).
+#[tauri::command]
+pub async fn restore_previous(
+    app: AppHandle,
+    state: State<'_, AppState>,
+    id: String,
+) -> Result<u64> {
+    start_job(app, &state, id, JobKind::Restore).await
+}
+
+#[tauri::command]
+pub async fn updates_check(state: State<'_, AppState>) -> Result<Vec<UpdateInfo>> {
+    let catalog = load_catalog(&state, false).await;
+    let db = InstalledDb::load(&state.dirs.installed_file())?;
+    Ok(update::check_updates(&state.http, &db, &catalog).await)
+}
+
+async fn start_job(app: AppHandle, state: &AppState, id: String, kind: JobKind) -> Result<u64> {
+    let entry = catalog_entry(state, &id).await?;
     let cancel = CancelFlag::new();
     let job = {
         let mut jobs = state.jobs.lock().expect("jobs lock poisoned");
@@ -184,15 +224,7 @@ pub async fn install(
 
     tauri::async_runtime::spawn(async move {
         let state = app.state::<AppState>();
-        let result = run_install(
-            &app,
-            &state,
-            job,
-            &entry,
-            options.unwrap_or_default(),
-            &cancel,
-        )
-        .await;
+        let result = run_job(&app, &state, job, &entry, kind, &cancel).await;
         state.jobs.lock().expect("jobs lock poisoned").remove(&job);
         let id = entry.id.as_str();
         match result {
@@ -208,7 +240,7 @@ pub async fn install(
             }
             Err(error) => {
                 if !matches!(error, AppError::Cancelled) {
-                    tracing::error!(%id, %error, "install failed");
+                    tracing::error!(%id, %error, "job failed");
                 }
                 let _ = app.emit(
                     "job:failed",
@@ -224,12 +256,12 @@ pub async fn install(
     Ok(job)
 }
 
-async fn run_install(
+async fn run_job(
     app: &AppHandle,
     state: &AppState,
     job: u64,
     entry: &CatalogEntry,
-    options: InstallOptions,
+    kind: JobKind,
     cancel: &CancelFlag,
 ) -> Result<InstalledApp> {
     let throttle = ProgressThrottle::default();
@@ -248,19 +280,38 @@ async fn run_install(
     emit(Progress::Resolving);
     let _slot = state.job_slot.lock().await;
     cancel.check()?;
-    let release = github::fetch_release(&state.http, entry).await?;
-    let lib = library(state).await;
-    install::install(InstallRequest {
-        http: &state.http,
-        lib: &lib,
-        installed_file: &state.dirs.installed_file(),
-        entry,
-        release: &release,
-        options,
-        cancel,
-        progress: &emit,
-    })
-    .await
+    match kind {
+        JobKind::Install(options) => {
+            let release = github::fetch_release(&state.http, entry).await?;
+            let lib = library(state).await;
+            install::install(InstallRequest {
+                http: &state.http,
+                lib: &lib,
+                installed_file: &state.dirs.installed_file(),
+                entry,
+                release: &release,
+                options,
+                cancel,
+                progress: &emit,
+            })
+            .await
+        }
+        JobKind::Update => {
+            let release = github::fetch_release(&state.http, entry).await?;
+            update::update(UpdateRequest {
+                http: &state.http,
+                dirs: &state.dirs,
+                entry,
+                release: &release,
+                cancel,
+                progress: &emit,
+            })
+            .await
+        }
+        JobKind::Restore => tokio::task::block_in_place(|| {
+            update::restore_previous(&state.dirs, entry, cancel, &emit)
+        }),
+    }
 }
 
 /// At most one progress event per 100 ms, but every phase change goes out.

@@ -11,6 +11,7 @@ import type {
   Progress,
   ReleaseInfo,
   Settings,
+  UpdateInfo,
 } from "./types";
 
 export interface Backend {
@@ -23,8 +24,13 @@ export interface Backend {
   installPreflight(id: string): Promise<Preflight>;
   /** Starts the job and resolves with its id; the outcome arrives as events. */
   install(id: string, options?: InstallOptions): Promise<number>;
+  /** Update to the latest release; a job like `install`. */
+  update(id: string): Promise<number>;
+  /** Swap back to the version before the last update; a job like `install`. */
+  restorePrevious(id: string): Promise<number>;
   jobCancel(job: number): Promise<void>;
   libraryList(): Promise<InstalledSummary[]>;
+  updatesCheck(): Promise<UpdateInfo[]>;
   /** Subscribe to job events; resolves with an unsubscribe function. */
   onJobEvent(handler: (event: JobEvent) => void): Promise<() => void>;
 }
@@ -53,8 +59,11 @@ const tauriBackend: Backend = {
   releaseInfo: (id) => invoke("release_info", { id }),
   installPreflight: (id) => invoke("install_preflight", { id }),
   install: (id, options) => invoke("install", { id, options: options ?? null }),
+  update: (id) => invoke("update", { id }),
+  restorePrevious: (id) => invoke("restore_previous", { id }),
   jobCancel: (job) => invoke("job_cancel", { job }),
   libraryList: () => invoke("library_list"),
+  updatesCheck: () => invoke("updates_check"),
   onJobEvent: listenJobs,
 };
 
@@ -76,8 +85,11 @@ function lazyMock(): Backend {
     releaseInfo: (id) => load().then((b) => b.releaseInfo(id)),
     installPreflight: (id) => load().then((b) => b.installPreflight(id)),
     install: (id, o) => load().then((b) => b.install(id, o)),
+    update: (id) => load().then((b) => b.update(id)),
+    restorePrevious: (id) => load().then((b) => b.restorePrevious(id)),
     jobCancel: (job) => load().then((b) => b.jobCancel(job)),
     libraryList: () => load().then((b) => b.libraryList()),
+    updatesCheck: () => load().then((b) => b.updatesCheck()),
     onJobEvent: (h) => load().then((b) => b.onJobEvent(h)),
   };
 }

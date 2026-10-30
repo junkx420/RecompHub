@@ -30,6 +30,7 @@ tempfile = "3"
 wiremock = "0.6"
 zip = { version = "9", default-features = false, features = ["deflate-flate2-zlib-rs", "deflate64", "bzip2", "lzma"] }
 sevenz-rust2 = { version = "0.24", default-features = false, features = ["bzip2", "deflate", "util"] }
+sysinfo = { version = "0.40", default-features = false, features = ["system"] }
 
 [profile.release]
 lto = "thin"

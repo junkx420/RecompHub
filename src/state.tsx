@@ -39,10 +39,16 @@ interface AppContextValue {
   jobs: Record<string, JobState>;
   /** Last failed job per app id (cleared on the next start). */
   jobErrors: Record<string, AppError>;
+  /** Latest release tag per installed app, from the last update check. */
+  latest: Record<string, string>;
+  checkingUpdates: boolean;
   saveSettings(next: Settings): Promise<void>;
   reloadCatalog(): Promise<void>;
   reloadLibrary(): Promise<void>;
+  checkUpdates(): Promise<void>;
   startInstall(id: string, options?: InstallOptions): Promise<void>;
+  startUpdate(id: string): Promise<void>;
+  startRestore(id: string): Promise<void>;
   cancelJob(id: string): Promise<void>;
 }
 
@@ -69,6 +75,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [jobs, setJobs] = useState<Record<string, JobState>>({});
   const [jobErrors, setJobErrors] = useState<Record<string, AppError>>({});
   const endedJobs = useRef(new Set<number>());
+  const [latest, setLatest] = useState<Record<string, string>>({});
+  const [checkingUpdates, setCheckingUpdates] = useState(false);
+
+  const checkUpdates = useCallback(async () => {
+    setCheckingUpdates(true);
+    try {
+      const [apps, updates] = await Promise.all([api.libraryList(), api.updatesCheck()]);
+      setInstalled(apps);
+      // Apps without an update are current: their latest tag is their own.
+      const next: Record<string, string> = Object.fromEntries(apps.map((a) => [a.id, a.version]));
+      for (const u of updates) next[u.id] = u.latest;
+      setLatest(next);
+    } finally {
+      setCheckingUpdates(false);
+    }
+  }, []);
 
   const reloadCatalog = useCallback(async () => {
     setCatalogLoading(true);
@@ -125,6 +147,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // One automatic update check per app start, if the user wants it.
+  const autoChecked = useRef(false);
+  useEffect(() => {
+    if (!settings?.check_updates || autoChecked.current) return;
+    autoChecked.current = true;
+    checkUpdates().catch((err: unknown) => console.warn("update check failed", err));
+  }, [settings, checkUpdates]);
+
   useEffect(() => {
     if (!settings) return;
     applyTheme(settings.theme);
@@ -139,13 +169,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setInfo(await api.appInfo());
   }, []);
 
-  const startInstall = useCallback(async (id: string, options?: InstallOptions) => {
+  const startJob = useCallback(async (id: string, start: () => Promise<number>) => {
     setJobErrors((prev) => without(prev, id));
-    const job = await api.install(id, options);
+    const job = await start();
     // Events can beat this reply; never resurrect a job that already ended.
     if (endedJobs.current.has(job)) return;
     setJobs((prev) => (prev[id] ? prev : { ...prev, [id]: { job, progress: null } }));
   }, []);
+
+  const startInstall = useCallback(
+    (id: string, options?: InstallOptions) => startJob(id, () => api.install(id, options)),
+    [startJob],
+  );
+  const startUpdate = useCallback((id: string) => startJob(id, () => api.update(id)), [startJob]);
+  const startRestore = useCallback((id: string) => startJob(id, () => api.restorePrevious(id)), [startJob]);
 
   const cancelJob = useCallback(
     async (id: string) => {
@@ -165,10 +202,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       installed,
       jobs,
       jobErrors,
+      latest,
+      checkingUpdates,
       saveSettings,
       reloadCatalog,
       reloadLibrary,
+      checkUpdates,
       startInstall,
+      startUpdate,
+      startRestore,
       cancelJob,
     }),
     [
@@ -180,10 +222,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
       installed,
       jobs,
       jobErrors,
+      latest,
+      checkingUpdates,
       saveSettings,
       reloadCatalog,
       reloadLibrary,
+      checkUpdates,
       startInstall,
+      startUpdate,
+      startRestore,
       cancelJob,
     ],
   );

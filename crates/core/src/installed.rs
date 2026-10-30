@@ -27,8 +27,25 @@ pub struct InstalledApp {
     /// Executable, `/`-separated and relative to `dir`.
     pub exe: String,
     pub installed_at: DateTime<Utc>,
-    /// Relative path (`/`-separated) to hex SHA-256, for every installed file.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub updated_at: Option<DateTime<Utc>>,
+    /// Relative path (`/`-separated) to hex SHA-256, for every file this
+    /// release placed. Anything else in `dir` belongs to the port or user.
     pub files: BTreeMap<String, String>,
+    /// Backup of the version before the last update or restore.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub previous: Option<PreviousVersion>,
+    /// Changes with every install, update and restore; an interrupted
+    /// update compares it with its journal to tell commit from rollback.
+    #[serde(default)]
+    pub revision: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PreviousVersion {
+    pub version: String,
+    /// Backup folder (holds `backup.json` and `files/`).
+    pub dir: PathBuf,
 }
 
 /// What the UI needs per installed app (no file list).
@@ -40,7 +57,9 @@ pub struct InstalledSummary {
     pub dir: PathBuf,
     pub exe: String,
     pub installed_at: DateTime<Utc>,
+    pub updated_at: Option<DateTime<Utc>>,
     pub file_count: usize,
+    pub previous_version: Option<String>,
 }
 
 impl InstalledApp {
@@ -52,7 +71,9 @@ impl InstalledApp {
             dir: crate::paths::normalize(&self.dir),
             exe: self.exe.clone(),
             installed_at: self.installed_at,
+            updated_at: self.updated_at,
             file_count: self.files.len(),
+            previous_version: self.previous.as_ref().map(|p| p.version.clone()),
         }
     }
 }
@@ -130,7 +151,10 @@ mod tests {
             dir: PathBuf::from("/games").join(id),
             exe: "game.exe".into(),
             installed_at: Utc::now(),
+            updated_at: None,
             files: BTreeMap::from([("game.exe".into(), "00".into())]),
+            previous: None,
+            revision: "r1".into(),
         }
     }
 

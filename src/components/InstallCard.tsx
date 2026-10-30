@@ -13,10 +13,11 @@ async function confirmDialog(message: string, title: string): Promise<boolean> {
   return window.confirm(message);
 }
 
-function ProgressView({ progress }: { progress: Progress | null }) {
+export function ProgressView({ progress }: { progress: Progress | null }) {
   const { t, i18n } = useTranslation();
   if (!progress) return <p className="muted">{t("install.phase.resolving")}</p>;
-  const counted = progress.phase === "downloading" || progress.phase === "extracting";
+  const counted =
+    progress.phase === "downloading" || progress.phase === "extracting" || progress.phase === "applying";
   const ratio = counted && progress.total > 0 ? Math.min(1, progress.done / progress.total) : null;
   let detail = "";
   if (progress.phase === "downloading") {
@@ -24,7 +25,7 @@ function ProgressView({ progress }: { progress: Progress | null }) {
       done: formatBytes(progress.done, i18n.language),
       total: formatBytes(progress.total, i18n.language),
     });
-  } else if (progress.phase === "extracting") {
+  } else if (progress.phase === "extracting" || progress.phase === "applying") {
     detail = t("install.files", { done: progress.done, total: progress.total });
   }
   return (
@@ -49,7 +50,7 @@ function ProgressView({ progress }: { progress: Progress | null }) {
 
 export function InstallCard({ entry }: { entry: CatalogEntry }) {
   const { t, i18n } = useTranslation();
-  const { installed, jobs, jobErrors, startInstall, cancelJob } = useApp();
+  const { installed, jobs, jobErrors, startInstall, startUpdate, startRestore, cancelJob } = useApp();
   const [attempt, setAttempt] = useState(0);
   const [loaded, setLoaded] = useState<{ key: string; release: ReleaseInfo | null; error: unknown } | null>(null);
   const [actionError, setActionError] = useState<unknown>(null);
@@ -72,6 +73,20 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
       (err: unknown) => setLoaded({ key: releaseKey, release: null, error: err }),
     );
   }, [entry.id, releaseKey]);
+
+  async function run(action: () => Promise<void>) {
+    setActionError(null);
+    try {
+      await action();
+    } catch (err) {
+      setActionError(err);
+    }
+  }
+
+  async function onRestore(version: string) {
+    const ok = await confirmDialog(t("update.restoreConfirm", { version }), t("update.restoreTitle"));
+    if (ok) await run(() => startRestore(entry.id));
+  }
 
   async function onInstall() {
     setActionError(null);
@@ -129,11 +144,24 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
           <p className="muted small">
             <code>{app.dir}</code>
           </p>
-          {inTauri && (
-            <button type="button" className="button" onClick={() => void revealItemInDir(app.dir)}>
-              {t("install.openFolder")}
-            </button>
-          )}
+          <div className="row">
+            {release && release.tag !== app.version && (
+              <button type="button" className="button primary" onClick={() => void run(() => startUpdate(entry.id))}>
+                {t("update.updateTo", { version: release.tag })}
+              </button>
+            )}
+            {app.previous_version && (
+              <button type="button" className="button" onClick={() => void onRestore(app.previous_version ?? "")}>
+                {t("update.restore", { version: app.previous_version })}
+              </button>
+            )}
+            {inTauri && (
+              <button type="button" className="button" onClick={() => void revealItemInDir(app.dir)}>
+                {t("install.openFolder")}
+              </button>
+            )}
+          </div>
+          {release && release.tag !== app.version && <p className="muted small">{t("update.keepsData")}</p>}
         </>
       ) : (
         <button

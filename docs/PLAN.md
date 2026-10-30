@@ -59,9 +59,10 @@ Errors: `AppError` in `crates/core/src/error.rs`, serialized as
    root), install a real game end to end, `installed.json` with file hashes.
    Live check: `cargo test -p recomphub-core --test live_install -- --ignored`
    (set `RECOMPHUB_LIVE_ID` for another entry).
-3. [ ] Updates with `preserve`, backup of the previous version, automatic
+3. [x] Updates with `preserve`, backup of the previous version, automatic
    rollback with a transaction journal, "restore previous version",
-   running-process check via sysinfo.
+   running-process check via sysinfo. Live check:
+   `cargo test -p recomphub-core --test live_install updates_real -- --ignored`.
 4. [ ] Game data modes (`copy_file`: hash check, v64/n64 byte swap to z64),
    library view, launch with log capture to `logs\<id>.log`.
 5. [ ] Start menu / desktop shortcuts, Steam `shortcuts.vdf` (binary VDF,
@@ -80,6 +81,23 @@ Steam.
 Jobs run one at a time (`AppState::job_slot`). A cancelled download keeps its
 `.part` file and resumes on the next attempt. Unpacking needs the
 multi-threaded Tokio runtime (`block_in_place`).
+
+## Implemented interface (milestone 3)
+
+`update`, `restore_previous` (jobs, same events as `install`; progress phase
+`applying`), `updates_check` (list of `{ id, installed, latest }`). The UI
+checks once per start when `check_updates` is on.
+
+Update design (`crates/core/src/update.rs`): files are swapped in place.
+Release-owned files (`InstalledApp::files`) not matching `preserve` move to
+`<backups>/<id>/<version>-<revision>/files`; new release files move in where
+the path is free or was freed. Everything else in the game folder is never
+touched, even if the new release ships a file of the same name. The plan
+is written to `<staging>/<id>.journal.json` first; failures roll back at
+once, crashes on the next start (`update::recover`, called before the UI
+starts). A journal counts as committed when `installed.json` already has
+its `revision`. One backup per app is kept; a restore makes the current
+version the new backup.
 
 ## Open points
 
