@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
 pub const DEFAULT_CATALOG_URL: &str =
-    "https://raw.githubusercontent.com/OWNER/recomphub/main/catalog/catalog.json";
+    "https://raw.githubusercontent.com/junkx420/ReCompX-Store/main/catalog/catalog.json";
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]

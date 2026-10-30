@@ -34,7 +34,7 @@
     "active": true,
     "targets": ["nsis"],
     "publisher": "RecompHub contributors",
-    "homepage": "https://github.com/OWNER/recomphub",
+    "homepage": "https://github.com/junkx420/ReCompX-Store",
     "license": "GPL-3.0-or-later",
     "category": "Game",
     "shortDescription": "Store for native PC ports of recompiled and decompiled games",
