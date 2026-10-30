@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OWNER/recomphub/catalog/catalog.schema.json",
+  "title": "RecompHub catalog",
+  "description": "List of native PC ports that RecompHub can install. Entries point to official GitHub release assets only; never to ROMs, ISOs or other game data.",
+  "type": "object",
+  "required": ["schema_version", "entries"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": 1 },
+    "entries": { "type": "array", "items": { "$ref": "#/$defs/entry" } }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "localizedText": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "required": ["en"],
+          "properties": { "en": { "type": "string", "minLength": 1 } },
+          "additionalProperties": { "type": "string" }
+        }
+      ]
+    },
+    "relativePath": {
+      "description": "Path relative to the game folder. Forward slashes or backslashes; no root, drive letter or '..'.",
+      "type": "string",
+      "minLength": 1,
+      "not": { "anyOf": [{ "pattern": "^[/\\\\]" }, { "pattern": ":" }, { "pattern": "(^|[/\\\\])\\.\\.([/\\\\]|$)" }] }
+    },
+    "httpsUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "knownDump": {
+      "type": "object",
+      "required": ["region", "version"],
+      "properties": {
+        "sha1": { "type": "string", "pattern": "^[0-9a-fA-F]{40}$" },
+        "md5": { "type": "string", "pattern": "^[0-9a-fA-F]{32}$" },
+        "region": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      },
+      "anyOf": [{ "required": ["sha1"] }, { "required": ["md5"] }],
+      "additionalProperties": false
+    },
+    "gameData": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["mode"],
+          "properties": { "mode": { "const": "none" } },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["mode", "hint"],
+          "properties": {
+            "mode": { "const": "port_handles_it" },
+            "hint": { "$ref": "#/$defs/localizedText" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["mode", "target", "accepted_hashes"],
+          "properties": {
+            "mode": { "const": "copy_file" },
+            "target": { "$ref": "#/$defs/relativePath" },
+            "accepted_hashes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/knownDump" } },
+            "other_known_hashes": { "type": "array", "items": { "$ref": "#/$defs/knownDump" } },
+            "hint": { "$ref": "#/$defs/localizedText" }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "entry": {
+      "type": "object",
+      "required": [
+        "id", "name", "category", "system", "repo", "asset_pattern", "exe",
+        "game_data", "description", "license", "homepage"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,63}$" },
+        "name": { "type": "string", "minLength": 1 },
+        "category": { "enum": ["game", "emulator", "tool"] },
+        "system": { "type": "string", "pattern": "^[a-z0-9]{1,16}$", "examples": ["n64", "x360", "gc", "ps2", "multi"] },
+        "repo": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "asset_pattern": { "type": "string", "minLength": 1, "description": "Regex (Rust regex syntax) on the Windows x64 asset name. Must match exactly one asset of the release." },
+        "release_tag": { "type": "string", "pattern": "^[A-Za-z0-9._+-]+$", "description": "Fixed tag instead of the latest release, for rolling CI releases." },
+        "exe": { "$ref": "#/$defs/relativePath", "description": "Executable relative to the game folder. Glob allowed." },
+        "preserve": { "type": "array", "items": { "$ref": "#/$defs/relativePath" }, "description": "Globs that updates never overwrite (saves, mods, configs)." },
+        "user_data_paths": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^%(LOCALAPPDATA|APPDATA|USERPROFILE)%\\\\" },
+          "description": "Folders outside the game folder where the port keeps saves or config."
+        },
+        "game_data": { "$ref": "#/$defs/gameData" },
+        "description": { "$ref": "#/$defs/localizedText" },
+        "credits": { "type": "array", "items": { "type": "string" } },
+        "license": { "type": "string", "minLength": 1, "description": "SPDX identifier, or NOASSERTION if the project has no license file." },
+        "homepage": { "$ref": "#/$defs/httpsUrl" },
+        "icon_url": { "$ref": "#/$defs/httpsUrl" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

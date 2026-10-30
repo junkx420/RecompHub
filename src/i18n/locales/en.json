@@ -1,0 +1,104 @@
+{
+  "app": {
+    "name": "RecompHub",
+    "tagline": "Native PC ports of recompiled and decompiled games"
+  },
+  "tabs": {
+    "discover": "Discover",
+    "library": "Library",
+    "settings": "Settings"
+  },
+  "common": {
+    "loading": "Loading…",
+    "retry": "Retry",
+    "save": "Save",
+    "saved": "Saved",
+    "back": "Back",
+    "reset": "Reset to default",
+    "change": "Change…",
+    "open": "Open"
+  },
+  "category": {
+    "all": "All",
+    "game": "Games",
+    "emulator": "Emulators",
+    "tool": "Tools"
+  },
+  "discover": {
+    "search": "Search ports",
+    "empty": "No ports match your search.",
+    "count_one": "{{count}} port",
+    "count_other": "{{count}} ports"
+  },
+  "catalog": {
+    "origin": {
+      "remote": "Catalog is up to date",
+      "cache": "Offline: showing the cached catalog",
+      "embedded": "Offline: showing the built-in catalog"
+    },
+    "fetchedAt": "Last updated {{date}}",
+    "warnings_one": "{{count}} catalog entry was skipped",
+    "warnings_other": "{{count}} catalog entries were skipped"
+  },
+  "badge": {
+    "official": "Official catalog",
+    "unverified": "Not verified"
+  },
+  "detail": {
+    "description": "Description",
+    "gameData": "Game data",
+    "credits": "Credits",
+    "license": "License",
+    "homepage": "Project page",
+    "repo": "Repository",
+    "userData": "Saves and settings outside the game folder",
+    "preserve": "Kept on updates",
+    "notFound": "This port is not in the catalog."
+  },
+  "gameData": {
+    "none": "This port needs no game data.",
+    "portHandlesIt": "The port asks for your own copy of the game itself.",
+    "copyFile": "RecompHub checks your own copy of the game and copies it into the game folder.",
+    "accepted": "Accepted: {{list}}",
+    "legal": "RecompHub never downloads or provides ROMs, ISOs or other game files. Use a dump of a game you own."
+  },
+  "library": {
+    "empty": "Nothing installed yet.",
+    "emptyHint": "Install ports from the Discover tab."
+  },
+  "settings": {
+    "appearance": "Appearance",
+    "language": "Language",
+    "theme": "Theme",
+    "system": "System default",
+    "light": "Light",
+    "dark": "Dark",
+    "library": "Library folder",
+    "libraryHint": "New installs go here. Existing installs stay where they are.",
+    "pickLibrary": "Choose library folder",
+    "catalog": "Catalog",
+    "catalogUrl": "Catalog URL",
+    "reloadCatalog": "Reload catalog",
+    "about": "About",
+    "version": "Version {{version}}",
+    "dataDir": "App data"
+  },
+  "errors": {
+    "title": "Something went wrong",
+    "unknown": "Unexpected error: {{message}}",
+    "network": "No connection: {{message}}",
+    "rate_limited": "GitHub's request limit is reached. Try again in {{minutes}} minutes, or add a GitHub token in Settings.",
+    "not_found": "Not found: {{what}}",
+    "http": "Server answered with HTTP {{status}}.",
+    "catalog_invalid": "The catalog is invalid.",
+    "unknown_app": "Unknown port: {{id}}",
+    "asset_no_match": "The release has no matching Windows download.",
+    "asset_ambiguous": "The release has several matching Windows downloads.",
+    "checksum_mismatch": "The download is damaged (checksum mismatch).",
+    "io": "File error at {{path}}: {{message}}",
+    "invalid_settings": "Invalid setting: {{message}}",
+    "invalid_input": "Invalid input: {{message}}",
+    "cancelled": "Cancelled.",
+    "unsupported": "Not supported on this system."
+  }
+}

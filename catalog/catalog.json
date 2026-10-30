@@ -1,0 +1,258 @@
+{
+  "$schema": "./catalog.schema.json",
+  "schema_version": 1,
+  "entries": [
+    {
+      "id": "zelda64recomp",
+      "name": "Zelda 64: Recompiled (Majora's Mask)",
+      "category": "game",
+      "system": "n64",
+      "repo": "Zelda64Recomp/Zelda64Recomp",
+      "asset_pattern": "(?i)^Zelda64Recompiled.*-Windows\\.zip$",
+      "exe": "Zelda64Recompiled.exe",
+      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
+      "user_data_paths": ["%LOCALAPPDATA%\\Zelda64Recompiled"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the game asks for your own US ROM of Majora's Mask (N64). Other formats than .z64 are converted automatically.",
+          "de": "Beim ersten Start fragt das Spiel nach deinem eigenen US-ROM von Majora's Mask (N64). Andere Formate als .z64 werden automatisch umgewandelt."
+        }
+      },
+      "description": {
+        "en": "Native PC port of The Legend of Zelda: Majora's Mask, made with N64Recomp. Widescreen, high frame rates, gyro aiming, autosave and mod support.",
+        "de": "Nativer PC-Port von The Legend of Zelda: Majora's Mask, erstellt mit N64Recomp. Breitbild, hohe Bildraten, Gyro-Zielen, Autosave und Mod-Support."
+      },
+      "credits": ["Zelda64Recomp contributors", "N64Recomp by Mr-Wiseguy"],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/Zelda64Recomp/Zelda64Recomp"
+    },
+    {
+      "id": "unleashedrecomp",
+      "name": "Unleashed Recompiled",
+      "category": "game",
+      "system": "x360",
+      "repo": "hedge-dev/UnleashedRecomp",
+      "asset_pattern": "(?i)^UnleashedRecomp-Windows\\.zip$",
+      "exe": "UnleashedRecomp.exe",
+      "preserve": ["game/**", "dlc/**", "update/**", "patched/**", "mods/**", "*.toml", "*.ini"],
+      "user_data_paths": ["%APPDATA%\\UnleashedRecomp"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the port's own installer asks for the game files you dumped from your Xbox 360 (game and optional DLC). RecompHub keeps those files on updates.",
+          "de": "Beim ersten Start fragt der Installer des Ports nach den Spieldateien, die du von deiner Xbox 360 gesichert hast (Spiel und optional DLC). RecompHub behält diese Dateien bei Updates."
+        }
+      },
+      "description": {
+        "en": "Native PC port of Sonic Unleashed (Xbox 360), made with XenonRecomp. High resolutions, high frame rates and many enhancements.",
+        "de": "Nativer PC-Port von Sonic Unleashed (Xbox 360), erstellt mit XenonRecomp. Hohe Auflösungen, hohe Bildraten und viele Verbesserungen."
+      },
+      "credits": ["hedge-dev contributors", "XenonRecomp"],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/hedge-dev/UnleashedRecomp"
+    },
+    {
+      "id": "starfox64recomp",
+      "name": "Starfox 64: Recompiled",
+      "category": "game",
+      "system": "n64",
+      "repo": "sonicdcer/Starfox64Recomp",
+      "asset_pattern": "(?i)^Starfox64Recompiled.*-Windows\\.zip$",
+      "exe": "Starfox64Recompiled.exe",
+      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
+      "user_data_paths": ["%LOCALAPPDATA%\\Starfox64Recompiled"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the game asks for your own US 1.1 (Rev A) ROM of Star Fox 64.",
+          "de": "Beim ersten Start fragt das Spiel nach deinem eigenen US-1.1-ROM (Rev A) von Star Fox 64."
+        }
+      },
+      "description": {
+        "en": "Native PC port of Star Fox 64, made with N64Recomp.",
+        "de": "Nativer PC-Port von Star Fox 64, erstellt mit N64Recomp."
+      },
+      "credits": ["sonicdcer and contributors", "N64Recomp by Mr-Wiseguy"],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/sonicdcer/Starfox64Recomp"
+    },
+    {
+      "id": "mariokart64recomp",
+      "name": "Mario Kart 64: Recompiled",
+      "category": "game",
+      "system": "n64",
+      "repo": "sonicdcer/MarioKart64Recomp",
+      "asset_pattern": "(?i)^MarioKart64Recompiled.*-Windows\\.zip$",
+      "exe": "MarioKart64Recompiled.exe",
+      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
+      "user_data_paths": ["%LOCALAPPDATA%\\MarioKart64Recompiled"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the game asks for your own US ROM of Mario Kart 64.",
+          "de": "Beim ersten Start fragt das Spiel nach deinem eigenen US-ROM von Mario Kart 64."
+        }
+      },
+      "description": {
+        "en": "Native PC port of Mario Kart 64, made with N64Recomp.",
+        "de": "Nativer PC-Port von Mario Kart 64, erstellt mit N64Recomp."
+      },
+      "credits": ["sonicdcer and contributors", "N64Recomp by Mr-Wiseguy"],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/sonicdcer/MarioKart64Recomp"
+    },
+    {
+      "id": "banjorecomp",
+      "name": "Banjo: Recompiled",
+      "category": "game",
+      "system": "n64",
+      "repo": "BanjoRecomp/BanjoRecomp",
+      "asset_pattern": "(?i)^BanjoRecompiled.*-Windows\\.zip$",
+      "exe": "BanjoRecompiled.exe",
+      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
+      "user_data_paths": ["%LOCALAPPDATA%\\BanjoRecompiled"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the game asks for your own US 1.0 ROM of Banjo-Kazooie.",
+          "de": "Beim ersten Start fragt das Spiel nach deinem eigenen US-1.0-ROM von Banjo-Kazooie."
+        }
+      },
+      "description": {
+        "en": "Native PC port of Banjo-Kazooie, made with N64Recomp.",
+        "de": "Nativer PC-Port von Banjo-Kazooie, erstellt mit N64Recomp."
+      },
+      "credits": ["BanjoRecomp contributors", "N64Recomp by Mr-Wiseguy"],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/BanjoRecomp/BanjoRecomp"
+    },
+    {
+      "id": "shipofharkinian",
+      "name": "Ship of Harkinian",
+      "category": "game",
+      "system": "n64",
+      "repo": "HarbourMasters/Shipwright",
+      "asset_pattern": "(?i)(win64|windows).*\\.zip$",
+      "exe": "soh.exe",
+      "preserve": ["mods/**", "shipofharkinian.json", "oot.o2r", "oot-mq.o2r"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the game asks for your own supported Ocarina of Time ROM and builds its asset archive from it. Supported dumps: ship.equipment.",
+          "de": "Beim ersten Start fragt das Spiel nach deinem eigenen unterstützten Ocarina-of-Time-ROM und erzeugt daraus sein Asset-Archiv. Unterstützte Dumps: ship.equipment."
+        }
+      },
+      "description": {
+        "en": "PC port of The Legend of Zelda: Ocarina of Time, based on the OoT decompilation.",
+        "de": "PC-Port von The Legend of Zelda: Ocarina of Time auf Basis der OoT-Dekompilierung."
+      },
+      "credits": ["Harbour Masters", "ZeldaRET (decompilation)"],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/HarbourMasters/Shipwright",
+      "icon_url": "https://raw.githubusercontent.com/HarbourMasters/Shipwright/develop/soh/macosx/sohIcon.png"
+    },
+    {
+      "id": "2ship2harkinian",
+      "name": "2 Ship 2 Harkinian",
+      "category": "game",
+      "system": "n64",
+      "repo": "2ship2harkinian/2ship2harkinian",
+      "asset_pattern": "(?i)(win64|windows).*\\.zip$",
+      "exe": "2ship.exe",
+      "preserve": ["mods/**", "2ship2harkinian.json"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the game asks for your own supported Majora's Mask ROM. Supported dumps: 2ship.equipment.",
+          "de": "Beim ersten Start fragt das Spiel nach deinem eigenen unterstützten Majora's-Mask-ROM. Unterstützte Dumps: 2ship.equipment."
+        }
+      },
+      "description": {
+        "en": "PC port of The Legend of Zelda: Majora's Mask, based on the MM decompilation.",
+        "de": "PC-Port von The Legend of Zelda: Majora's Mask auf Basis der MM-Dekompilierung."
+      },
+      "credits": ["Harbour Masters", "ZeldaRET (decompilation)"],
+      "license": "CC0-1.0",
+      "homepage": "https://github.com/2ship2harkinian/2ship2harkinian",
+      "icon_url": "https://raw.githubusercontent.com/2ship2harkinian/2ship2harkinian/develop/mm/assets/custom/textures/icons/g2ShipIcon.png"
+    },
+    {
+      "id": "starship",
+      "name": "Starship",
+      "category": "game",
+      "system": "n64",
+      "repo": "HarbourMasters/Starship",
+      "asset_pattern": "(?i)(win64|windows).*\\.zip$",
+      "exe": "Starship.exe",
+      "preserve": ["mods/**", "starship.cfg.json", "sf64.o2r"],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "On first launch the game asks for your own US 1.0 or US 1.1 ROM of Star Fox 64.",
+          "de": "Beim ersten Start fragt das Spiel nach deinem eigenen US-1.0- oder US-1.1-ROM von Star Fox 64."
+        }
+      },
+      "description": {
+        "en": "PC port of Star Fox 64, based on the SF64 decompilation.",
+        "de": "PC-Port von Star Fox 64 auf Basis der SF64-Dekompilierung."
+      },
+      "credits": ["Harbour Masters", "sf64 decompilation contributors"],
+      "license": "CC0-1.0",
+      "homepage": "https://github.com/HarbourMasters/Starship",
+      "icon_url": "https://raw.githubusercontent.com/HarbourMasters/Starship/main/logo.png"
+    },
+    {
+      "id": "perfect-dark",
+      "name": "Perfect Dark (PC port)",
+      "category": "game",
+      "system": "n64",
+      "repo": "fgsfdsfgs/perfect_dark",
+      "asset_pattern": "^pd-x86_64-windows\\.zip$",
+      "release_tag": "ci-dev-build",
+      "exe": "pd.x86_64.exe",
+      "preserve": ["data/**", "*.ini", "*.cfg"],
+      "game_data": {
+        "mode": "copy_file",
+        "target": "data/pd.ntsc-final.z64",
+        "accepted_hashes": [
+          { "md5": "e03b088b6ac9e0080440efed07c1e40f", "region": "US", "version": "1.1 (ntsc-final)" }
+        ],
+        "other_known_hashes": [
+          { "md5": "7f4171b0c8d17815be37913f535e4e93", "region": "US", "version": "1.0 (ntsc-1.0)" },
+          { "md5": "538d2b75945eae069b29c46193e74790", "region": "JP", "version": "final (jpn-final)" },
+          { "md5": "d9b5cd305d228424891ce38e71bc9213", "region": "EU", "version": "PAL final (pal-final)" }
+        ],
+        "hint": {
+          "en": "Select your own Perfect Dark ROM (US V1.1 / Rev 1). RecompHub checks it and copies it to data\\pd.ntsc-final.z64.",
+          "de": "Wähle dein eigenes Perfect-Dark-ROM (US V1.1 / Rev 1). RecompHub prüft es und kopiert es nach data\\pd.ntsc-final.z64."
+        }
+      },
+      "description": {
+        "en": "Port of the Perfect Dark decompilation to modern platforms. Work in progress; builds come from the project's rolling CI release.",
+        "de": "Port der Perfect-Dark-Dekompilierung auf moderne Plattformen. In Arbeit; Builds stammen aus dem fortlaufenden CI-Release des Projekts."
+      },
+      "credits": ["fgsfdsfgs (port)", "n64decomp/perfect_dark (decompilation)"],
+      "license": "MIT",
+      "homepage": "https://github.com/fgsfdsfgs/perfect_dark"
+    },
+    {
+      "id": "rmg",
+      "name": "Rosalie's Mupen GUI",
+      "category": "emulator",
+      "system": "n64",
+      "repo": "Rosalie241/RMG",
+      "asset_pattern": "^RMG-Portable-Windows64-.*\\.zip$",
+      "exe": "RMG.exe",
+      "preserve": ["Config/**", "Data/**", "Save/**", "Screenshots/**", "Cache/**", "portable.txt"],
+      "game_data": { "mode": "none" },
+      "description": {
+        "en": "Free and open-source mupen64plus front-end. Portable build; RecompHub keeps its config and saves on updates.",
+        "de": "Freies Open-Source-Frontend für mupen64plus. Portable Version; RecompHub behält Konfiguration und Spielstände bei Updates."
+      },
+      "credits": ["Rosalie241", "mupen64plus contributors"],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/Rosalie241/RMG"
+    }
+  ]
+}

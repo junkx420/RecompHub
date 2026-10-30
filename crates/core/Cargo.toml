@@ -1,0 +1,32 @@
+[package]
+name = "recomphub-core"
+description = "Platform-neutral core of RecompHub: catalog, GitHub releases, install transactions."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+reqwest.workspace = true
+tracing.workspace = true
+regex.workspace = true
+globset.workspace = true
+dunce.workspace = true
+chrono.workspace = true
+sha2.workspace = true
+hex.workspace = true
+url.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.62", features = ["Win32_UI_Shell", "Win32_Foundation", "Win32_System_Com"] }
+
+[dev-dependencies]
+tempfile.workspace = true
+wiremock.workspace = true
+jsonschema = { version = "0.60", default-features = false }
+tokio = { workspace = true, features = ["test-util"] }

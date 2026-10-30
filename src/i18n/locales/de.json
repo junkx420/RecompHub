@@ -1,0 +1,104 @@
+{
+  "app": {
+    "name": "RecompHub",
+    "tagline": "Native PC-Ports recompilierter und dekompilierter Spiele"
+  },
+  "tabs": {
+    "discover": "Entdecken",
+    "library": "Bibliothek",
+    "settings": "Einstellungen"
+  },
+  "common": {
+    "loading": "Wird geladen …",
+    "retry": "Erneut versuchen",
+    "save": "Speichern",
+    "saved": "Gespeichert",
+    "back": "Zurück",
+    "reset": "Auf Standard zurücksetzen",
+    "change": "Ändern …",
+    "open": "Öffnen"
+  },
+  "category": {
+    "all": "Alle",
+    "game": "Spiele",
+    "emulator": "Emulatoren",
+    "tool": "Tools"
+  },
+  "discover": {
+    "search": "Ports durchsuchen",
+    "empty": "Keine Ports passen zu deiner Suche.",
+    "count_one": "{{count}} Port",
+    "count_other": "{{count}} Ports"
+  },
+  "catalog": {
+    "origin": {
+      "remote": "Katalog ist aktuell",
+      "cache": "Offline: zeige den zwischengespeicherten Katalog",
+      "embedded": "Offline: zeige den eingebauten Katalog"
+    },
+    "fetchedAt": "Zuletzt aktualisiert {{date}}",
+    "warnings_one": "{{count}} Katalogeintrag wurde übersprungen",
+    "warnings_other": "{{count}} Katalogeinträge wurden übersprungen"
+  },
+  "badge": {
+    "official": "Offizieller Katalog",
+    "unverified": "Nicht geprüft"
+  },
+  "detail": {
+    "description": "Beschreibung",
+    "gameData": "Spieldaten",
+    "credits": "Credits",
+    "license": "Lizenz",
+    "homepage": "Projektseite",
+    "repo": "Repository",
+    "userData": "Spielstände und Einstellungen außerhalb des Spielordners",
+    "preserve": "Bleibt bei Updates erhalten",
+    "notFound": "Dieser Port ist nicht im Katalog."
+  },
+  "gameData": {
+    "none": "Dieser Port braucht keine Spieldaten.",
+    "portHandlesIt": "Der Port fragt selbst nach deiner eigenen Kopie des Spiels.",
+    "copyFile": "RecompHub prüft deine eigene Kopie des Spiels und kopiert sie in den Spielordner.",
+    "accepted": "Akzeptiert: {{list}}",
+    "legal": "RecompHub lädt oder verteilt niemals ROMs, ISOs oder andere Spieldateien. Nutze einen Dump eines Spiels, das du besitzt."
+  },
+  "library": {
+    "empty": "Noch nichts installiert.",
+    "emptyHint": "Installiere Ports über den Tab „Entdecken“."
+  },
+  "settings": {
+    "appearance": "Darstellung",
+    "language": "Sprache",
+    "theme": "Design",
+    "system": "Systemstandard",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "library": "Bibliotheksordner",
+    "libraryHint": "Neue Installationen landen hier. Bestehende Installationen bleiben, wo sie sind.",
+    "pickLibrary": "Bibliotheksordner wählen",
+    "catalog": "Katalog",
+    "catalogUrl": "Katalog-URL",
+    "reloadCatalog": "Katalog neu laden",
+    "about": "Über",
+    "version": "Version {{version}}",
+    "dataDir": "App-Daten"
+  },
+  "errors": {
+    "title": "Etwas ist schiefgelaufen",
+    "unknown": "Unerwarteter Fehler: {{message}}",
+    "network": "Keine Verbindung: {{message}}",
+    "rate_limited": "Das Anfragelimit von GitHub ist erreicht. Versuche es in {{minutes}} Minuten erneut oder hinterlege einen GitHub-Token in den Einstellungen.",
+    "not_found": "Nicht gefunden: {{what}}",
+    "http": "Der Server antwortete mit HTTP {{status}}.",
+    "catalog_invalid": "Der Katalog ist ungültig.",
+    "unknown_app": "Unbekannter Port: {{id}}",
+    "asset_no_match": "Das Release enthält keinen passenden Windows-Download.",
+    "asset_ambiguous": "Das Release enthält mehrere passende Windows-Downloads.",
+    "checksum_mismatch": "Der Download ist beschädigt (Prüfsumme stimmt nicht).",
+    "io": "Dateifehler bei {{path}}: {{message}}",
+    "invalid_settings": "Ungültige Einstellung: {{message}}",
+    "invalid_input": "Ungültige Eingabe: {{message}}",
+    "cancelled": "Abgebrochen.",
+    "unsupported": "Auf diesem System nicht unterstützt."
+  }
+}
