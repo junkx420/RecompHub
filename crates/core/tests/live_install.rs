@@ -22,10 +22,7 @@ use recomphub_core::paths::AppDirs;
 async fn installs_real_release() {
     let id = std::env::var("RECOMPHUB_LIVE_ID").unwrap_or_else(|_| "zelda64recomp".into());
     let (entries, _) = catalog::parse(EMBEDDED_CATALOG.as_bytes(), Default::default()).unwrap();
-    let entry = entries
-        .iter()
-        .find(|e| e.id == id)
-        .expect("id in catalog");
+    let entry = entries.iter().find(|e| e.id == id).expect("id in catalog");
 
     let dir = tempfile::tempdir().unwrap();
     let dirs = AppDirs::at(dir.path().join("RecompHub"));
@@ -42,7 +39,10 @@ async fn installs_real_release() {
     );
 
     let report = |p: Progress| {
-        if !matches!(p, Progress::Downloading { .. } | Progress::Extracting { .. }) {
+        if !matches!(
+            p,
+            Progress::Downloading { .. } | Progress::Extracting { .. }
+        ) {
             println!("{p:?}");
         }
     };
