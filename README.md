@@ -1,13 +1,12 @@
 # RecompHub
 
-**English** · [Deutsch](#deutsch)
-
 RecompHub finds, installs, updates and launches native PC ports of
 recompiled and decompiled games (N64Recomp, XenonRecomp, decomp projects)
 on Windows 10/11 x64.
 
-> **Status:** early development (milestone 1 of 6: scaffold, settings,
-> i18n, catalog). Installing ports is not implemented yet.
+> **Status:** early development (milestone 2 of 6). Ports can be installed
+> from their GitHub releases; updates, game data import, launching and
+> shortcuts are not implemented yet.
 
 **Legal:** RecompHub never downloads, hosts or links ROMs, ISOs or other
 game data. It only downloads the official release assets that port projects
@@ -30,21 +29,3 @@ Layout: `crates/core` (all logic, no Tauri), `src-tauri` (commands),
 `src` (React UI), `catalog` (catalog and JSON schema).
 
 License: GPL-3.0-or-later.
-
----
-
-## Deutsch
-
-RecompHub findet, installiert, aktualisiert und startet native PC-Ports
-recompilierter und dekompilierter Spiele (N64Recomp, XenonRecomp,
-Decomp-Projekte) unter Windows 10/11 x64.
-
-> **Stand:** frühe Entwicklung (Meilenstein 1 von 6: Gerüst, Einstellungen,
-> i18n, Katalog). Installieren ist noch nicht umgesetzt.
-
-**Rechtliches:** RecompHub lädt, hostet und verlinkt niemals ROMs, ISOs
-oder andere Spieldaten. Die App lädt nur die offiziellen Release-Assets,
-die Port-Projekte auf GitHub veröffentlichen. Du brauchst eine eigene,
-legal erworbene Kopie jedes Spiels.
-
-Entwicklung: siehe oben. Lizenz: GPL-3.0-or-later.

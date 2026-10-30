@@ -57,6 +57,30 @@ pub enum AppError {
     #[error("invalid input: {message}")]
     InvalidInput { message: String },
 
+    #[error("download size mismatch: expected {expected} bytes, got {actual}")]
+    SizeMismatch { expected: u64, actual: u64 },
+
+    #[error("unsupported archive {name}")]
+    UnsupportedArchive { name: String },
+
+    #[error("archive entry escapes the target folder: {entry}")]
+    UnsafeArchivePath { entry: String },
+
+    #[error("invalid archive: {message}")]
+    ArchiveInvalid { message: String },
+
+    #[error("no file matches the executable pattern {pattern}")]
+    ExeNotFound { pattern: String },
+
+    #[error("{path:?} already contains files that RecompHub did not install")]
+    ForeignContent { path: PathBuf },
+
+    #[error("{id} is already installed")]
+    AlreadyInstalled { id: String },
+
+    #[error("{id} is busy with another job")]
+    Busy { id: String },
+
     #[error("cancelled")]
     Cancelled,
 

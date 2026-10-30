@@ -64,7 +64,10 @@
   },
   "library": {
     "empty": "Noch nichts installiert.",
-    "emptyHint": "Installiere Ports über den Tab „Entdecken“."
+    "emptyHint": "Installiere Ports über den Tab „Entdecken“.",
+    "version": "Version {{version}}",
+    "installedOn": "installiert am {{date}}",
+    "busy": "beschäftigt"
   },
   "settings": {
     "appearance": "Darstellung",
@@ -99,6 +102,35 @@
     "invalid_settings": "Ungültige Einstellung: {{message}}",
     "invalid_input": "Ungültige Eingabe: {{message}}",
     "cancelled": "Abgebrochen.",
-    "unsupported": "Auf diesem System nicht unterstützt."
+    "unsupported": "Auf diesem System nicht unterstützt.",
+    "size_mismatch": "Der Download hat die falsche Größe ({{actual}} statt {{expected}} Bytes).",
+    "unsupported_archive": "{{name}} hat ein Format, das RecompHub nicht entpacken kann.",
+    "unsafe_archive_path": "Der Download enthält einen unsicheren Pfad und wurde nicht entpackt: {{entry}}",
+    "archive_invalid": "Der Download konnte nicht entpackt werden: {{message}}",
+    "exe_not_found": "Der Download enthält das erwartete Programm nicht ({{pattern}}).",
+    "foreign_content": "{{path}} enthält bereits Dateien, die nicht von RecompHub stammen.",
+    "already_installed": "{{id}} ist bereits installiert.",
+    "busy": "{{id}} ist gerade mit einer anderen Aufgabe beschäftigt."
+  },
+  "install": {
+    "title": "Installieren",
+    "install": "Installieren",
+    "cancel": "Abbrechen",
+    "latest": "Neueste Version {{version}}",
+    "unverified": "Keine Prüfsumme",
+    "unverifiedHint": "GitHub veröffentlicht für diesen Download keine Prüfsumme, daher kann nur die Größe geprüft werden.",
+    "installed": "Installiert: {{version}}",
+    "openFolder": "Ordner öffnen",
+    "foreignTitle": "Ordner ist nicht leer",
+    "foreignContent": "{{path}} enthält bereits Dateien, die nicht von RecompHub stammen. In den Backup-Ordner verschieben und trotzdem installieren?",
+    "bytes": "{{done}} von {{total}}",
+    "files": "{{done}} von {{total}} Dateien",
+    "phase": {
+      "resolving": "Wird vorbereitet…",
+      "downloading": "Wird heruntergeladen",
+      "verifying": "Download wird geprüft…",
+      "extracting": "Wird entpackt",
+      "finalizing": "Wird abgeschlossen…"
+    }
   }
 }

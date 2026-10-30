@@ -48,7 +48,7 @@ export function App() {
         ) : tab === "discover" ? (
           <Discover onOpen={setDetailId} />
         ) : tab === "library" ? (
-          <Library />
+          <Library onOpen={setDetailId} />
         ) : (
           <Settings />
         )}

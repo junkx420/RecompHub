@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { inTauri } from "../api";
 import type { CatalogEntry, KnownDump } from "../api/types";
 import { EntryIcon } from "../components/EntryIcon";
+import { InstallCard } from "../components/InstallCard";
 import { SourceBadge } from "../components/SourceBadge";
 import { localized } from "../i18n";
 import { useApp } from "../state";
@@ -68,6 +69,7 @@ export function Detail({ id, onBack }: { id: string; onBack: () => void }) {
           </header>
 
           <div className="detail-grid">
+            <InstallCard entry={entry} />
             <div className="card">
               <h2>{t("detail.description")}</h2>
               <p>{localized(entry.description, i18n.language)}</p>

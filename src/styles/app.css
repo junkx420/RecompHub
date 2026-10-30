@@ -436,3 +436,95 @@ ul.code-list {
 .settings .card {
   max-width: 760px;
 }
+
+/* Install and library */
+.install-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+.install-card > * {
+  margin: 0;
+}
+.install-card .badge {
+  margin-left: 8px;
+}
+.install-card code,
+.library-item code {
+  word-break: break-all;
+}
+
+.row.spread {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.progress-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+.progress {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.15s linear;
+}
+.progress.indeterminate .progress-fill {
+  width: 30%;
+  animation: progress-slide 1.2s ease-in-out infinite;
+}
+@keyframes progress-slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(340%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .progress-fill {
+    transition: none;
+  }
+  .progress.indeterminate .progress-fill {
+    animation: none;
+    width: 100%;
+    opacity: 0.4;
+  }
+}
+
+.library-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.library-item {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.library-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+.library-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  align-self: flex-start;
+}

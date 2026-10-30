@@ -48,6 +48,11 @@ pub fn run() {
             commands::settings_set,
             commands::catalog_get,
             commands::catalog_refresh,
+            commands::release_info,
+            commands::install_preflight,
+            commands::install,
+            commands::job_cancel,
+            commands::library_list,
         ])
         .run(tauri::generate_context!())
         .unwrap_or_else(|err| {

@@ -64,7 +64,10 @@
   },
   "library": {
     "empty": "Nothing installed yet.",
-    "emptyHint": "Install ports from the Discover tab."
+    "emptyHint": "Install ports from the Discover tab.",
+    "version": "Version {{version}}",
+    "installedOn": "installed {{date}}",
+    "busy": "busy"
   },
   "settings": {
     "appearance": "Appearance",
@@ -99,6 +102,35 @@
     "invalid_settings": "Invalid setting: {{message}}",
     "invalid_input": "Invalid input: {{message}}",
     "cancelled": "Cancelled.",
-    "unsupported": "Not supported on this system."
+    "unsupported": "Not supported on this system.",
+    "size_mismatch": "The download has the wrong size ({{actual}} instead of {{expected}} bytes).",
+    "unsupported_archive": "{{name}} is not a format RecompHub can unpack.",
+    "unsafe_archive_path": "The download contains an unsafe path and was not unpacked: {{entry}}",
+    "archive_invalid": "The download could not be unpacked: {{message}}",
+    "exe_not_found": "The download does not contain the expected program ({{pattern}}).",
+    "foreign_content": "{{path}} already contains files that RecompHub did not install.",
+    "already_installed": "{{id}} is already installed.",
+    "busy": "{{id}} is busy with another task."
+  },
+  "install": {
+    "title": "Install",
+    "install": "Install",
+    "cancel": "Cancel",
+    "latest": "Latest version {{version}}",
+    "unverified": "No checksum",
+    "unverifiedHint": "GitHub publishes no checksum for this download, so only its size can be checked.",
+    "installed": "Installed: {{version}}",
+    "openFolder": "Open folder",
+    "foreignTitle": "Folder is not empty",
+    "foreignContent": "{{path}} already contains files that RecompHub did not install. Move them to the backups folder and install anyway?",
+    "bytes": "{{done}} of {{total}}",
+    "files": "{{done}} of {{total}} files",
+    "phase": {
+      "resolving": "Preparing…",
+      "downloading": "Downloading",
+      "verifying": "Checking download…",
+      "extracting": "Unpacking",
+      "finalizing": "Finishing…"
+    }
   }
 }

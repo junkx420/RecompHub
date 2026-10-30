@@ -47,20 +47,31 @@ struct CacheMeta {
 
 pub struct Http {
     client: reqwest::Client,
+    download_client: reqwest::Client,
     cache_dir: PathBuf,
     github_token: RwLock<Option<String>>,
 }
 
+const USER_AGENT: &str = concat!("RecompHub/", env!("CARGO_PKG_VERSION"));
+
 impl Http {
     pub fn new(cache_dir: impl Into<PathBuf>) -> Result<Self> {
         let client = reqwest::Client::builder()
-            .user_agent(concat!("RecompHub/", env!("CARGO_PKG_VERSION")))
+            .user_agent(USER_AGENT)
             .connect_timeout(Duration::from_secs(15))
             .timeout(Duration::from_secs(60))
             .build()
             .map_err(AppError::network)?;
+        // Large assets: no total timeout, only a stall timeout per read.
+        let download_client = reqwest::Client::builder()
+            .user_agent(USER_AGENT)
+            .connect_timeout(Duration::from_secs(15))
+            .read_timeout(Duration::from_secs(30))
+            .build()
+            .map_err(AppError::network)?;
         Ok(Self {
             client,
+            download_client,
             cache_dir: cache_dir.into(),
             github_token: RwLock::new(None),
         })
@@ -68,6 +79,12 @@ impl Http {
 
     pub fn client(&self) -> &reqwest::Client {
         &self.client
+    }
+
+    /// Client for release asset downloads. Never sends the GitHub token:
+    /// asset URLs redirect to a CDN host.
+    pub fn download_client(&self) -> &reqwest::Client {
+        &self.download_client
     }
 
     /// Set or clear the GitHub token. It is only ever sent to api.github.com.
