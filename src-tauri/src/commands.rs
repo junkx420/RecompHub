@@ -2,10 +2,13 @@
 
 use crate::state::{AppState, RunningJob};
 use chrono::{DateTime, Utc};
+use recomphub_core::catalog::KnownDump;
 use recomphub_core::catalog::{self, CatalogEntry, LoadedCatalog};
+use recomphub_core::gamedata::{self, GameDataStatus};
 use recomphub_core::install::{self, InstallOptions, InstallRequest, Preflight};
 use recomphub_core::installed::{InstalledApp, InstalledDb, InstalledSummary};
 use recomphub_core::job::{CancelFlag, Progress};
+use recomphub_core::launch;
 use recomphub_core::paths::{self, LibraryDirs};
 use recomphub_core::settings::Settings;
 use recomphub_core::update::{self, UpdateInfo, UpdateRequest};
@@ -15,6 +18,7 @@ use std::path::PathBuf;
 use std::sync::atomic::Ordering;
 use std::time::{Duration, Instant};
 use tauri::{AppHandle, Emitter, Manager, State};
+use tauri_plugin_opener::OpenerExt;
 
 #[derive(Serialize)]
 pub struct AppInfo {
@@ -334,6 +338,108 @@ impl ProgressThrottle {
         }
         due
     }
+}
+
+async fn installed_app(state: &AppState, id: &str) -> Result<(InstalledApp, CatalogEntry)> {
+    let entry = catalog_entry(state, id).await?;
+    let app = InstalledDb::load(&state.dirs.installed_file())?
+        .get(id)
+        .cloned()
+        .ok_or_else(|| AppError::NotInstalled { id: id.into() })?;
+    Ok((app, entry))
+}
+
+#[tauri::command]
+pub async fn gamedata_status(state: State<'_, AppState>, id: String) -> Result<GameDataStatus> {
+    let (app, entry) = installed_app(&state, &id).await?;
+    tokio::task::block_in_place(|| gamedata::status(&app, &entry))
+}
+
+/// Check the user's dump at `path` and copy it into the game folder.
+#[tauri::command]
+pub async fn gamedata_import(
+    state: State<'_, AppState>,
+    id: String,
+    path: PathBuf,
+) -> Result<KnownDump> {
+    let (app, entry) = installed_app(&state, &id).await?;
+    // Not while an update swaps files in the same folder.
+    let _slot = state.job_slot.lock().await;
+    tokio::task::block_in_place(|| gamedata::import(&app, &entry, &path))
+}
+
+#[derive(Clone, Serialize)]
+struct GameExitedEvent<'a> {
+    id: &'a str,
+    code: Option<i32>,
+}
+
+/// Start the game. Emits `game:exited` with the exit code when it ends.
+#[tauri::command]
+pub async fn launch(app: AppHandle, state: State<'_, AppState>, id: String) -> Result<()> {
+    let (installed, entry) = installed_app(&state, &id).await?;
+    if state
+        .jobs
+        .lock()
+        .expect("jobs lock poisoned")
+        .values()
+        .any(|j| j.app_id == id)
+    {
+        return Err(AppError::Busy { id });
+    }
+    let launched = tokio::task::block_in_place(|| launch::launch(&state.dirs, &installed, &entry))?;
+    state
+        .running
+        .lock()
+        .expect("running lock poisoned")
+        .insert(id.clone());
+    tauri::async_runtime::spawn(async move {
+        let code = launched.wait().await;
+        tracing::info!(%id, ?code, "game exited");
+        app.state::<AppState>()
+            .running
+            .lock()
+            .expect("running lock poisoned")
+            .remove(&id);
+        let _ = app.emit("game:exited", GameExitedEvent { id: &id, code });
+    });
+    Ok(())
+}
+
+/// Apps started from RecompHub that are still running.
+#[tauri::command]
+pub async fn running_list(state: State<'_, AppState>) -> Result<Vec<String>> {
+    let mut ids: Vec<String> = state
+        .running
+        .lock()
+        .expect("running lock poisoned")
+        .iter()
+        .cloned()
+        .collect();
+    ids.sort();
+    Ok(ids)
+}
+
+/// Open the game's log in the default text editor.
+#[tauri::command]
+pub async fn open_log(app: AppHandle, state: State<'_, AppState>, id: String) -> Result<()> {
+    let path = launch::log_path(&state.dirs, &id);
+    if !path.is_file() {
+        return Err(AppError::NotFound {
+            what: paths::normalize(&path).display().to_string(),
+        });
+    }
+    app.opener()
+        .open_path(paths::normalize(&path).to_string_lossy(), None::<&str>)
+        .map_err(|e| AppError::InvalidInput {
+            message: e.to_string(),
+        })
+}
+
+/// The end of the game's last log, to show after a crash.
+#[tauri::command]
+pub async fn log_tail(state: State<'_, AppState>, id: String) -> Result<String> {
+    launch::log_tail(&launch::log_path(&state.dirs, &id), 8 * 1024)
 }
 
 #[tauri::command]

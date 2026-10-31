@@ -3,7 +3,10 @@ import { listen } from "@tauri-apps/api/event";
 import type {
   AppError,
   AppInfo,
+  GameDataStatus,
+  GameExited,
   InstallOptions,
+  KnownDump,
   InstalledSummary,
   JobEvent,
   LoadedCatalog,
@@ -31,6 +34,15 @@ export interface Backend {
   jobCancel(job: number): Promise<void>;
   libraryList(): Promise<InstalledSummary[]>;
   updatesCheck(): Promise<UpdateInfo[]>;
+  gamedataStatus(id: string): Promise<GameDataStatus>;
+  /** Check the user's dump at `path` and copy it into the game folder. */
+  gamedataImport(id: string, path: string): Promise<KnownDump>;
+  /** Start the game; `onGameExited` reports when it ends. */
+  launch(id: string): Promise<void>;
+  runningList(): Promise<string[]>;
+  openLog(id: string): Promise<void>;
+  logTail(id: string): Promise<string>;
+  onGameExited(handler: (event: GameExited) => void): Promise<() => void>;
   /** Subscribe to job events; resolves with an unsubscribe function. */
   onJobEvent(handler: (event: JobEvent) => void): Promise<() => void>;
 }
@@ -64,6 +76,13 @@ const tauriBackend: Backend = {
   jobCancel: (job) => invoke("job_cancel", { job }),
   libraryList: () => invoke("library_list"),
   updatesCheck: () => invoke("updates_check"),
+  gamedataStatus: (id) => invoke("gamedata_status", { id }),
+  gamedataImport: (id, path) => invoke("gamedata_import", { id, path }),
+  launch: (id) => invoke("launch", { id }),
+  runningList: () => invoke("running_list"),
+  openLog: (id) => invoke("open_log", { id }),
+  logTail: (id) => invoke("log_tail", { id }),
+  onGameExited: (handler) => listen<GameExited>("game:exited", (e) => handler(e.payload)),
   onJobEvent: listenJobs,
 };
 
@@ -90,6 +109,13 @@ function lazyMock(): Backend {
     jobCancel: (job) => load().then((b) => b.jobCancel(job)),
     libraryList: () => load().then((b) => b.libraryList()),
     updatesCheck: () => load().then((b) => b.updatesCheck()),
+    gamedataStatus: (id) => load().then((b) => b.gamedataStatus(id)),
+    gamedataImport: (id, p) => load().then((b) => b.gamedataImport(id, p)),
+    launch: (id) => load().then((b) => b.launch(id)),
+    runningList: () => load().then((b) => b.runningList()),
+    openLog: (id) => load().then((b) => b.openLog(id)),
+    logTail: (id) => load().then((b) => b.logTail(id)),
+    onGameExited: (h) => load().then((b) => b.onGameExited(h)),
     onJobEvent: (h) => load().then((b) => b.onJobEvent(h)),
   };
 }

@@ -7,6 +7,7 @@ import type { CatalogEntry, Progress, ReleaseInfo } from "../api/types";
 import { formatBytes } from "../format";
 import { useApp } from "../state";
 import { ErrorBox } from "./ErrorBox";
+import { PlayButton, RunInfo } from "./Play";
 
 async function confirmDialog(message: string, title: string): Promise<boolean> {
   if (inTauri) return ask(message, { title, kind: "warning" });
@@ -145,8 +146,9 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
             <code>{app.dir}</code>
           </p>
           <div className="row">
+            <PlayButton app={app} onError={setActionError} />
             {release && release.tag !== app.version && (
-              <button type="button" className="button primary" onClick={() => void run(() => startUpdate(entry.id))}>
+              <button type="button" className="button" onClick={() => void run(() => startUpdate(entry.id))}>
                 {t("update.updateTo", { version: release.tag })}
               </button>
             )}
@@ -162,6 +164,7 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
             )}
           </div>
           {release && release.tag !== app.version && <p className="muted small">{t("update.keepsData")}</p>}
+          <RunInfo app={app} />
         </>
       ) : (
         <button

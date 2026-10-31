@@ -93,6 +93,21 @@ pub enum AppError {
     #[error("close the game first: {processes:?} is running")]
     GameRunning { processes: Vec<String> },
 
+    #[error("already running: {processes:?}")]
+    AlreadyRunning { processes: Vec<String> },
+
+    #[error("{id} needs game data before it can start")]
+    GameDataMissing { id: String },
+
+    #[error("this is a known dump, but not a supported one: {region} {version}")]
+    WrongDump { region: String, version: String },
+
+    #[error("unknown dump (sha1 {sha1})")]
+    UnknownDump { sha1: String, md5: String },
+
+    #[error("not an N64 ROM")]
+    NotARom,
+
     #[error("cancelled")]
     Cancelled,
 

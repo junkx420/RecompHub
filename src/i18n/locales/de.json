@@ -60,7 +60,14 @@
     "portHandlesIt": "Der Port fragt selbst nach deiner eigenen Kopie des Spiels.",
     "copyFile": "RecompHub prüft deine eigene Kopie des Spiels und kopiert sie in den Spielordner.",
     "accepted": "Akzeptiert: {{list}}",
-    "legal": "RecompHub lädt oder verteilt niemals ROMs, ISOs oder andere Spieldateien. Nutze einen Dump eines Spiels, das du besitzt."
+    "legal": "RecompHub lädt oder verteilt niemals ROMs, ISOs oder andere Spieldateien. Nutze einen Dump eines Spiels, das du besitzt.",
+    "missing": "Deine Spieldatei fehlt noch",
+    "present": "Spieldatei OK: {{dump}}",
+    "presentUnknown": "Eine Spieldatei ist vorhanden, aber kein unterstützter Dump",
+    "choose": "Spieldatei auswählen…",
+    "replace": "Spieldatei ersetzen…",
+    "checking": "Wird geprüft…",
+    "pickTitle": "Wähle deinen eigenen ROM-Dump"
   },
   "library": {
     "empty": "Noch nichts installiert.",
@@ -114,7 +121,12 @@
     "not_installed": "{{id}} ist nicht installiert.",
     "up_to_date": "{{id}} ist bereits auf {{version}}.",
     "no_previous_version": "Für {{id}} gibt es keine vorherige Version zum Wiederherstellen.",
-    "game_running": "Bitte zuerst das Spiel schließen ({{processes}} läuft noch)."
+    "game_running": "Bitte zuerst das Spiel schließen ({{processes}} läuft noch).",
+    "already_running": "Das Spiel läuft bereits.",
+    "game_data_missing": "Wähle zuerst deine Spieldatei unter Spieldaten aus.",
+    "wrong_dump": "Das ist der Dump {{region}} {{version}}, den dieser Port nicht unterstützt.",
+    "unknown_dump": "Diese Datei ist kein bekannter Dump dieses Spiels (SHA-1 {{sha1}}).",
+    "not_a_rom": "Diese Datei ist kein N64-ROM."
   },
   "install": {
     "title": "Installieren",
@@ -151,5 +163,14 @@
     "restore": "{{version}} wiederherstellen",
     "restoreTitle": "Vorherige Version wiederherstellen",
     "restoreConfirm": "Zurück zu {{version}}? Spielstände und Einstellungen bleiben erhalten, und die aktuelle Version wird gesichert, sodass du zurückwechseln kannst."
+  },
+  "play": {
+    "play": "Spielen",
+    "running": "Läuft",
+    "crashed": "Das Spiel wurde mit Exit-Code {{code}} beendet.",
+    "showLog": "Log anzeigen",
+    "hideLog": "Log ausblenden",
+    "openLog": "Logdatei öffnen",
+    "emptyLog": "Das Log ist leer."
   }
 }

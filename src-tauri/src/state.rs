@@ -4,7 +4,7 @@ use recomphub_core::job::CancelFlag;
 use recomphub_core::paths::AppDirs;
 use recomphub_core::settings::Settings;
 use recomphub_core::Result;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::sync::atomic::AtomicU64;
 use tokio::sync::{Mutex, RwLock};
 
@@ -26,6 +26,8 @@ pub struct AppState {
     /// Jobs run one at a time: downloads are sequential and every job
     /// rewrites `installed.json`.
     pub job_slot: Mutex<()>,
+    /// Apps started from RecompHub that have not exited yet.
+    pub running: std::sync::Mutex<HashSet<String>>,
 }
 
 impl AppState {
@@ -41,6 +43,7 @@ impl AppState {
             jobs: std::sync::Mutex::new(HashMap::new()),
             next_job: AtomicU64::new(1),
             job_slot: Mutex::new(()),
+            running: std::sync::Mutex::new(HashSet::new()),
         })
     }
 }

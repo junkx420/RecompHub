@@ -100,6 +100,17 @@ export type Progress =
   | { phase: "applying"; done: number; total: number }
   | { phase: "finalizing" };
 
+export type GameDataStatus =
+  | { state: "not_needed" }
+  | { state: "handled_by_port"; hint: LocalizedText }
+  | { state: "missing"; target: string }
+  | { state: "present"; target: string; dump: KnownDump | null };
+
+export interface GameExited {
+  id: string;
+  code: number | null;
+}
+
 export interface UpdateInfo {
   id: string;
   installed: string;

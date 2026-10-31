@@ -63,7 +63,7 @@ Errors: `AppError` in `crates/core/src/error.rs`, serialized as
    rollback with a transaction journal, "restore previous version",
    running-process check via sysinfo. Live check:
    `cargo test -p recomphub-core --test live_install updates_real -- --ignored`.
-4. [ ] Game data modes (`copy_file`: hash check, v64/n64 byte swap to z64),
+4. [x] Game data modes (`copy_file`: hash check, v64/n64 byte swap to z64),
    library view, launch with log capture to `logs\<id>.log`.
 5. [ ] Start menu / desktop shortcuts, Steam `shortcuts.vdf` (binary VDF,
    backup, no duplicates, Steam must be closed), gamepad navigation.
@@ -99,7 +99,24 @@ starts). A journal counts as committed when `installed.json` already has
 its `revision`. One backup per app is kept; a restore makes the current
 version the new backup.
 
+## Implemented interface (milestone 4)
+
+`gamedata_status`, `gamedata_import(id, path)` (`crates/core/src/gamedata.rs`:
+detects z64/v64/n64 by the first four bytes, converts to z64, matches
+SHA-1/MD5 against `accepted_hashes`, names the dump if it is one of
+`other_known_hashes`, writes the target atomically), `launch` (working
+directory is the game folder, stdout/stderr to `logs\<id>.log`, no extra
+console window, `game:exited { id, code }` when it ends), `running_list`,
+`open_log`, `log_tail`. Launch refuses when a `copy_file` dump is missing
+or a program from the game folder is already running. The imported dump is
+not in the release manifest, so updates keep it.
+
 ## Open points
+
+- Testing from a Claude session: Claude desktop is an MSIX app, so a
+  RecompHub started from its shells writes `%LOCALAPPDATA%` into the
+  package's virtualized folder, which Explorer cannot open. Start the app
+  yourself for realistic paths.
 
 - Catalog asset patterns are unverified except Perfect Dark; the CI job
   `verify-catalog` checks them (see `catalog/RESEARCH.md`).

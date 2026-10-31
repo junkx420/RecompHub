@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { inTauri } from "../api";
 import type { CatalogEntry, KnownDump } from "../api/types";
 import { EntryIcon } from "../components/EntryIcon";
+import { GameDataImport } from "../components/GameDataImport";
 import { InstallCard } from "../components/InstallCard";
 import { SourceBadge } from "../components/SourceBadge";
 import { localized } from "../i18n";
@@ -19,6 +20,8 @@ function dumpLabel(d: KnownDump) {
 
 function GameDataInfo({ entry }: { entry: CatalogEntry }) {
   const { t, i18n } = useTranslation();
+  const { installed } = useApp();
+  const app = installed.find((a) => a.id === entry.id);
   const gd = entry.game_data;
   return (
     <div className="card">
@@ -35,6 +38,7 @@ function GameDataInfo({ entry }: { entry: CatalogEntry }) {
           <p>{t("gameData.copyFile")}</p>
           {gd.hint && <p className="hint">{localized(gd.hint, i18n.language)}</p>}
           <p className="muted">{t("gameData.accepted", { list: gd.accepted_hashes.map(dumpLabel).join(", ") })}</p>
+          {app && <GameDataImport app={app} />}
         </>
       )}
       {gd.mode !== "none" && <p className="muted small">{t("gameData.legal")}</p>}

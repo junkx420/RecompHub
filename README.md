@@ -4,10 +4,10 @@ RecompHub finds, installs, updates and launches native PC ports of
 recompiled and decompiled games (N64Recomp, XenonRecomp, decomp projects)
 on Windows 10/11 x64.
 
-> **Status:** early development (milestone 3 of 6). Ports can be installed
-> and updated from their GitHub releases without losing saves, and the
-> previous version can be restored. Game data import, launching and
-> shortcuts are not implemented yet.
+> **Status:** early development (milestone 4 of 6). Ports can be installed,
+> updated without losing saves, rolled back and launched; your own ROM dump
+> is checked and imported where a port needs it. Shortcuts, Steam
+> integration and self-update are not implemented yet.
 
 **Legal:** RecompHub never downloads, hosts or links ROMs, ISOs or other
 game data. It only downloads the official release assets that port projects

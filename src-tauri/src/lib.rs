@@ -58,6 +58,12 @@ pub fn run() {
             commands::update,
             commands::restore_previous,
             commands::updates_check,
+            commands::gamedata_status,
+            commands::gamedata_import,
+            commands::launch,
+            commands::running_list,
+            commands::open_log,
+            commands::log_tail,
         ])
         .run(tauri::generate_context!())
         .unwrap_or_else(|err| {

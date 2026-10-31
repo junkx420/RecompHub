@@ -60,7 +60,14 @@
     "portHandlesIt": "The port asks for your own copy of the game itself.",
     "copyFile": "RecompHub checks your own copy of the game and copies it into the game folder.",
     "accepted": "Accepted: {{list}}",
-    "legal": "RecompHub never downloads or provides ROMs, ISOs or other game files. Use a dump of a game you own."
+    "legal": "RecompHub never downloads or provides ROMs, ISOs or other game files. Use a dump of a game you own.",
+    "missing": "Your game file is still missing",
+    "present": "Game file OK: {{dump}}",
+    "presentUnknown": "A game file is in place, but it is not a supported dump",
+    "choose": "Choose game file…",
+    "replace": "Replace game file…",
+    "checking": "Checking…",
+    "pickTitle": "Choose your own ROM dump"
   },
   "library": {
     "empty": "Nothing installed yet.",
@@ -114,7 +121,12 @@
     "not_installed": "{{id}} is not installed.",
     "up_to_date": "{{id}} is already at {{version}}.",
     "no_previous_version": "There is no previous version of {{id}} to restore.",
-    "game_running": "Close the game first ({{processes}} is running)."
+    "game_running": "Close the game first ({{processes}} is running).",
+    "already_running": "The game is already running.",
+    "game_data_missing": "Choose your game file under Game data first.",
+    "wrong_dump": "This is the {{region}} {{version}} dump, which this port does not support.",
+    "unknown_dump": "This file is not a known dump of this game (SHA-1 {{sha1}}).",
+    "not_a_rom": "This file is not an N64 ROM."
   },
   "install": {
     "title": "Install",
@@ -151,5 +163,14 @@
     "restore": "Restore {{version}}",
     "restoreTitle": "Restore previous version",
     "restoreConfirm": "Go back to {{version}}? Saves and settings are kept, and the current version is backed up so you can switch back."
+  },
+  "play": {
+    "play": "Play",
+    "running": "Running",
+    "crashed": "The game ended with exit code {{code}}.",
+    "showLog": "Show log",
+    "hideLog": "Hide log",
+    "openLog": "Open log file",
+    "emptyLog": "The log is empty."
   }
 }

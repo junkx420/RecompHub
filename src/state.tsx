@@ -12,6 +12,7 @@ import { api } from "./api";
 import type {
   AppError,
   AppInfo,
+  GameExited,
   InstallOptions,
   InstalledSummary,
   JobEvent,
@@ -42,6 +43,11 @@ interface AppContextValue {
   /** Latest release tag per installed app, from the last update check. */
   latest: Record<string, string>;
   checkingUpdates: boolean;
+  /** Apps started from RecompHub that are still running. */
+  running: Record<string, true>;
+  /** Exit code of the last run per app id (null: unknown). */
+  lastExit: Record<string, number | null>;
+  play(id: string): Promise<void>;
   saveSettings(next: Settings): Promise<void>;
   reloadCatalog(): Promise<void>;
   reloadLibrary(): Promise<void>;
@@ -75,6 +81,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [jobs, setJobs] = useState<Record<string, JobState>>({});
   const [jobErrors, setJobErrors] = useState<Record<string, AppError>>({});
   const endedJobs = useRef(new Set<number>());
+  const [running, setRunning] = useState<Record<string, true>>({});
+  const [lastExit, setLastExit] = useState<Record<string, number | null>>({});
   const [latest, setLatest] = useState<Record<string, string>>({});
   const [checkingUpdates, setCheckingUpdates] = useState(false);
 
@@ -112,6 +120,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     void api.settingsGet().then(setSettings);
     void api.appInfo().then(setInfo);
     void api.libraryList().then(setInstalled);
+    void api.runningList().then((ids) => setRunning(Object.fromEntries(ids.map((id) => [id, true as const]))));
     api
       .catalogGet()
       .then(setCatalog, setCatalogError)
@@ -135,16 +144,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setJobErrors((prev) => ({ ...prev, [id]: event.error }));
       }
     };
-    let unsubscribe: (() => void) | undefined;
+    const onExit = ({ id, code }: GameExited) => {
+      setRunning((prev) => without(prev, id));
+      setLastExit((prev) => ({ ...prev, [id]: code }));
+    };
+    const unsubscribers: (() => void)[] = [];
     let disposed = false;
-    void api.onJobEvent(handle).then((u) => {
-      if (disposed) u();
-      else unsubscribe = u;
-    });
+    for (const subscribe of [api.onJobEvent(handle), api.onGameExited(onExit)]) {
+      void subscribe.then((u) => {
+        if (disposed) u();
+        else unsubscribers.push(u);
+      });
+    }
     return () => {
       disposed = true;
-      unsubscribe?.();
+      unsubscribers.forEach((u) => u());
     };
+  }, []);
+
+  const play = useCallback(async (id: string) => {
+    setLastExit((prev) => without(prev, id));
+    await api.launch(id);
+    setRunning((prev) => ({ ...prev, [id]: true }));
   }, []);
 
   // One automatic update check per app start, if the user wants it.
@@ -204,6 +225,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       jobErrors,
       latest,
       checkingUpdates,
+      running,
+      lastExit,
+      play,
       saveSettings,
       reloadCatalog,
       reloadLibrary,
@@ -214,6 +238,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
       cancelJob,
     }),
     [
+      running,
+      lastExit,
+      play,
       settings,
       info,
       catalog,
