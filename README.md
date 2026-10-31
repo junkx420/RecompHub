@@ -1,121 +1,94 @@
+<div align="center">
+
 # RecompHub
 
-A store for native PC ports of recompiled and decompiled games
-(N64Recomp, XenonRecomp, decomp projects) on Windows 10/11 x64. It finds,
-installs, updates and launches the ports from their official GitHub
-releases, keeps your saves safe across updates, and puts the games in your
-start menu and Steam library.
+**One place for native PC ports of N64, Xbox 360, PlayStation, GameCube and more,
+made by the recompilation and decompilation community.**
 
-> **Status:** all six planned milestones are implemented; the app has not
-> had a public release yet.
+Find a port, install it with one click, keep it updated without losing your saves,
+and start it from the app, the start menu or Steam.
 
-**Legal:** RecompHub never downloads, hosts or links ROMs, ISOs or other
-game data. It only downloads the release assets that port projects publish
-on GitHub. Ports need your own legally obtained copy of each game.
+[**Download for Windows**](https://github.com/junkx420/ReCompX-Store/releases/latest) ·
+[What's new](https://github.com/junkx420/ReCompX-Store/releases) ·
+[Report a problem](https://github.com/junkx420/ReCompX-Store/issues)
 
-## Features
+<img src="docs/screenshot.png" alt="RecompHub showing the catalog of ports" width="820">
 
-- **Catalog** of more than 80 ports (`catalog/catalog.json`), loaded from
-  this repository with an offline fallback. Early ports that start but are
-  not finished yet live in their own Experimental tab. Custom catalogs can
-  be added in Settings; their entries are marked "Not verified".
-- **Install** with download resume, SHA-256 check against the digest GitHub
-  publishes for each asset, zip and 7z support, and protection against
-  archives that try to write outside their folder. Folders that RecompHub
-  did not create are never overwritten without asking.
-- **Updates that keep your data.** Only the files the old release installed
-  are replaced; saves, settings, mods and anything the port or you created
-  stay where they are. The previous version is backed up and can be
-  restored with one click. An update that fails, or is interrupted by a
-  crash, is rolled back automatically.
-- **Game data.** For ports that need a ROM file in their folder, RecompHub
-  checks your dump against the known hashes, converts `.v64`/`.n64` to
-  `.z64`, and tells you exactly which dump you have if it is the wrong one.
-- **Launch** from the app, with each game's console output in
-  `%LOCALAPPDATA%\RecompHub\logs\<id>.log`.
-- **Start menu, desktop and Steam.** Shortcuts are created on install;
-  games can be added to Steam as non-Steam shortcuts for any account on the
-  PC (Steam must be closed; `shortcuts.vdf` is backed up first).
-- **Uninstall** keeps your saves by default: they move to a backup folder
-  and come back automatically if you install the port again. Deleting them
-  too is an explicit choice.
-- **Controller support:** D-pad or left stick moves, A selects, B goes back,
-  LB/RB switch tabs.
-- **Self-update** of RecompHub itself from signed GitHub releases.
-- English and German interface.
+</div>
+
+## What you get
+
+- **More than 80 ports** in one catalog, among them Zelda 64: Recompiled, Ship of
+  Harkinian, Dusklight (Twilight Princess), Sonic Unleashed, Donkey Kong 64,
+  Banjo-Kazooie, Perfect Dark, Castlevania: Symphony of the Night and many more.
+  Ports that are still early have their own **Experimental** tab.
+- **One-click install** straight from each project's official GitHub release. Every
+  download is checked before anything is installed.
+- **Updates that keep your saves.** Saves, settings and mods stay untouched; the
+  previous version is kept, so you can go back with one click if an update has a
+  problem.
+- **Your own game files.** For ports that need a ROM in their folder, RecompHub checks
+  your file and tells you if it is the wrong version.
+- **Start menu, desktop and Steam.** Games get a start menu shortcut, and you can add
+  them to your Steam library for the big-screen experience.
+- **Controller friendly:** D-pad or stick to move, A to select, B to go back, LB/RB to
+  switch tabs.
+- **Updates itself** when a new RecompHub version is out.
+- English and German.
 
 ## Install
 
-Download `RecompHub_<version>_x64-setup.exe` from the
-[latest release](https://github.com/junkx420/ReCompX-Store/releases/latest)
-and run it. It installs for the current user; no administrator rights are
-needed. The WebView2 runtime is installed if it is missing.
+1. Download `RecompHub_<version>_x64-setup.exe` from the
+   [latest release](https://github.com/junkx420/ReCompX-Store/releases/latest).
+2. Run it. It installs for your user only and needs no administrator rights.
 
-Data lives in `%LOCALAPPDATA%\RecompHub` (settings, `installed.json`,
-logs) and games in `%LOCALAPPDATA%\RecompHub\apps` unless you pick another
-library folder in Settings.
+Requires Windows 10 or 11, 64-bit.
 
-## Adding a port to the catalog
+## Questions
 
-Edit `catalog/catalog.json` (schema: `catalog/catalog.schema.json`). Each
-entry names the GitHub repository, a regular expression that matches
-exactly one Windows asset of its releases, the executable, the files that
-updates must keep (`preserve`), and how the port gets its game data.
-`catalog/RESEARCH.md` records how the existing entries were checked. CI
-verifies every pattern against the live GitHub releases on each push and
-weekly.
+**Windows says "Windows protected your PC". Is that safe?**
+The installer is not signed with a paid certificate yet, so SmartScreen does not know
+it. Click **More info**, then **Run anyway**. The installer is built by this
+repository's public GitHub workflow from the source you can read here.
 
-A custom catalog uses the same format; host it anywhere over https and add
-its URL in Settings, Custom sources.
+**Do I need my own copy of the games?**
+Yes. RecompHub never downloads, hosts or links ROMs, ISOs or other game data. Most
+ports ask for a dump of a game you own on first start; the detail page of each port
+says what it needs.
 
-## Development
+**What does "Experimental" mean?**
+The port starts and can be played, but it is early: it may crash, miss content or
+need workarounds. Check the project page before you dive in.
 
-Requirements: Rust (stable), Node.js 22, and the Visual Studio C++ build
-tools on Windows.
+**Where are my games and saves?**
+Games go to `%LOCALAPPDATA%\RecompHub\apps` unless you pick another library folder in
+Settings. Saves stay where each port keeps them. When you uninstall a game, its saves
+are kept by default and come back if you install it again.
 
-```bash
-npm ci
-npm run tauri dev           # run the app
-npm run dev                 # UI only, in a browser, with a mock backend
-cargo test --workspace      # Rust tests
-npm test                    # frontend tests
-npm run lint && npm run typecheck
-```
+**My virus scanner blocked a download.**
+RecompHub does not install files a scanner flags. These are often false alarms for
+recompiled games, but RecompHub leaves that decision to you and the port's authors;
+check the project page.
 
-Tests that touch the network or the local Steam installation are ignored
-by default:
+**A port does not work.**
+Problems with a game itself belong to that port's project (link on its detail page).
+Problems with installing, updating or the app go
+[here](https://github.com/junkx420/ReCompX-Store/issues).
 
-```bash
-cargo test -p recomphub-core --test live_install -- --ignored --nocapture
-cargo test -p recomphub-core --test live_steam -- --ignored --nocapture
-```
+## Thanks
 
-Layout: `crates/core` holds all logic and has no Tauri dependency,
-`src-tauri` is a thin command layer, `src` is the React UI, `catalog` the
-catalog and its schema. Design decisions and the full command list are in
-[`docs/PLAN.md`](docs/PLAN.md).
+RecompHub only installs the work of others. All credit goes to the people behind
+[N64Recomp](https://github.com/N64Recomp/N64Recomp),
+[XenonRecomp](https://github.com/hedge-dev/XenonRecomp),
+[Harbour Masters](https://github.com/HarbourMasters) and every port in the catalog.
+The catalog expansion uses the rated data of
+[awesome-decomp-games](https://github.com/SubmitGame/awesome-decomp-games).
 
-## Releasing
+Want to add a port or help with the app? See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Self-update needs a signing key pair. Once:
+## Legal
 
-1. Run `npx tauri signer generate -w recomphub.key` and keep the private
-   key and its password safe (never commit them).
-2. Add the repository secrets `TAURI_SIGNING_PRIVATE_KEY` (the contents of
-   `recomphub.key`) and `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`.
-3. Put the public key (`recomphub.key.pub`) into
-   `plugins.updater.pubkey` in `src-tauri/tauri.conf.json`.
-
-For each release, set the same version in `package.json`, `Cargo.toml`
-(`[workspace.package]`) and `src-tauri/tauri.conf.json`, commit, and push a
-tag `v<version>`. The release workflow checks the versions, runs the
-tests, builds the signed installer and creates a draft release with
-`latest.json`. Publish the draft to make it visible to the updater.
-
-Builds without a public key (local builds, forks) simply have self-update
-switched off.
-
-## License
-
-GPL-3.0-or-later. The ports themselves have their own licenses, shown on
-each catalog entry.
+RecompHub is an unofficial fan project and is not affiliated with Nintendo, Microsoft,
+Sony, Sega or any game publisher. All trademarks belong to their owners. RecompHub
+itself is licensed under GPL-3.0-or-later; each port has its own license, shown on its
+detail page.

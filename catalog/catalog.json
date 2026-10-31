@@ -293,7 +293,7 @@
       "name": "Perfect Dark (PC port)",
       "category": "game",
       "system": "n64",
-      "repo": "fgsfdsfgs/perfect_dark",
+      "repo": "perfect-dark-pc-port/perfect_dark",
       "asset_pattern": "^pd-x86_64-windows\\.zip$",
       "release_tag": "ci-dev-build",
       "exe": "pd.x86_64.exe",
@@ -343,7 +343,7 @@
         "n64decomp/perfect_dark (decompilation)"
       ],
       "license": "MIT",
-      "homepage": "https://github.com/fgsfdsfgs/perfect_dark"
+      "homepage": "https://github.com/perfect-dark-pc-port/perfect_dark"
     },
     {
       "id": "rmg",

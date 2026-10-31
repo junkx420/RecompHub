@@ -63,7 +63,8 @@ function catalog(): LoadedCatalog {
   );
   const first = settings.custom_sources[0];
   if (first) entries.push(customEntry(first));
-  return { entries, origin: "embedded", fetched_at: null, warnings: [] };
+  // Behave like a successful remote load so the UI shows its normal state.
+  return { entries, origin: "remote", fetched_at: new Date().toISOString(), warnings: [] };
 }
 
 function summary(entry: CatalogEntry, version: string, previous: string | null): InstalledSummary {

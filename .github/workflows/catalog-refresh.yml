@@ -1,0 +1,93 @@
+name: Catalog refresh
+
+# Weekly: find new ports, refresh managed entries, install every new or
+# changed entry for real, and open a pull request with the result.
+# See docs/RELEASING.md, "Catalog refresh".
+
+on:
+  schedule:
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: catalog-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh catalog
+    runs-on: windows-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Scout
+        shell: pwsh
+        run: python -I tools/catalog-scout/scout.py --summary "$env:RUNNER_TEMP/summary.md" --changed "$env:RUNNER_TEMP/changed.txt"
+
+      - name: Anything changed?
+        id: diff
+        shell: pwsh
+        run: |
+          git diff --quiet -- catalog
+          "changed=$(if ($LASTEXITCODE -ne 0) { 'true' } else { 'false' })" >> $env:GITHUB_OUTPUT
+
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.diff.outputs.changed == 'true'
+
+      - uses: Swatinem/rust-cache@v2
+        if: steps.diff.outputs.changed == 'true'
+
+      - name: Install every new or changed entry
+        if: steps.diff.outputs.changed == 'true'
+        shell: pwsh
+        run: |
+          cargo test -q -p recomphub-core --test live_install --no-run
+          $failed = @()
+          foreach ($id in Get-Content "$env:RUNNER_TEMP/changed.txt") {
+            if (-not $id) { continue }
+            $env:RECOMPHUB_LIVE_ID = $id
+            $out = cargo test -q -p recomphub-core --test live_install installs_real -- --ignored --nocapture 2>&1 | Out-String
+            if ($LASTEXITCODE -ne 0) {
+              $reason = ($out -split "`n" | Where-Object { $_ -match "unwrap|panicked" } | Select-Object -First 1)
+              $failed += "- ``$id``: $($reason.Trim())"
+              python -I tools/catalog-scout/drop.py $id
+            }
+          }
+          if ($failed) {
+            Add-Content "$env:RUNNER_TEMP/summary.md" "`n### Dropped (install failed)`n"
+            Add-Content "$env:RUNNER_TEMP/summary.md" ($failed -join "`n")
+          }
+
+      - name: Validate catalog
+        if: steps.diff.outputs.changed == 'true'
+        shell: pwsh
+        run: |
+          cargo test -q -p recomphub-core catalog
+          cargo run -q -p recomphub-core --bin verify-catalog catalog/catalog.json
+
+      - name: Open or update pull request
+        if: steps.diff.outputs.changed == 'true'
+        shell: pwsh
+        run: |
+          git diff --quiet -- catalog
+          if ($LASTEXITCODE -eq 0) { "Nothing left after the install check."; exit 0 }
+          $branch = "catalog-refresh"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c $branch
+          git add catalog
+          git commit -m "Refresh catalog" -m "Automated by .github/workflows/catalog-refresh.yml."
+          git push --force origin $branch
+          $open = gh pr list --head $branch --state open --json number --jq ".[0].number"
+          if ($open) {
+            gh pr edit $open --body-file "$env:RUNNER_TEMP/summary.md"
+          } else {
+            gh pr create --head $branch --title "Catalog refresh" --body-file "$env:RUNNER_TEMP/summary.md"
+          }

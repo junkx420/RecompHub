@@ -157,6 +157,15 @@ tab. How the 31 October 2026 expansion was selected is in
 `catalog/RESEARCH.md`. A download the virus scanner blocks (Windows error
 225/226) is reported as `blocked_by_antivirus`.
 
+## Docs and maintenance
+
+`README.md` is for players. Developer setup is in `docs/DEVELOPMENT.md`,
+releases, signing and the catalog refresh in `docs/RELEASING.md`, catalog
+contributions in `CONTRIBUTING.md`. The weekly
+`.github/workflows/catalog-refresh.yml` runs `tools/catalog-scout/scout.py`
+and opens a pull request; it needs "Allow GitHub Actions to create and
+approve pull requests" enabled in the repository settings.
+
 ## Uninstall
 
 `uninstall(id, keep_saves)` (`crates/core/src/uninstall.rs`): refuses while
