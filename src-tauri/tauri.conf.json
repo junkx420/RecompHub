@@ -55,7 +55,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENEMzY3NjE1MjQ1NEQ2NzQKUldSMDFsUWtGWFkyelc3UnU1TmlHTHgwZy9sV1ZLcWxrOXNNOGRJbmJ6SEtENE00V2pxVXZMR00K",
       "endpoints": ["https://github.com/junkx420/ReCompX-Store/releases/latest/download/latest.json"],
       "windows": { "installMode": "passive" }
     }

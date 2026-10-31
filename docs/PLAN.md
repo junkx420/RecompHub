@@ -161,8 +161,10 @@ record, the previous-version backup, shortcuts and Steam entries go.
 
 ## Open points
 
-- The updater pubkey is still empty: the owner has to generate the key
-  pair and set the secrets (README, Releasing) before the first release.
+- Updater key: public key (minisign id CD3676152454D674) is in
+  `tauri.conf.json`; the private key and password are repository secrets
+  and with the owner. Losing them means installed copies can no longer be
+  updated.
 
 
 - Testing from a Claude session: Claude desktop is an MSIX app, so a
