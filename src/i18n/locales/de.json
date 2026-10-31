@@ -200,5 +200,23 @@
     "steamRefresh": "In Steam aktualisieren",
     "steamRemove": "Aus Steam entfernen",
     "checkAgain": "Erneut prüfen"
+  },
+  "sources": {
+    "title": "Eigene Quellen",
+    "hint": "Füge Kataloge anderer Leute hinzu. Ihre Einträge sind als „Nicht verifiziert“ markiert: Niemand hat sie geprüft, füge also nur Quellen hinzu, denen du vertraust. Downloads kommen trotzdem nur aus GitHub-Releases.",
+    "url": "Katalog-URL",
+    "add": "Quelle hinzufügen",
+    "checking": "Wird geprüft…",
+    "remove": "Entfernen",
+    "notice": "Aus einer selbst hinzugefügten Quelle ({{url}}). RecompHub hat diesen Eintrag nicht geprüft.",
+    "installConfirm": "Dieser Eintrag kommt von {{url}}, einer selbst hinzugefügten Quelle. RecompHub hat ihn nicht geprüft. Trotzdem installieren?"
+  },
+  "appUpdate": {
+    "check": "Nach RecompHub-Updates suchen",
+    "current": "RecompHub ist auf dem neuesten Stand.",
+    "available": "RecompHub {{version}} ist verfügbar.",
+    "install": "Installieren und neu starten",
+    "downloading": "Update wird heruntergeladen…",
+    "unavailable": "Diese Version kann sich nicht selbst aktualisieren. Updates gibt es mit signierten Releases von GitHub."
   }
 }

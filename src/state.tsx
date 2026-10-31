@@ -51,6 +51,8 @@ interface AppContextValue {
   /** Put a record the backend returned into the library list. */
   replaceInstalled(app: InstalledSummary): void;
   saveSettings(next: Settings): Promise<void>;
+  /** Add or remove a custom catalog source, then reload the catalog. */
+  changeSource(action: "add" | "remove", url: string): Promise<void>;
   reloadCatalog(): Promise<void>;
   reloadLibrary(): Promise<void>;
   checkUpdates(): Promise<void>;
@@ -164,6 +166,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const changeSource = useCallback(
+    async (action: "add" | "remove", url: string) => {
+      setSettings(action === "add" ? await api.sourceAdd(url) : await api.sourceRemove(url));
+      await reloadCatalog();
+    },
+    [reloadCatalog],
+  );
+
   const replaceInstalled = useCallback((app: InstalledSummary) => {
     setInstalled((prev) => prev.map((a) => (a.id === app.id ? app : a)));
   }, []);
@@ -235,6 +245,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       lastExit,
       play,
       replaceInstalled,
+      changeSource,
       saveSettings,
       reloadCatalog,
       reloadLibrary,
@@ -249,6 +260,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       lastExit,
       play,
       replaceInstalled,
+      changeSource,
       settings,
       info,
       catalog,

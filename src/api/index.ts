@@ -50,6 +50,9 @@ export interface Backend {
   /** Steam must be closed. */
   steamAdd(id: string, userIds: number[]): Promise<InstalledSummary>;
   steamRemove(id: string): Promise<InstalledSummary>;
+  /** Fetches and checks the catalog at `url` before saving it. */
+  sourceAdd(url: string): Promise<Settings>;
+  sourceRemove(url: string): Promise<Settings>;
   /** Subscribe to job events; resolves with an unsubscribe function. */
   onJobEvent(handler: (event: JobEvent) => void): Promise<() => void>;
 }
@@ -95,6 +98,8 @@ const tauriBackend: Backend = {
   steamStatus: () => invoke("steam_status"),
   steamAdd: (id, userIds) => invoke("steam_add", { id, userIds }),
   steamRemove: (id) => invoke("steam_remove", { id }),
+  sourceAdd: (url) => invoke("source_add", { url }),
+  sourceRemove: (url) => invoke("source_remove", { url }),
   onJobEvent: listenJobs,
 };
 
@@ -133,6 +138,8 @@ function lazyMock(): Backend {
     steamStatus: () => load().then((b) => b.steamStatus()),
     steamAdd: (id, u) => load().then((b) => b.steamAdd(id, u)),
     steamRemove: (id) => load().then((b) => b.steamRemove(id)),
+    sourceAdd: (url) => load().then((b) => b.sourceAdd(url)),
+    sourceRemove: (url) => load().then((b) => b.sourceRemove(url)),
     onJobEvent: (h) => load().then((b) => b.onJobEvent(h)),
   };
 }

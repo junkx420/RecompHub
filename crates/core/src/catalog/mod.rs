@@ -117,6 +117,49 @@ pub async fn load(http: &Http, url: &str) -> LoadedCatalog {
     embedded(warnings)
 }
 
+/// Load one user-added source. Its entries are tagged as custom.
+pub async fn load_custom(http: &Http, url: &str) -> Result<(Vec<CatalogEntry>, Vec<String>)> {
+    let fetched = http.get_cached(url, true).await?;
+    parse(
+        &fetched.body,
+        EntrySource::Custom {
+            url: url.to_owned(),
+        },
+    )
+}
+
+/// The official catalog plus user-added sources. A custom entry whose id
+/// is already taken is skipped: the official catalog (and earlier sources)
+/// win. Broken sources become warnings.
+pub async fn load_with_sources(
+    http: &Http,
+    official_url: &str,
+    custom: &[String],
+) -> LoadedCatalog {
+    let mut loaded = load(http, official_url).await;
+    for url in custom {
+        match load_custom(http, url).await {
+            Ok((entries, warnings)) => {
+                loaded
+                    .warnings
+                    .extend(warnings.into_iter().map(|w| format!("{url}: {w}")));
+                for entry in entries {
+                    if loaded.get(&entry.id).is_some() {
+                        loaded.warnings.push(format!(
+                            "{url}: entry {} skipped, id already taken",
+                            entry.id
+                        ));
+                    } else {
+                        loaded.entries.push(entry);
+                    }
+                }
+            }
+            Err(err) => loaded.warnings.push(format!("{url}: {err}")),
+        }
+    }
+    loaded
+}
+
 fn embedded(mut warnings: Vec<String>) -> LoadedCatalog {
     let (entries, mut w) = parse(EMBEDDED_CATALOG.as_bytes(), EntrySource::Official)
         .expect("embedded catalog is valid (checked by tests)");

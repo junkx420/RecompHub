@@ -1,0 +1,79 @@
+name: Release
+
+# Push a tag like v0.2.0 to build a signed installer and a draft GitHub
+# release with latest.json for the in-app updater. Review the draft, then
+# publish it: the updater only sees published releases.
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and draft release (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check tag matches the app version
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref_name }}".TrimStart("v")
+          $conf = (Get-Content src-tauri/tauri.conf.json -Raw | ConvertFrom-Json).version
+          $pkg = (Get-Content package.json -Raw | ConvertFrom-Json).version
+          $cargo = (Select-String -Path Cargo.toml -Pattern '^version = "(.+)"').Matches[0].Groups[1].Value
+          if ($tag -ne $conf -or $tag -ne $pkg -or $tag -ne $cargo) {
+            Write-Error "Tag v$tag does not match: tauri.conf.json $conf, package.json $pkg, Cargo.toml $cargo"
+            exit 1
+          }
+
+      - name: Check updater signing setup
+        shell: pwsh
+        env:
+          SIGNING_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: |
+          if (-not $env:SIGNING_KEY) {
+            Write-Error "Secret TAURI_SIGNING_PRIVATE_KEY is missing (README: Releasing)"
+            exit 1
+          }
+          $pubkey = (Get-Content src-tauri/tauri.conf.json -Raw | ConvertFrom-Json).plugins.updater.pubkey
+          if (-not $pubkey) {
+            Write-Error "plugins.updater.pubkey in src-tauri/tauri.conf.json is empty (README: Releasing)"
+            exit 1
+          }
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Tests
+        run: |
+          npm test
+          cargo test --workspace
+
+      - name: Build and draft release
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: RecompHub ${{ github.ref_name }}
+          releaseBody: Download the `-setup.exe` below and run it. Installed copies update themselves from Settings, About.
+          releaseDraft: true
+          prerelease: false
+          generateReleaseNotes: true
+          uploadUpdaterJson: true
+          args: --config src-tauri/tauri.release.conf.json

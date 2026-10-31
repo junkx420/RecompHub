@@ -67,7 +67,7 @@ Errors: `AppError` in `crates/core/src/error.rs`, serialized as
    library view, launch with log capture to `logs\<id>.log`.
 5. [x] Start menu / desktop shortcuts, Steam `shortcuts.vdf` (binary VDF,
    backup, no duplicates, Steam must be closed), gamepad navigation.
-6. [ ] Custom sources ("Not verified"), self-update via tauri-plugin-updater,
+6. [x] Custom sources ("Not verified"), self-update via tauri-plugin-updater,
    release workflow on `v*` tags, polished README.
 
 Done when a fresh Windows user runs the installer, installs Zelda64Recomp
@@ -131,7 +131,26 @@ Gamepad (`src/gamepad.ts`): polled every 33 ms (animation frames stall in
 throttled windows); D-pad/left stick move focus spatially, A clicks, B
 clicks the element marked `data-gamepad-back`, LB/RB switch tabs.
 
+## Implemented interface (milestone 6)
+
+`source_add(url)` (fetches and validates the catalog before saving),
+`source_remove(url)`; `settings.custom_sources` feeds
+`catalog::load_with_sources`, where official ids win over custom ones.
+Installing a custom entry asks for confirmation.
+
+Self-update: `tauri-plugin-updater` is registered only when
+`plugins.updater.pubkey` in `tauri.conf.json` is set (`app_info.self_update`
+tells the UI). The endpoint is `releases/latest/download/latest.json`.
+`.github/workflows/release.yml` runs on `v*` tags: checks that the tag
+matches all three version fields and that the signing secret and pubkey
+exist, tests, then `tauri-action` builds with
+`src-tauri/tauri.release.conf.json` (`createUpdaterArtifacts`) and creates a
+draft release with `latest.json`.
+
 ## Open points
+
+- The updater pubkey is still empty: the owner has to generate the key
+  pair and set the secrets (README, Releasing) before the first release.
 
 - `uninstall(id, keep_saves)` from the planned interface is not implemented
   yet (no milestone owns it); it must also remove shortcuts and Steam

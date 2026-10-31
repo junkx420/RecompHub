@@ -23,13 +23,37 @@ let settings: Settings = {
   catalog_url: "https://raw.githubusercontent.com/junkx420/ReCompX-Store/main/catalog/catalog.json",
   check_updates: true,
   desktop_shortcut: false,
+  custom_sources: [],
 };
+
+/** Every custom source in the mock serves this one entry. */
+function customEntry(url: string): CatalogEntry {
+  return {
+    id: "example-port",
+    name: "Example Port (custom source)",
+    category: "game",
+    system: "n64",
+    repo: "example/example-port",
+    asset_pattern: "(?i)windows.*\\.zip$",
+    exe: "example.exe",
+    preserve: [],
+    user_data_paths: [],
+    game_data: { mode: "none" },
+    description: { en: "An entry from a catalog the user added.", de: "Ein Eintrag aus einem selbst hinzugefügten Katalog." },
+    credits: [],
+    license: "MIT",
+    homepage: "https://github.com/example/example-port",
+    source: { kind: "custom", url },
+  };
+}
 
 function catalog(): LoadedCatalog {
   const raw = catalogJson.entries as unknown as Partial<CatalogEntry>[];
   const entries = raw.map(
     (e) => ({ preserve: [], user_data_paths: [], credits: [], ...e, source: { kind: "official" } }) as CatalogEntry,
   );
+  const first = settings.custom_sources[0];
+  if (first) entries.push(customEntry(first));
   return { entries, origin: "embedded", fetched_at: null, warnings: [] };
 }
 
@@ -143,6 +167,7 @@ function start(id: string, kind: Kind): number {
 export const mockBackend: Backend = {
   appInfo: async () => ({
     version: "0.0.0-dev",
+    self_update: false,
     data_dir: "C:\\Users\\dev\\AppData\\Local\\RecompHub",
     library_dir: settings.library_dir ?? LIBRARY,
     default_library_dir: LIBRARY,
@@ -229,6 +254,17 @@ export const mockBackend: Backend = {
   steamAdd: async (id, userIds) =>
     patch(id, (app) => ({ ...app, steam_users: [...new Set([...app.steam_users, ...userIds])] })),
   steamRemove: async (id) => patch(id, (app) => ({ ...app, steam_users: [] })),
+  sourceAdd: async (url) => {
+    if (!url.trim().startsWith("https://")) throw { code: "invalid_settings", params: { message: "url must use https" } };
+    if (!settings.custom_sources.includes(url.trim())) {
+      settings = { ...settings, custom_sources: [...settings.custom_sources, url.trim()] };
+    }
+    return settings;
+  },
+  sourceRemove: async (url) => {
+    settings = { ...settings, custom_sources: settings.custom_sources.filter((s) => s !== url) };
+    return settings;
+  },
   onGameExited: async (handler) => {
     exitHandlers.add(handler);
     return () => exitHandlers.delete(handler);

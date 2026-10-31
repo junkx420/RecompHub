@@ -43,6 +43,18 @@ pub fn run() {
         }))
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_process::init())
+        .setup(|app| {
+            // Builds without a signing key (development, forks) ship no
+            // updater; the plugin would refuse to start without a pubkey.
+            if updater_configured(app.config()) {
+                app.handle()
+                    .plugin(tauri_plugin_updater::Builder::new().build())?;
+            } else {
+                tracing::info!("self-update disabled: no updater pubkey in tauri.conf.json");
+            }
+            Ok(())
+        })
         .manage(state)
         .invoke_handler(tauri::generate_handler![
             commands::app_info,
@@ -69,12 +81,25 @@ pub fn run() {
             commands::steam_status,
             commands::steam_add,
             commands::steam_remove,
+            commands::source_add,
+            commands::source_remove,
         ])
         .run(tauri::generate_context!())
         .unwrap_or_else(|err| {
             tracing::error!(%err, "tauri runtime failed");
             std::process::exit(1);
         });
+}
+
+/// Is a public key for signed self-updates configured?
+pub(crate) fn updater_configured(config: &tauri::Config) -> bool {
+    config
+        .plugins
+        .0
+        .get("updater")
+        .and_then(|u| u.get("pubkey"))
+        .and_then(|k| k.as_str())
+        .is_some_and(|k| !k.trim().is_empty())
 }
 
 /// Undo updates a crash interrupted, before the UI can start new jobs. Looks

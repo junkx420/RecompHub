@@ -633,3 +633,28 @@ ul.code-list {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
 }
+/* Custom sources */
+.source-list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.source-list li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+.card form.row input {
+  flex: 1;
+  min-width: 0;
+}
+.install-card p.badge {
+  white-space: normal;
+  font-weight: 600;
+  padding: 6px 10px;
+  margin-left: 0;
+}

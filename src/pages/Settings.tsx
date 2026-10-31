@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inTauri } from "../api";
 import type { Language, Settings as SettingsModel, Theme } from "../api/types";
+import { AppUpdate } from "../components/AppUpdate";
 import { CatalogStatus } from "../components/CatalogStatus";
 import { formatError } from "../errors";
 import { useApp } from "../state";
@@ -10,6 +11,68 @@ import { useApp } from "../state";
 const LANGUAGES: Language[] = ["system", "de", "en"];
 const THEMES: Theme[] = ["system", "light", "dark"];
 const LANGUAGE_NAMES: Record<Exclude<Language, "system">, string> = { de: "Deutsch", en: "English" };
+
+/** User-added catalogs. Their entries are marked "not verified". */
+function SourcesCard() {
+  const { t } = useTranslation();
+  const { settings, changeSource } = useApp();
+  const [draft, setDraft] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<unknown>(null);
+
+  async function change(action: "add" | "remove", url: string) {
+    setBusy(true);
+    setError(null);
+    try {
+      await changeSource(action, url);
+      if (action === "add") setDraft("");
+    } catch (err) {
+      setError(err);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="card">
+      <h2>{t("sources.title")}</h2>
+      <p className="muted small">{t("sources.hint")}</p>
+      {settings && settings.custom_sources.length > 0 && (
+        <ul className="source-list">
+          {settings.custom_sources.map((url) => (
+            <li key={url}>
+              <span className="path">{url}</span>
+              <button type="button" className="button ghost small" disabled={busy} onClick={() => void change("remove", url)}>
+                {t("sources.remove")}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <form
+        className="row"
+        onSubmit={(e) => {
+          e.preventDefault();
+          void change("add", draft);
+        }}
+      >
+        <input
+          type="url"
+          className="search"
+          placeholder="https://…/catalog.json"
+          value={draft}
+          spellCheck={false}
+          onChange={(e) => setDraft(e.target.value)}
+          aria-label={t("sources.url")}
+        />
+        <button type="submit" className="button" disabled={busy || draft.trim() === ""}>
+          {busy ? t("sources.checking") : t("sources.add")}
+        </button>
+      </form>
+      {error !== null && <p className="error-inline small">{formatError(error, t)}</p>}
+    </div>
+  );
+}
 
 export function Settings() {
   const { t } = useTranslation();
@@ -161,9 +224,12 @@ export function Settings() {
         {catalog && <CatalogStatus catalog={catalog} />}
       </div>
 
+      <SourcesCard />
+
       <div className="card">
         <h2>{t("settings.about")}</h2>
         <p>{info && t("settings.version", { version: info.version })}</p>
+        <AppUpdate />
         <dl className="facts">
           <dt>{t("settings.dataDir")}</dt>
           <dd className="path">{info?.data_dir}</dd>

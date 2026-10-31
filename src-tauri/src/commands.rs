@@ -25,17 +25,20 @@ use tauri_plugin_opener::OpenerExt;
 #[derive(Serialize)]
 pub struct AppInfo {
     version: &'static str,
+    /// This build can update itself (an updater key is configured).
+    self_update: bool,
     data_dir: PathBuf,
     library_dir: PathBuf,
     default_library_dir: PathBuf,
 }
 
 #[tauri::command]
-pub async fn app_info(state: State<'_, AppState>) -> Result<AppInfo> {
+pub async fn app_info(app: AppHandle, state: State<'_, AppState>) -> Result<AppInfo> {
     let settings = state.settings.read().await;
     let library = state.dirs.library(settings.library_dir.as_deref());
     Ok(AppInfo {
         version: env!("CARGO_PKG_VERSION"),
+        self_update: crate::updater_configured(app.config()),
         data_dir: paths::normalize(state.dirs.root()),
         library_dir: paths::normalize(&library.apps),
         default_library_dir: paths::normalize(&state.dirs.default_library()),
@@ -52,13 +55,38 @@ pub async fn settings_set(state: State<'_, AppState>, settings: Settings) -> Res
     settings.validate()?;
     let mut current = state.settings.write().await;
     settings.save(&state.dirs.settings_file())?;
-    let url_changed = current.catalog_url != settings.catalog_url;
+    let sources_changed = current.catalog_url != settings.catalog_url
+        || current.custom_sources != settings.custom_sources;
     *current = settings.clone();
     drop(current);
-    if url_changed {
+    if sources_changed {
         *state.catalog.write().await = None;
     }
     Ok(settings)
+}
+
+/// Add a user catalog. It is fetched and checked first, so a typo or a
+/// file without valid entries is reported instead of saved.
+#[tauri::command]
+pub async fn source_add(state: State<'_, AppState>, url: String) -> Result<Settings> {
+    let url = url.trim().to_owned();
+    recomphub_core::settings::validate_catalog_url("url", &url)?;
+    let (entries, warnings) = catalog::load_custom(&state.http, &url).await?;
+    if entries.is_empty() {
+        return Err(AppError::CatalogInvalid { errors: warnings });
+    }
+    let mut next = state.settings.read().await.clone();
+    if !next.custom_sources.contains(&url) {
+        next.custom_sources.push(url);
+    }
+    settings_set(state, next).await
+}
+
+#[tauri::command]
+pub async fn source_remove(state: State<'_, AppState>, url: String) -> Result<Settings> {
+    let mut next = state.settings.read().await.clone();
+    next.custom_sources.retain(|s| s != &url);
+    settings_set(state, next).await
 }
 
 async fn load_catalog(state: &AppState, force: bool) -> LoadedCatalog {
@@ -68,8 +96,14 @@ async fn load_catalog(state: &AppState, force: bool) -> LoadedCatalog {
             return loaded.clone();
         }
     }
-    let url = state.settings.read().await.catalog_url.clone();
-    let loaded = catalog::load(&state.http, &url).await;
+    let (url, custom) = {
+        let settings = state.settings.read().await;
+        (
+            settings.catalog_url.clone(),
+            settings.custom_sources.clone(),
+        )
+    };
+    let loaded = catalog::load_with_sources(&state.http, &url, &custom).await;
     *state.catalog.write().await = Some(loaded.clone());
     loaded
 }

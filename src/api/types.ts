@@ -63,10 +63,14 @@ export interface Settings {
   catalog_url: string;
   check_updates: boolean;
   desktop_shortcut: boolean;
+  /** Extra catalog URLs; their entries are marked "not verified". */
+  custom_sources: string[];
 }
 
 export interface AppInfo {
   version: string;
+  /** This build can update itself (signed release builds only). */
+  self_update: boolean;
   data_dir: string;
   library_dir: string;
   default_library_dir: string;

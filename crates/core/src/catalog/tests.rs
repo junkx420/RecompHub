@@ -168,3 +168,44 @@ async fn load_uses_cache_when_offline() {
     assert_eq!(loaded.origin, CatalogOrigin::Cache);
     assert!(loaded.get("cached-one").is_some());
 }
+
+#[tokio::test]
+async fn custom_sources_are_merged_tagged_and_cannot_shadow_official_ids() {
+    use wiremock::matchers::path;
+    let server = MockServer::start().await;
+    Mock::given(method("GET"))
+        .and(path("/official.json"))
+        .respond_with(ResponseTemplate::new(200).set_body_bytes(doc(vec![entry_json("shared")])))
+        .mount(&server)
+        .await;
+    Mock::given(method("GET"))
+        .and(path("/custom.json"))
+        .respond_with(
+            ResponseTemplate::new(200)
+                .set_body_bytes(doc(vec![entry_json("shared"), entry_json("extra")])),
+        )
+        .mount(&server)
+        .await;
+    let dir = tempfile::tempdir().unwrap();
+    let http = Http::new(dir.path()).unwrap();
+    let custom = format!("{}/custom.json", server.uri());
+    let broken = format!("{}/missing.json", server.uri());
+
+    let loaded = load_with_sources(
+        &http,
+        &format!("{}/official.json", server.uri()),
+        &[custom.clone(), broken.clone()],
+    )
+    .await;
+    let ids: Vec<_> = loaded.entries.iter().map(|e| e.id.as_str()).collect();
+    assert_eq!(ids, ["shared", "extra"]);
+    assert_eq!(loaded.get("shared").unwrap().source, EntrySource::Official);
+    assert_eq!(
+        loaded.get("extra").unwrap().source,
+        EntrySource::Custom {
+            url: custom.clone()
+        }
+    );
+    assert!(loaded.warnings.iter().any(|w| w.contains("shared skipped")));
+    assert!(loaded.warnings.iter().any(|w| w.starts_with(&broken)));
+}

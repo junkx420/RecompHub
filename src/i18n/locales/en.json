@@ -200,5 +200,23 @@
     "steamRefresh": "Update in Steam",
     "steamRemove": "Remove from Steam",
     "checkAgain": "Check again"
+  },
+  "sources": {
+    "title": "Custom sources",
+    "hint": "Add catalogs from other people. Their entries are marked \"Not verified\": nobody checked them, so only add sources you trust. Downloads still come only from GitHub releases.",
+    "url": "Catalog URL",
+    "add": "Add source",
+    "checking": "Checking…",
+    "remove": "Remove",
+    "notice": "From a source you added ({{url}}). RecompHub has not checked this entry.",
+    "installConfirm": "This entry comes from {{url}}, a source you added. RecompHub has not checked it. Install anyway?"
+  },
+  "appUpdate": {
+    "check": "Check for RecompHub updates",
+    "current": "RecompHub is up to date.",
+    "available": "RecompHub {{version}} is available.",
+    "install": "Install and restart",
+    "downloading": "Downloading update…",
+    "unavailable": "This build cannot update itself. Updates come with signed releases from GitHub."
   }
 }

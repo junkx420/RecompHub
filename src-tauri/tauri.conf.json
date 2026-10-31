@@ -52,5 +52,12 @@
         "displayLanguageSelector": false
       }
     }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "",
+      "endpoints": ["https://github.com/junkx420/ReCompX-Store/releases/latest/download/latest.json"],
+      "windows": { "installMode": "passive" }
+    }
   }
 }

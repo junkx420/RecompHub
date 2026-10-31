@@ -93,6 +93,10 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
     setActionError(null);
     setStarting(true);
     try {
+      if (entry.source.kind === "custom") {
+        const ok = await confirmDialog(t("sources.installConfirm", { url: entry.source.url }), t("badge.unverified"));
+        if (!ok) return;
+      }
       const preflight = await api.installPreflight(entry.id);
       let replaceForeign = false;
       if (preflight.state === "foreign_content") {
@@ -130,6 +134,9 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
         </p>
       )}
       {!current && <p className="muted">{t("common.loading")}</p>}
+      {entry.source.kind === "custom" && !app && (
+        <p className="badge badge-warning">{t("sources.notice", { url: entry.source.url })}</p>
+      )}
       {releaseError !== null && <ErrorBox error={releaseError} onRetry={() => setAttempt((n) => n + 1)} />}
 
       {job ? (
