@@ -73,7 +73,7 @@ struct BackupInfo {
     created_at: DateTime<Utc>,
 }
 
-fn preserve_set(entry: &CatalogEntry) -> Result<GlobSet> {
+pub(crate) fn preserve_set(entry: &CatalogEntry) -> Result<GlobSet> {
     let mut builder = GlobSetBuilder::new();
     for pattern in &entry.preserve {
         let glob = GlobBuilder::new(&pattern.replace('\\', "/"))
@@ -178,7 +178,7 @@ fn commit(installed_file: &Path, app: &InstalledApp, journal: &Journal, path: &P
     Ok(())
 }
 
-fn ensure_not_running(dir: &Path) -> Result<()> {
+pub(crate) fn ensure_not_running(dir: &Path) -> Result<()> {
     let processes = process::running_in(dir);
     if processes.is_empty() {
         Ok(())

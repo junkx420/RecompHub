@@ -83,6 +83,7 @@ pub fn run() {
             commands::steam_remove,
             commands::source_add,
             commands::source_remove,
+            commands::uninstall,
         ])
         .run(tauri::generate_context!())
         .unwrap_or_else(|err| {

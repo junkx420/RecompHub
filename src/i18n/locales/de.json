@@ -218,5 +218,17 @@
     "install": "Installieren und neu starten",
     "downloading": "Update wird heruntergeladen…",
     "unavailable": "Diese Version kann sich nicht selbst aktualisieren. Updates gibt es mit signierten Releases von GitHub."
+  },
+  "uninstall": {
+    "open": "Deinstallieren…",
+    "title": "{{name}} deinstallieren?",
+    "keepHint": "Der Spielordner, seine Verknüpfungen und Steam-Einträge werden entfernt. Spielstände, Einstellungen und Mods bleiben im Backup-Ordner und kommen bei einer Neuinstallation zurück.",
+    "deleteHint": "Alles wird entfernt, auch Spielstände und Einstellungen innerhalb und außerhalb des Spielordners. Das lässt sich nicht rückgängig machen.",
+    "deleteSaves": "Auch Spielstände und Einstellungen löschen",
+    "confirm": "Deinstallieren",
+    "working": "Wird deinstalliert…",
+    "cancel": "Abbrechen",
+    "done": "Deinstalliert.",
+    "doneKept": "Deinstalliert. Deine Spielstände liegen in {{path}} und kommen bei einer Neuinstallation zurück."
   }
 }

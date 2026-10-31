@@ -3,11 +3,12 @@ import { revealItemInDir } from "@tauri-apps/plugin-opener";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { api, inTauri } from "../api";
-import type { CatalogEntry, Progress, ReleaseInfo } from "../api/types";
+import type { CatalogEntry, Progress, ReleaseInfo, UninstallOutcome } from "../api/types";
 import { formatBytes } from "../format";
 import { useApp } from "../state";
 import { ErrorBox } from "./ErrorBox";
 import { PlayButton, RunInfo } from "./Play";
+import { UninstallPanel } from "./UninstallPanel";
 
 async function confirmDialog(message: string, title: string): Promise<boolean> {
   if (inTauri) return ask(message, { title, kind: "warning" });
@@ -55,6 +56,7 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
   const [attempt, setAttempt] = useState(0);
   const [loaded, setLoaded] = useState<{ key: string; release: ReleaseInfo | null; error: unknown } | null>(null);
   const [actionError, setActionError] = useState<unknown>(null);
+  const [uninstalled, setUninstalled] = useState<UninstallOutcome | null>(null);
   const [starting, setStarting] = useState(false);
 
   const app = installed.find((a) => a.id === entry.id);
@@ -172,6 +174,7 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
           </div>
           {release && release.tag !== app.version && <p className="muted small">{t("update.keepsData")}</p>}
           <RunInfo app={app} />
+          <UninstallPanel app={app} onDone={setUninstalled} />
         </>
       ) : (
         <button
@@ -182,6 +185,13 @@ export function InstallCard({ entry }: { entry: CatalogEntry }) {
         >
           {t("install.install")}
         </button>
+      )}
+      {uninstalled && !app && (
+        <p className="muted small" role="status">
+          {uninstalled.kept_saves
+            ? t("uninstall.doneKept", { path: uninstalled.kept_saves })
+            : t("uninstall.done")}
+        </p>
       )}
       {actionError !== null && <ErrorBox error={actionError} />}
       {jobError && !job && <ErrorBox error={jobError} onRetry={() => void onInstall()} />}

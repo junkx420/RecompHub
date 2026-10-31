@@ -261,6 +261,16 @@ export const mockBackend: Backend = {
     }
     return settings;
   },
+  uninstall: async (id, keepSaves) => {
+    if (!installed.has(id)) throw { code: "not_installed", params: { id } };
+    if (running.has(id)) throw { code: "busy", params: { id } };
+    await sleep(500);
+    installed.delete(id);
+    dumps.delete(id);
+    return keepSaves
+      ? { kept_saves: `C:\\Users\\dev\\AppData\\Local\\RecompHub\\backups\\${id}\\saves-20261031`, removed_user_data: [] }
+      : { kept_saves: null, removed_user_data: [] };
+  },
   sourceRemove: async (url) => {
     settings = { ...settings, custom_sources: settings.custom_sources.filter((s) => s !== url) };
     return settings;

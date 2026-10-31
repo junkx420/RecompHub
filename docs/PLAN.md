@@ -147,14 +147,23 @@ exist, tests, then `tauri-action` builds with
 `src-tauri/tauri.release.conf.json` (`createUpdaterArtifacts`) and creates a
 draft release with `latest.json`.
 
+## Uninstall
+
+`uninstall(id, keep_saves)` (`crates/core/src/uninstall.rs`): refuses while
+the game runs or a job works on it, and while Steam runs if the app has
+Steam entries. The game folder is renamed into staging first, so a locked
+file fails the uninstall cleanly. With `keep_saves`, every file the release
+did not place, plus `preserve` matches, moves to
+`<backups>\<id>\saves-<time>`; the next install of the same id moves those
+files back where the new release has no file of the same path. Without
+`keep_saves`, the entry's `user_data_paths` are deleted too. Then the
+record, the previous-version backup, shortcuts and Steam entries go.
+
 ## Open points
 
 - The updater pubkey is still empty: the owner has to generate the key
   pair and set the secrets (README, Releasing) before the first release.
 
-- `uninstall(id, keep_saves)` from the planned interface is not implemented
-  yet (no milestone owns it); it must also remove shortcuts and Steam
-  entries.
 
 - Testing from a Claude session: Claude desktop is an MSIX app, so a
   RecompHub started from its shells writes `%LOCALAPPDATA%` (and the start

@@ -7,8 +7,7 @@ releases, keeps your saves safe across updates, and puts the games in your
 start menu and Steam library.
 
 > **Status:** all six planned milestones are implemented; the app has not
-> had a public release yet. Uninstalling a port from inside the app is not
-> implemented yet.
+> had a public release yet.
 
 **Legal:** RecompHub never downloads, hosts or links ROMs, ISOs or other
 game data. It only downloads the release assets that port projects publish
@@ -36,6 +35,9 @@ on GitHub. Ports need your own legally obtained copy of each game.
 - **Start menu, desktop and Steam.** Shortcuts are created on install;
   games can be added to Steam as non-Steam shortcuts for any account on the
   PC (Steam must be closed; `shortcuts.vdf` is backed up first).
+- **Uninstall** keeps your saves by default: they move to a backup folder
+  and come back automatically if you install the port again. Deleting them
+  too is an explicit choice.
 - **Controller support:** D-pad or left stick moves, A selects, B goes back,
   LB/RB switch tabs.
 - **Self-update** of RecompHub itself from signed GitHub releases.

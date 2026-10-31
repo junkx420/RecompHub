@@ -137,6 +137,13 @@ export interface InstalledSummary {
   steam_users: number[];
 }
 
+export interface UninstallOutcome {
+  /** Where kept saves went, if there were any. */
+  kept_saves: string | null;
+  /** Save folders outside the game folder that were deleted. */
+  removed_user_data: string[];
+}
+
 export interface SteamUser {
   account_id: number;
   account_name: string;

@@ -20,6 +20,7 @@ import type {
   Progress,
   Settings,
   Theme,
+  UninstallOutcome,
 } from "./api/types";
 import i18n, { resolveLanguage } from "./i18n";
 
@@ -51,6 +52,7 @@ interface AppContextValue {
   /** Put a record the backend returned into the library list. */
   replaceInstalled(app: InstalledSummary): void;
   saveSettings(next: Settings): Promise<void>;
+  uninstallApp(id: string, keepSaves: boolean): Promise<UninstallOutcome>;
   /** Add or remove a custom catalog source, then reload the catalog. */
   changeSource(action: "add" | "remove", url: string): Promise<void>;
   reloadCatalog(): Promise<void>;
@@ -166,6 +168,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const uninstallApp = useCallback(async (id: string, keepSaves: boolean) => {
+    const outcome = await api.uninstall(id, keepSaves);
+    setInstalled((prev) => prev.filter((a) => a.id !== id));
+    setLatest((prev) => without(prev, id));
+    setLastExit((prev) => without(prev, id));
+    setJobErrors((prev) => without(prev, id));
+    return outcome;
+  }, []);
+
   const changeSource = useCallback(
     async (action: "add" | "remove", url: string) => {
       setSettings(action === "add" ? await api.sourceAdd(url) : await api.sourceRemove(url));
@@ -245,6 +256,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       lastExit,
       play,
       replaceInstalled,
+      uninstallApp,
       changeSource,
       saveSettings,
       reloadCatalog,
@@ -260,6 +272,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       lastExit,
       play,
       replaceInstalled,
+      uninstallApp,
       changeSource,
       settings,
       info,

@@ -143,6 +143,14 @@ pub async fn install(req: InstallRequest<'_>) -> Result<InstalledApp> {
     // The work folder is only scaffolding; never leave it behind.
     let _ = tokio::fs::remove_dir_all(&prepared.work).await;
     let target = placed?;
+    // Saves kept by an earlier uninstall come back with a reinstall.
+    match tokio::task::block_in_place(|| {
+        crate::uninstall::restore_kept_saves(lib, &entry.id, &target)
+    }) {
+        Ok(0) => {}
+        Ok(count) => tracing::info!(id = %entry.id, count, "restored kept saves"),
+        Err(err) => tracing::warn!(id = %entry.id, %err, "could not restore kept saves"),
+    }
 
     progress(Progress::Finalizing);
     let app = InstalledApp {

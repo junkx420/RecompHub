@@ -12,6 +12,7 @@ use recomphub_core::launch;
 use recomphub_core::paths::{self, LibraryDirs};
 use recomphub_core::settings::Settings;
 use recomphub_core::steam::{self, SteamStatus};
+use recomphub_core::uninstall::{UninstallOutcome, UninstallRequest};
 use recomphub_core::update::{self, UpdateInfo, UpdateRequest};
 use recomphub_core::{download, github, AppError, Result};
 use recomphub_core::{platform, shortcuts};
@@ -374,6 +375,57 @@ pub async fn shortcut_remove(state: State<'_, AppState>, id: String) -> Result<I
         Ok(())
     })?;
     Ok(app.summary())
+}
+
+/// Remove the app, its shortcuts and Steam entries. With `keep_saves`, the
+/// user's files are kept in the backups folder for a later reinstall.
+#[tauri::command]
+pub async fn uninstall(
+    state: State<'_, AppState>,
+    id: String,
+    keep_saves: bool,
+) -> Result<UninstallOutcome> {
+    let busy = state
+        .jobs
+        .lock()
+        .expect("jobs lock poisoned")
+        .values()
+        .any(|j| j.app_id == id)
+        || state
+            .running
+            .lock()
+            .expect("running lock poisoned")
+            .contains(&id);
+    if busy {
+        return Err(AppError::Busy { id });
+    }
+    // The entry may be gone from the catalog; then only the folder goes.
+    let entry = load_catalog(&state, false).await.get(&id).cloned();
+    let installed = InstalledDb::load(&state.dirs.installed_file())?
+        .get(&id)
+        .cloned()
+        .ok_or_else(|| AppError::NotInstalled { id: id.clone() })?;
+    let steam_dir = platform::current().steam_dir();
+    if !installed.steam_users.is_empty() && steam_dir.is_some() {
+        steam::ensure_closed()?;
+    }
+    let _slot = state.job_slot.lock().await;
+    tokio::task::block_in_place(|| {
+        let (app, outcome) = recomphub_core::uninstall::uninstall(UninstallRequest {
+            dirs: &state.dirs,
+            id: &id,
+            entry: entry.as_ref(),
+            keep_saves,
+            expand: &recomphub_core::uninstall::expand_user_path,
+        })?;
+        shortcuts::remove(&app.shortcuts);
+        if let (Some(dir), false) = (&steam_dir, app.steam_users.is_empty()) {
+            if let Err(err) = steam::remove(dir, &app, &app.steam_users) {
+                tracing::warn!(%id, %err, "Steam entry not removed");
+            }
+        }
+        Ok(outcome)
+    })
 }
 
 #[tauri::command]

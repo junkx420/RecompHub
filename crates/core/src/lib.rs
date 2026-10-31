@@ -21,6 +21,7 @@ pub mod process;
 pub mod settings;
 pub mod shortcuts;
 pub mod steam;
+pub mod uninstall;
 pub mod update;
 pub mod vdf;
 

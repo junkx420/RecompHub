@@ -15,6 +15,7 @@ import type {
   ReleaseInfo,
   Settings,
   SteamStatus,
+  UninstallOutcome,
   UpdateInfo,
 } from "./types";
 
@@ -53,6 +54,8 @@ export interface Backend {
   /** Fetches and checks the catalog at `url` before saving it. */
   sourceAdd(url: string): Promise<Settings>;
   sourceRemove(url: string): Promise<Settings>;
+  /** Remove the app, its shortcuts and Steam entries. */
+  uninstall(id: string, keepSaves: boolean): Promise<UninstallOutcome>;
   /** Subscribe to job events; resolves with an unsubscribe function. */
   onJobEvent(handler: (event: JobEvent) => void): Promise<() => void>;
 }
@@ -100,6 +103,7 @@ const tauriBackend: Backend = {
   steamRemove: (id) => invoke("steam_remove", { id }),
   sourceAdd: (url) => invoke("source_add", { url }),
   sourceRemove: (url) => invoke("source_remove", { url }),
+  uninstall: (id, keepSaves) => invoke("uninstall", { id, keepSaves }),
   onJobEvent: listenJobs,
 };
 
@@ -140,6 +144,7 @@ function lazyMock(): Backend {
     steamRemove: (id) => load().then((b) => b.steamRemove(id)),
     sourceAdd: (url) => load().then((b) => b.sourceAdd(url)),
     sourceRemove: (url) => load().then((b) => b.sourceRemove(url)),
+    uninstall: (id, k) => load().then((b) => b.uninstall(id, k)),
     onJobEvent: (h) => load().then((b) => b.onJobEvent(h)),
   };
 }

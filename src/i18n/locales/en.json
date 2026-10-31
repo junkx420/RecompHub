@@ -218,5 +218,17 @@
     "install": "Install and restart",
     "downloading": "Downloading update…",
     "unavailable": "This build cannot update itself. Updates come with signed releases from GitHub."
+  },
+  "uninstall": {
+    "open": "Uninstall…",
+    "title": "Uninstall {{name}}?",
+    "keepHint": "The game folder, its shortcuts and Steam entries are removed. Saves, settings and mods are kept in the backups folder and come back if you install it again.",
+    "deleteHint": "Everything is removed, including saves and settings inside and outside the game folder. This cannot be undone.",
+    "deleteSaves": "Also delete saves and settings",
+    "confirm": "Uninstall",
+    "working": "Uninstalling…",
+    "cancel": "Cancel",
+    "done": "Uninstalled.",
+    "doneKept": "Uninstalled. Your saves are kept in {{path}} and come back when you install it again."
   }
 }
