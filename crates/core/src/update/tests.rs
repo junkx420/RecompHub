@@ -299,6 +299,8 @@ fn write_db(dirs: &AppDirs, revision: &str) {
             files: BTreeMap::new(),
             previous: None,
             revision: revision.into(),
+            shortcuts: Vec::new(),
+            steam_users: Vec::new(),
         },
     );
     db.save(&dirs.installed_file()).unwrap();

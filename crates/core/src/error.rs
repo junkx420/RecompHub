@@ -108,6 +108,12 @@ pub enum AppError {
     #[error("not an N64 ROM")]
     NotARom,
 
+    #[error("Steam is not installed")]
+    SteamNotFound,
+
+    #[error("close Steam first")]
+    SteamRunning,
+
     #[error("cancelled")]
     Cancelled,
 

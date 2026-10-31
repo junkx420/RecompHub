@@ -14,6 +14,7 @@ import type {
   Progress,
   ReleaseInfo,
   Settings,
+  SteamStatus,
   UpdateInfo,
 } from "./types";
 
@@ -43,6 +44,12 @@ export interface Backend {
   openLog(id: string): Promise<void>;
   logTail(id: string): Promise<string>;
   onGameExited(handler: (event: GameExited) => void): Promise<() => void>;
+  shortcutCreate(id: string, desktop: boolean): Promise<InstalledSummary>;
+  shortcutRemove(id: string): Promise<InstalledSummary>;
+  steamStatus(): Promise<SteamStatus>;
+  /** Steam must be closed. */
+  steamAdd(id: string, userIds: number[]): Promise<InstalledSummary>;
+  steamRemove(id: string): Promise<InstalledSummary>;
   /** Subscribe to job events; resolves with an unsubscribe function. */
   onJobEvent(handler: (event: JobEvent) => void): Promise<() => void>;
 }
@@ -83,6 +90,11 @@ const tauriBackend: Backend = {
   openLog: (id) => invoke("open_log", { id }),
   logTail: (id) => invoke("log_tail", { id }),
   onGameExited: (handler) => listen<GameExited>("game:exited", (e) => handler(e.payload)),
+  shortcutCreate: (id, desktop) => invoke("shortcut_create", { id, desktop }),
+  shortcutRemove: (id) => invoke("shortcut_remove", { id }),
+  steamStatus: () => invoke("steam_status"),
+  steamAdd: (id, userIds) => invoke("steam_add", { id, userIds }),
+  steamRemove: (id) => invoke("steam_remove", { id }),
   onJobEvent: listenJobs,
 };
 
@@ -116,6 +128,11 @@ function lazyMock(): Backend {
     openLog: (id) => load().then((b) => b.openLog(id)),
     logTail: (id) => load().then((b) => b.logTail(id)),
     onGameExited: (h) => load().then((b) => b.onGameExited(h)),
+    shortcutCreate: (id, d) => load().then((b) => b.shortcutCreate(id, d)),
+    shortcutRemove: (id) => load().then((b) => b.shortcutRemove(id)),
+    steamStatus: () => load().then((b) => b.steamStatus()),
+    steamAdd: (id, u) => load().then((b) => b.steamAdd(id, u)),
+    steamRemove: (id) => load().then((b) => b.steamRemove(id)),
     onJobEvent: (h) => load().then((b) => b.onJobEvent(h)),
   };
 }

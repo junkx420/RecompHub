@@ -19,6 +19,9 @@ pub mod paths;
 pub mod platform;
 pub mod process;
 pub mod settings;
+pub mod shortcuts;
+pub mod steam;
 pub mod update;
+pub mod vdf;
 
 pub use error::{AppError, Result};

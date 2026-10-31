@@ -48,6 +48,8 @@ interface AppContextValue {
   /** Exit code of the last run per app id (null: unknown). */
   lastExit: Record<string, number | null>;
   play(id: string): Promise<void>;
+  /** Put a record the backend returned into the library list. */
+  replaceInstalled(app: InstalledSummary): void;
   saveSettings(next: Settings): Promise<void>;
   reloadCatalog(): Promise<void>;
   reloadLibrary(): Promise<void>;
@@ -162,6 +164,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const replaceInstalled = useCallback((app: InstalledSummary) => {
+    setInstalled((prev) => prev.map((a) => (a.id === app.id ? app : a)));
+  }, []);
+
   const play = useCallback(async (id: string) => {
     setLastExit((prev) => without(prev, id));
     await api.launch(id);
@@ -228,6 +234,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       running,
       lastExit,
       play,
+      replaceInstalled,
       saveSettings,
       reloadCatalog,
       reloadLibrary,
@@ -241,6 +248,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       running,
       lastExit,
       play,
+      replaceInstalled,
       settings,
       info,
       catalog,

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { startGamepadNavigation } from "./gamepad";
 import { Detail } from "./pages/Detail";
 import { Discover } from "./pages/Discover";
 import { Library } from "./pages/Library";
@@ -12,6 +13,8 @@ export function App() {
   const { t } = useTranslation();
   const [tab, setTab] = useState<Tab>("discover");
   const [detailId, setDetailId] = useState<string | null>(null);
+
+  useEffect(() => startGamepadNavigation(), []);
 
   function selectTab(next: Tab) {
     setTab(next);

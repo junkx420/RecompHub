@@ -91,7 +91,11 @@
     "reloadCatalog": "Katalog neu laden",
     "about": "Über",
     "version": "Version {{version}}",
-    "dataDir": "App-Daten"
+    "dataDir": "App-Daten",
+    "behaviour": "Verhalten",
+    "checkUpdates": "Beim Start von RecompHub nach Updates suchen",
+    "desktopShortcut": "Bei neuen Installationen eine Desktop-Verknüpfung anlegen",
+    "gamepadHint": "Controller: Steuerkreuz oder linker Stick bewegt, A wählt aus, B geht zurück, LB/RB wechseln die Tabs."
   },
   "errors": {
     "title": "Etwas ist schiefgelaufen",
@@ -126,7 +130,9 @@
     "game_data_missing": "Wähle zuerst deine Spieldatei unter Spieldaten aus.",
     "wrong_dump": "Das ist der Dump {{region}} {{version}}, den dieser Port nicht unterstützt.",
     "unknown_dump": "Diese Datei ist kein bekannter Dump dieses Spiels (SHA-1 {{sha1}}).",
-    "not_a_rom": "Diese Datei ist kein N64-ROM."
+    "not_a_rom": "Diese Datei ist kein N64-ROM.",
+    "steam_not_found": "Steam ist nicht installiert.",
+    "steam_running": "Schließe zuerst Steam und versuche es dann erneut."
   },
   "install": {
     "title": "Installieren",
@@ -172,5 +178,27 @@
     "hideLog": "Log ausblenden",
     "openLog": "Logdatei öffnen",
     "emptyLog": "Das Log ist leer."
+  },
+  "integration": {
+    "title": "Verknüpfungen und Steam",
+    "shortcuts": "Verknüpfungen",
+    "shortcutCount_one": "{{count}} Verknüpfung von RecompHub angelegt.",
+    "shortcutCount_other": "{{count}} Verknüpfungen von RecompHub angelegt.",
+    "noShortcuts": "Noch keine Verknüpfungen.",
+    "alsoDesktop": "Auch auf dem Desktop",
+    "createShortcuts": "Verknüpfungen anlegen",
+    "recreateShortcuts": "Neu anlegen",
+    "removeShortcuts": "Verknüpfungen entfernen",
+    "steam": "Steam",
+    "steamNotFound": "Steam ist nicht installiert.",
+    "steamNoUsers": "Auf diesem PC hat sich noch kein Steam-Konto angemeldet.",
+    "steamAccounts": "Für diese Konten hinzufügen",
+    "lastLogin": "zuletzt angemeldet",
+    "steamAdded": "In der Steam-Bibliothek von: {{names}}",
+    "steamRunning": "Schließe zuerst Steam. Steam überschreibt seine Verknüpfungsliste beim Beenden.",
+    "steamAdd": "Zu Steam hinzufügen",
+    "steamRefresh": "In Steam aktualisieren",
+    "steamRemove": "Aus Steam entfernen",
+    "checkAgain": "Erneut prüfen"
   }
 }

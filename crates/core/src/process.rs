@@ -47,6 +47,18 @@ pub fn running_in(dir: &Path) -> Vec<String> {
     names.into_iter().collect()
 }
 
+/// Is a process with this executable name running (case-insensitive)?
+pub fn is_running_named(name: &str) -> bool {
+    let Ok(mut system) = System::new() else {
+        return false;
+    };
+    system.refresh_processes_specifics(ProcessesToUpdate::All, true, ProcessRefreshKind::nothing());
+    system
+        .processes()
+        .values()
+        .any(|p| p.name().to_string_lossy().eq_ignore_ascii_case(name))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

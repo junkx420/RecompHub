@@ -13,6 +13,8 @@ function app(id: string, version: string): InstalledSummary {
     updated_at: null,
     file_count: 1,
     previous_version: null,
+    shortcuts: [],
+    steam_users: [],
   };
 }
 

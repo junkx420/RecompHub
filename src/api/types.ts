@@ -127,6 +127,23 @@ export interface InstalledSummary {
   updated_at: string | null;
   file_count: number;
   previous_version: string | null;
+  /** `.lnk` files RecompHub created. */
+  shortcuts: string[];
+  /** Steam account ids the app was added to. */
+  steam_users: number[];
+}
+
+export interface SteamUser {
+  account_id: number;
+  account_name: string;
+  persona_name: string;
+  most_recent: boolean;
+}
+
+export interface SteamStatus {
+  found: boolean;
+  running: boolean;
+  users: SteamUser[];
 }
 
 export type JobEvent =

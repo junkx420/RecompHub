@@ -159,6 +159,8 @@ pub async fn install(req: InstallRequest<'_>) -> Result<InstalledApp> {
         files: prepared.files,
         previous: None,
         revision: stamp(),
+        shortcuts: Vec::new(),
+        steam_users: Vec::new(),
     };
     let mut db = InstalledDb::load(installed_file)?;
     db.apps.insert(app.id.clone(), app.clone());

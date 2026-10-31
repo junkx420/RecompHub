@@ -91,7 +91,11 @@
     "reloadCatalog": "Reload catalog",
     "about": "About",
     "version": "Version {{version}}",
-    "dataDir": "App data"
+    "dataDir": "App data",
+    "behaviour": "Behaviour",
+    "checkUpdates": "Check for updates when RecompHub starts",
+    "desktopShortcut": "Create a desktop shortcut for new installs",
+    "gamepadHint": "Controller: D-pad or left stick moves, A selects, B goes back, LB/RB switch tabs."
   },
   "errors": {
     "title": "Something went wrong",
@@ -126,7 +130,9 @@
     "game_data_missing": "Choose your game file under Game data first.",
     "wrong_dump": "This is the {{region}} {{version}} dump, which this port does not support.",
     "unknown_dump": "This file is not a known dump of this game (SHA-1 {{sha1}}).",
-    "not_a_rom": "This file is not an N64 ROM."
+    "not_a_rom": "This file is not an N64 ROM.",
+    "steam_not_found": "Steam is not installed.",
+    "steam_running": "Close Steam first, then try again."
   },
   "install": {
     "title": "Install",
@@ -172,5 +178,27 @@
     "hideLog": "Hide log",
     "openLog": "Open log file",
     "emptyLog": "The log is empty."
+  },
+  "integration": {
+    "title": "Shortcuts and Steam",
+    "shortcuts": "Shortcuts",
+    "shortcutCount_one": "{{count}} shortcut created by RecompHub.",
+    "shortcutCount_other": "{{count}} shortcuts created by RecompHub.",
+    "noShortcuts": "No shortcuts yet.",
+    "alsoDesktop": "Also on the desktop",
+    "createShortcuts": "Create shortcuts",
+    "recreateShortcuts": "Create again",
+    "removeShortcuts": "Remove shortcuts",
+    "steam": "Steam",
+    "steamNotFound": "Steam is not installed.",
+    "steamNoUsers": "No Steam account has logged in on this PC yet.",
+    "steamAccounts": "Add for these accounts",
+    "lastLogin": "last login",
+    "steamAdded": "In the Steam library of: {{names}}",
+    "steamRunning": "Close Steam first. It rewrites its shortcut list when it exits.",
+    "steamAdd": "Add to Steam",
+    "steamRefresh": "Update in Steam",
+    "steamRemove": "Remove from Steam",
+    "checkAgain": "Check again"
   }
 }

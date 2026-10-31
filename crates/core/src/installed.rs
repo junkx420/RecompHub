@@ -39,6 +39,12 @@ pub struct InstalledApp {
     /// update compares it with its journal to tell commit from rollback.
     #[serde(default)]
     pub revision: String,
+    /// `.lnk` files RecompHub created for this app.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub shortcuts: Vec<PathBuf>,
+    /// Steam account ids (32-bit) this app was added to as a shortcut.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub steam_users: Vec<u32>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -60,6 +66,8 @@ pub struct InstalledSummary {
     pub updated_at: Option<DateTime<Utc>>,
     pub file_count: usize,
     pub previous_version: Option<String>,
+    pub shortcuts: Vec<PathBuf>,
+    pub steam_users: Vec<u32>,
 }
 
 impl InstalledApp {
@@ -74,6 +82,12 @@ impl InstalledApp {
             updated_at: self.updated_at,
             file_count: self.files.len(),
             previous_version: self.previous.as_ref().map(|p| p.version.clone()),
+            shortcuts: self
+                .shortcuts
+                .iter()
+                .map(|p| crate::paths::normalize(p))
+                .collect(),
+            steam_users: self.steam_users.clone(),
         }
     }
 }
@@ -129,6 +143,23 @@ impl InstalledDb {
         self.apps.get(id)
     }
 
+    /// Load, change one app's record with `f`, and save.
+    pub fn modify<T>(
+        path: &Path,
+        id: &str,
+        f: impl FnOnce(&mut InstalledApp) -> Result<T>,
+    ) -> Result<(T, InstalledApp)> {
+        let mut db = Self::load(path)?;
+        let app = db
+            .apps
+            .get_mut(id)
+            .ok_or_else(|| AppError::NotInstalled { id: id.into() })?;
+        let value = f(app)?;
+        let app = app.clone();
+        db.save(path)?;
+        Ok((value, app))
+    }
+
     pub fn summaries(&self) -> Vec<InstalledSummary> {
         let mut list: Vec<_> = self.apps.values().map(InstalledApp::summary).collect();
         list.sort_by_key(|a| a.name.to_lowercase());
@@ -155,6 +186,8 @@ mod tests {
             files: BTreeMap::from([("game.exe".into(), "00".into())]),
             previous: None,
             revision: "r1".into(),
+            shortcuts: Vec::new(),
+            steam_users: Vec::new(),
         }
     }
 

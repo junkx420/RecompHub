@@ -110,6 +110,27 @@ export function Settings() {
       </div>
 
       <div className="card">
+        <h2>{t("settings.behaviour")}</h2>
+        <label className="check">
+          <input
+            type="checkbox"
+            checked={settings.check_updates}
+            onChange={(e) => void update({ check_updates: e.target.checked }).catch(() => undefined)}
+          />
+          {t("settings.checkUpdates")}
+        </label>
+        <label className="check">
+          <input
+            type="checkbox"
+            checked={settings.desktop_shortcut}
+            onChange={(e) => void update({ desktop_shortcut: e.target.checked }).catch(() => undefined)}
+          />
+          {t("settings.desktopShortcut")}
+        </label>
+        <p className="muted small">{t("settings.gamepadHint")}</p>
+      </div>
+
+      <div className="card">
         <h2>{t("settings.catalog")}</h2>
         <label className="field stacked">
           <span>{t("settings.catalogUrl")}</span>

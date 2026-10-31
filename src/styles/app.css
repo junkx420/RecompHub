@@ -603,3 +603,33 @@ ul.code-list {
   color: var(--ok-text);
   border-color: transparent;
 }
+/* Shortcuts, Steam, gamepad */
+.integration-card h3 {
+  margin: 16px 0 8px;
+  font-size: 0.95rem;
+}
+.integration-card h3:first-of-type {
+  margin-top: 4px;
+}
+.integration-card .row + .row,
+.integration-card p + .row {
+  margin-top: 8px;
+}
+.check {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+.steam-users {
+  border: 0;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gamepad-mode :focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}

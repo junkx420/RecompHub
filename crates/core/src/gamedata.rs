@@ -237,6 +237,8 @@ mod tests {
             files: BTreeMap::new(),
             previous: None,
             revision: "r".into(),
+            shortcuts: Vec::new(),
+            steam_users: Vec::new(),
         };
         std::fs::create_dir_all(&app.dir).unwrap();
         (dir, app, entry)

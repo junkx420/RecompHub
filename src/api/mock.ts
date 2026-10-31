@@ -44,7 +44,26 @@ function summary(entry: CatalogEntry, version: string, previous: string | null):
     updated_at: previous ? new Date().toISOString() : null,
     file_count: 120,
     previous_version: previous,
+    shortcuts: [],
+    steam_users: [],
   };
+}
+
+const START_MENU = "C:\\Users\\dev\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\RecompHub";
+
+function startMenuLink(app: InstalledSummary): string {
+  return `${START_MENU}\\${app.name.replace(/[<>:"/\\|?*]/g, "_")}.lnk`;
+}
+
+/** Mock Steam: installed, closed, one account. */
+const steamUser = { account_id: 12345678, account_name: "dev", persona_name: "Dev", most_recent: true };
+
+function patch(id: string, change: (app: InstalledSummary) => InstalledSummary): InstalledSummary {
+  const app = installed.get(id);
+  if (!app) throw { code: "not_installed", params: { id } };
+  const next = change(app);
+  installed.set(id, next);
+  return next;
 }
 
 const installed = new Map<string, InstalledSummary>();
@@ -96,12 +115,18 @@ async function simulate(job: number, entry: CatalogEntry, kind: Kind) {
     return;
   }
   const current = installed.get(id);
-  const app =
+  const base =
     kind === "install"
       ? summary(entry, LATEST, null)
       : kind === "update"
         ? summary(entry, LATEST, current?.version ?? null)
         : summary(entry, current?.previous_version ?? LATEST, current?.version ?? null);
+  // Like the backend: installs get a start menu link, updates keep links.
+  const app = {
+    ...base,
+    shortcuts: current?.shortcuts ?? [startMenuLink(base)],
+    steam_users: current?.steam_users ?? [],
+  };
   installed.set(id, app);
   emit({ kind: "finished", job, id, app });
 }
@@ -193,6 +218,17 @@ export const mockBackend: Backend = {
   runningList: async () => [...running],
   openLog: async () => {},
   logTail: async (id) => `# RecompHub: starting ${id}\n[info] mock log line\n\n# RecompHub: exited with code 0\n`,
+  shortcutCreate: async (id, desktop) =>
+    patch(id, (app) => {
+      const links = [startMenuLink(app)];
+      if (desktop) links.push(`C:\\Users\\dev\\Desktop\\${app.name.replace(/[<>:"/\\|?*]/g, "_")}.lnk`);
+      return { ...app, shortcuts: [...new Set([...app.shortcuts, ...links])] };
+    }),
+  shortcutRemove: async (id) => patch(id, (app) => ({ ...app, shortcuts: [] })),
+  steamStatus: async () => ({ found: true, running: false, users: [steamUser] }),
+  steamAdd: async (id, userIds) =>
+    patch(id, (app) => ({ ...app, steam_users: [...new Set([...app.steam_users, ...userIds])] })),
+  steamRemove: async (id) => patch(id, (app) => ({ ...app, steam_users: [] })),
   onGameExited: async (handler) => {
     exitHandlers.add(handler);
     return () => exitHandlers.delete(handler);

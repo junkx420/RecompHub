@@ -64,6 +64,11 @@ pub fn run() {
             commands::running_list,
             commands::open_log,
             commands::log_tail,
+            commands::shortcut_create,
+            commands::shortcut_remove,
+            commands::steam_status,
+            commands::steam_add,
+            commands::steam_remove,
         ])
         .run(tauri::generate_context!())
         .unwrap_or_else(|err| {

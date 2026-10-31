@@ -59,7 +59,7 @@ pub fn parse_sha256_digest(digest: &str) -> Option<String> {
 }
 
 /// Keep asset names usable as Windows file names.
-fn sanitize_file_name(name: &str) -> String {
+pub(crate) fn sanitize_file_name(name: &str) -> String {
     let cleaned: String = name
         .chars()
         .map(|c| {

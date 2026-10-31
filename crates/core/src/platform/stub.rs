@@ -1,6 +1,6 @@
-use super::Platform;
+use super::{Platform, ShortcutSpec, UserFolder};
 use crate::error::{AppError, Result};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 /// Minimal non-Windows backend for development and tests.
 pub struct StubPlatform;
@@ -15,5 +15,17 @@ impl Platform for StubPlatform {
             .ok_or(AppError::NotFound {
                 what: "$HOME".into(),
             })
+    }
+
+    fn user_folder(&self, _: UserFolder) -> Result<PathBuf> {
+        Err(AppError::Unsupported)
+    }
+
+    fn create_shortcut(&self, _: &Path, _: &ShortcutSpec<'_>) -> Result<()> {
+        Err(AppError::Unsupported)
+    }
+
+    fn steam_dir(&self) -> Option<PathBuf> {
+        None
     }
 }

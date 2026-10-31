@@ -347,6 +347,8 @@ pub async fn update(req: UpdateRequest<'_>) -> Result<InstalledApp> {
                 dir: swapped.journal.backup_dir.clone(),
             }),
             revision: swapped.journal.revision.clone(),
+            shortcuts: app.shortcuts.clone(),
+            steam_users: app.steam_users.clone(),
         };
         commit(
             &installed_file,
@@ -416,6 +418,8 @@ pub fn restore_previous(
             dir: swapped.journal.backup_dir.clone(),
         }),
         revision: swapped.journal.revision.clone(),
+        shortcuts: app.shortcuts.clone(),
+        steam_users: app.steam_users.clone(),
     };
     commit(
         &installed_file,

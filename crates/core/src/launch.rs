@@ -143,6 +143,8 @@ mod tests {
             files: BTreeMap::new(),
             previous: None,
             revision: "r".into(),
+            shortcuts: Vec::new(),
+            steam_users: Vec::new(),
         };
         (app, entry)
     }

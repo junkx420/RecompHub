@@ -11,8 +11,10 @@ use recomphub_core::job::{CancelFlag, Progress};
 use recomphub_core::launch;
 use recomphub_core::paths::{self, LibraryDirs};
 use recomphub_core::settings::Settings;
+use recomphub_core::steam::{self, SteamStatus};
 use recomphub_core::update::{self, UpdateInfo, UpdateRequest};
 use recomphub_core::{download, github, AppError, Result};
+use recomphub_core::{platform, shortcuts};
 use serde::Serialize;
 use std::path::PathBuf;
 use std::sync::atomic::Ordering;
@@ -228,7 +230,12 @@ async fn start_job(app: AppHandle, state: &AppState, id: String, kind: JobKind) 
 
     tauri::async_runtime::spawn(async move {
         let state = app.state::<AppState>();
+        let fresh_install = matches!(kind, JobKind::Install(_));
         let result = run_job(&app, &state, job, &entry, kind, &cancel).await;
+        let result = match result {
+            Ok(installed) => Ok(integrate(&state, installed, fresh_install).await),
+            Err(err) => Err(err),
+        };
         state.jobs.lock().expect("jobs lock poisoned").remove(&job);
         let id = entry.id.as_str();
         match result {
@@ -258,6 +265,133 @@ async fn start_job(app: AppHandle, state: &AppState, id: String, kind: JobKind) 
         }
     });
     Ok(job)
+}
+
+/// Shortcuts after a job: a fresh install gets a start menu link (and a
+/// desktop link if the setting is on); an update or restore refreshes the
+/// links and Steam entries it already has, since the executable may have
+/// changed. Failures here are logged, never fail the job.
+async fn integrate(state: &AppState, installed: InstalledApp, fresh_install: bool) -> InstalledApp {
+    let platform = platform::current();
+    let desktop = state.settings.read().await.desktop_shortcut;
+    let result = tokio::task::block_in_place(|| -> Result<InstalledApp> {
+        if fresh_install {
+            let paths = shortcuts::link_paths(platform, &installed, desktop)?;
+            shortcuts::write(platform, &installed, &paths)?;
+            return record_shortcuts(state, &installed.id, paths);
+        }
+        if !installed.shortcuts.is_empty() {
+            shortcuts::write(platform, &installed, &installed.shortcuts)?;
+        }
+        if !installed.steam_users.is_empty() {
+            match (platform.steam_dir(), steam::ensure_closed()) {
+                (Some(dir), Ok(())) => steam::add(&dir, &installed, &installed.steam_users)?,
+                _ => {
+                    tracing::warn!(id = %installed.id, "Steam entry not refreshed (Steam open or missing)")
+                }
+            }
+        }
+        Ok(installed.clone())
+    });
+    result.unwrap_or_else(|err| {
+        tracing::warn!(id = %installed.id, %err, "shortcuts not updated");
+        installed
+    })
+}
+
+fn record_shortcuts(state: &AppState, id: &str, paths: Vec<PathBuf>) -> Result<InstalledApp> {
+    let ((), app) = InstalledDb::modify(&state.dirs.installed_file(), id, |app| {
+        for path in paths {
+            if !app.shortcuts.contains(&path) {
+                app.shortcuts.push(path);
+            }
+        }
+        Ok(())
+    })?;
+    Ok(app)
+}
+
+/// Create a start menu link, and a desktop link if `desktop`.
+#[tauri::command]
+pub async fn shortcut_create(
+    state: State<'_, AppState>,
+    id: String,
+    desktop: bool,
+) -> Result<InstalledSummary> {
+    let (installed, _) = installed_app(&state, &id).await?;
+    let platform = platform::current();
+    tokio::task::block_in_place(|| {
+        let paths = shortcuts::link_paths(platform, &installed, desktop)?;
+        shortcuts::write(platform, &installed, &paths)?;
+        Ok(record_shortcuts(&state, &id, paths)?.summary())
+    })
+}
+
+/// Remove every link RecompHub created for the app.
+#[tauri::command]
+pub async fn shortcut_remove(state: State<'_, AppState>, id: String) -> Result<InstalledSummary> {
+    let ((), app) = InstalledDb::modify(&state.dirs.installed_file(), &id, |app| {
+        let ours: Vec<PathBuf> = app
+            .shortcuts
+            .drain(..)
+            .filter(|p| shortcuts::is_link(p))
+            .collect();
+        shortcuts::remove(&ours);
+        Ok(())
+    })?;
+    Ok(app.summary())
+}
+
+#[tauri::command]
+pub async fn steam_status() -> Result<SteamStatus> {
+    let dir = platform::current().steam_dir();
+    Ok(tokio::task::block_in_place(|| {
+        steam::status(dir.as_deref())
+    }))
+}
+
+/// Add the app to Steam for the given accounts. Steam must be closed.
+#[tauri::command]
+pub async fn steam_add(
+    state: State<'_, AppState>,
+    id: String,
+    user_ids: Vec<u32>,
+) -> Result<InstalledSummary> {
+    let (installed, _) = installed_app(&state, &id).await?;
+    let dir = platform::current()
+        .steam_dir()
+        .ok_or(AppError::SteamNotFound)?;
+    tokio::task::block_in_place(|| {
+        steam::ensure_closed()?;
+        steam::add(&dir, &installed, &user_ids)?;
+        let ((), app) = InstalledDb::modify(&state.dirs.installed_file(), &id, |app| {
+            for user in &user_ids {
+                if !app.steam_users.contains(user) {
+                    app.steam_users.push(*user);
+                }
+            }
+            Ok(())
+        })?;
+        Ok(app.summary())
+    })
+}
+
+/// Remove the app from every Steam account it was added to.
+#[tauri::command]
+pub async fn steam_remove(state: State<'_, AppState>, id: String) -> Result<InstalledSummary> {
+    let (installed, _) = installed_app(&state, &id).await?;
+    let dir = platform::current()
+        .steam_dir()
+        .ok_or(AppError::SteamNotFound)?;
+    tokio::task::block_in_place(|| {
+        steam::ensure_closed()?;
+        steam::remove(&dir, &installed, &installed.steam_users)?;
+        let ((), app) = InstalledDb::modify(&state.dirs.installed_file(), &id, |app| {
+            app.steam_users.clear();
+            Ok(())
+        })?;
+        Ok(app.summary())
+    })
 }
 
 async fn run_job(

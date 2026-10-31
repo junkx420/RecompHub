@@ -5,6 +5,7 @@ import type { CatalogEntry, KnownDump } from "../api/types";
 import { EntryIcon } from "../components/EntryIcon";
 import { GameDataImport } from "../components/GameDataImport";
 import { InstallCard } from "../components/InstallCard";
+import { IntegrationCard } from "../components/IntegrationCard";
 import { SourceBadge } from "../components/SourceBadge";
 import { localized } from "../i18n";
 import { useApp } from "../state";
@@ -48,12 +49,13 @@ function GameDataInfo({ entry }: { entry: CatalogEntry }) {
 
 export function Detail({ id, onBack }: { id: string; onBack: () => void }) {
   const { t, i18n } = useTranslation();
-  const { catalog } = useApp();
+  const { catalog, installed } = useApp();
   const entry = catalog?.entries.find((e) => e.id === id);
+  const app = installed.find((a) => a.id === id);
 
   return (
     <section className="page detail">
-      <button type="button" className="button ghost back" onClick={onBack}>
+      <button type="button" className="button ghost back" onClick={onBack} data-gamepad-back>
         ← {t("common.back")}
       </button>
       {!entry ? (
@@ -74,6 +76,7 @@ export function Detail({ id, onBack }: { id: string; onBack: () => void }) {
 
           <div className="detail-grid">
             <InstallCard entry={entry} />
+            {app && <IntegrationCard app={app} />}
             <div className="card">
               <h2>{t("detail.description")}</h2>
               <p>{localized(entry.description, i18n.language)}</p>

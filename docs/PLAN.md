@@ -65,7 +65,7 @@ Errors: `AppError` in `crates/core/src/error.rs`, serialized as
    `cargo test -p recomphub-core --test live_install updates_real -- --ignored`.
 4. [x] Game data modes (`copy_file`: hash check, v64/n64 byte swap to z64),
    library view, launch with log capture to `logs\<id>.log`.
-5. [ ] Start menu / desktop shortcuts, Steam `shortcuts.vdf` (binary VDF,
+5. [x] Start menu / desktop shortcuts, Steam `shortcuts.vdf` (binary VDF,
    backup, no duplicates, Steam must be closed), gamepad navigation.
 6. [ ] Custom sources ("Not verified"), self-update via tauri-plugin-updater,
    release workflow on `v*` tags, polished README.
@@ -111,12 +111,36 @@ console window, `game:exited { id, code }` when it ends), `running_list`,
 or a program from the game folder is already running. The imported dump is
 not in the release manifest, so updates keep it.
 
+## Implemented interface (milestone 5)
+
+`shortcut_create(id, desktop)`, `shortcut_remove`, `steam_status`
+(`{ found, running, users }`, most recent login first), `steam_add(id,
+user_ids)`, `steam_remove`. A fresh install gets a start menu link in
+`Programs\RecompHub` (plus a desktop link if `desktop_shortcut` is on);
+updates and restores rewrite existing links and Steam entries, because the
+executable may have changed. Links and Steam accounts are recorded in
+`InstalledApp::shortcuts` / `steam_users`.
+
+Steam (`crates/core/src/steam.rs`, `vdf.rs`): entries are matched by
+`StartDir` (the game folder), so re-adding updates instead of duplicating
+and keeps the appid. The binary VDF reader rejects anything it cannot write
+back byte for byte. Each write backs up `shortcuts.vdf` first (newest 3
+kept). `steam_add`/`steam_remove` refuse while `steam.exe` runs.
+
+Gamepad (`src/gamepad.ts`): polled every 33 ms (animation frames stall in
+throttled windows); D-pad/left stick move focus spatially, A clicks, B
+clicks the element marked `data-gamepad-back`, LB/RB switch tabs.
+
 ## Open points
 
+- `uninstall(id, keep_saves)` from the planned interface is not implemented
+  yet (no milestone owns it); it must also remove shortcuts and Steam
+  entries.
+
 - Testing from a Claude session: Claude desktop is an MSIX app, so a
-  RecompHub started from its shells writes `%LOCALAPPDATA%` into the
-  package's virtualized folder, which Explorer cannot open. Start the app
-  yourself for realistic paths.
+  RecompHub started from its shells writes `%LOCALAPPDATA%` (and the start
+  menu under `%APPDATA%`) into the package's virtualized folder, which
+  Explorer cannot open. Start the app yourself for realistic paths.
 
 - Catalog asset patterns are unverified except Perfect Dark; the CI job
   `verify-catalog` checks them (see `catalog/RESEARCH.md`).
