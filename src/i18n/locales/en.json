@@ -6,7 +6,8 @@
   "tabs": {
     "discover": "Discover",
     "library": "Library",
-    "settings": "Settings"
+    "settings": "Settings",
+    "experimental": "Experimental"
   },
   "common": {
     "loading": "Loading…",
@@ -28,7 +29,10 @@
     "search": "Search ports",
     "empty": "No ports match your search.",
     "count_one": "{{count}} port",
-    "count_other": "{{count}} ports"
+    "count_other": "{{count}} ports",
+    "experimentalHint": "Early ports: they start, but may crash, miss content or need workarounds. Check the project page before you play.",
+    "system": "System",
+    "allSystems": "All systems"
   },
   "catalog": {
     "origin": {
@@ -132,7 +136,8 @@
     "unknown_dump": "This file is not a known dump of this game (SHA-1 {{sha1}}).",
     "not_a_rom": "This file is not an N64 ROM.",
     "steam_not_found": "Steam is not installed.",
-    "steam_running": "Close Steam first, then try again."
+    "steam_running": "Close Steam first, then try again.",
+    "blocked_by_antivirus": "Your virus scanner blocked this download. RecompHub does not install files a scanner flags."
   },
   "install": {
     "title": "Install",
@@ -230,5 +235,32 @@
     "cancel": "Cancel",
     "done": "Uninstalled.",
     "doneKept": "Uninstalled. Your saves are kept in {{path}} and come back when you install it again."
+  },
+  "systems": {
+    "n64": "Nintendo 64",
+    "x360": "Xbox 360",
+    "xbox": "Xbox",
+    "ps1": "PlayStation",
+    "ps2": "PlayStation 2",
+    "ps3": "PlayStation 3",
+    "ps4": "PlayStation 4",
+    "wii": "Wii",
+    "wiiu": "Wii U",
+    "gc": "GameCube",
+    "gba": "Game Boy Advance",
+    "gb": "Game Boy",
+    "gbc": "Game Boy Color",
+    "snes": "Super Nintendo",
+    "nes": "NES",
+    "dos": "DOS",
+    "arcade": "Arcade",
+    "pc": "PC",
+    "segacd": "Sega CD / 32X",
+    "psp": "PSP",
+    "nds": "Nintendo DS",
+    "md": "Mega Drive",
+    "dc": "Dreamcast",
+    "mobile": "Mobile",
+    "other": "Other"
   }
 }

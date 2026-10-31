@@ -108,6 +108,9 @@ pub enum AppError {
     #[error("not an N64 ROM")]
     NotARom,
 
+    #[error("blocked by the virus scanner: {path:?}")]
+    BlockedByAntivirus { path: PathBuf },
+
     #[error("Steam is not installed")]
     SteamNotFound,
 
@@ -123,6 +126,11 @@ pub enum AppError {
 
 impl AppError {
     pub fn io(path: impl Into<PathBuf>, err: std::io::Error) -> Self {
+        // ERROR_VIRUS_INFECTED / ERROR_VIRUS_DELETED: Defender or another
+        // scanner refused the file. Worth its own message, not "I/O error".
+        if matches!(err.raw_os_error(), Some(225 | 226)) {
+            return AppError::BlockedByAntivirus { path: path.into() };
+        }
         AppError::Io {
             path: path.into(),
             message: err.to_string(),
@@ -172,5 +180,13 @@ mod tests {
         );
         let json = serde_json::to_value(AppError::Cancelled).unwrap();
         assert_eq!(json, serde_json::json!({"code": "cancelled"}));
+    }
+
+    #[test]
+    fn virus_scanner_refusal_is_recognized() {
+        let err = AppError::io("x.zip", std::io::Error::from_raw_os_error(225));
+        assert!(matches!(err, AppError::BlockedByAntivirus { .. }));
+        let err = AppError::io("x.zip", std::io::Error::from_raw_os_error(5));
+        assert!(matches!(err, AppError::Io { .. }));
     }
 }

@@ -51,6 +51,21 @@ pub enum Category {
     Tool,
 }
 
+/// How far along a port is. The UI lists experimental ones separately.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "snake_case")]
+pub enum Maturity {
+    /// Playable from start to finish, or close to it.
+    #[default]
+    Playable,
+    /// Early: may crash, miss content or need workarounds.
+    Experimental,
+}
+
+fn is_false(b: &bool) -> bool {
+    !*b
+}
+
 /// Where an entry came from. Not part of the JSON; set by the loader.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(tag = "kind", rename_all = "snake_case")]
@@ -104,6 +119,12 @@ pub struct CatalogEntry {
     /// Fixed release tag instead of "latest" (for rolling CI releases).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub release_tag: Option<String>,
+    /// Use the newest release even if it is a pre-release, for projects
+    /// that have not published a stable release yet.
+    #[serde(default, skip_serializing_if = "is_false")]
+    pub include_prereleases: bool,
+    #[serde(default)]
+    pub maturity: Maturity,
     /// Executable, relative to the game folder; glob allowed.
     pub exe: String,
     /// Globs of files that updates never overwrite.
@@ -246,11 +267,16 @@ impl CatalogEntry {
         p
     }
 
-    /// `https://api.github.com/repos/<repo>/releases/...` for this entry.
+    /// `https://api.github.com/repos/<repo>/releases/...` for this entry. With
+    /// `include_prereleases` it is the release list; the newest entry wins.
     pub fn release_api_url(&self) -> String {
         match &self.release_tag {
             Some(tag) => format!(
                 "https://api.github.com/repos/{}/releases/tags/{tag}",
+                self.repo
+            ),
+            None if self.include_prereleases => format!(
+                "https://api.github.com/repos/{}/releases?per_page=10",
                 self.repo
             ),
             None => format!("https://api.github.com/repos/{}/releases/latest", self.repo),

@@ -10,8 +10,18 @@
       "repo": "Zelda64Recomp/Zelda64Recomp",
       "asset_pattern": "(?i)^Zelda64Recompiled.*-Windows\\.zip$",
       "exe": "Zelda64Recompiled.exe",
-      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
-      "user_data_paths": ["%LOCALAPPDATA%\\Zelda64Recompiled"],
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**",
+        "general.json",
+        "graphics.json",
+        "controls.json",
+        "sound.json"
+      ],
+      "user_data_paths": [
+        "%LOCALAPPDATA%\\Zelda64Recompiled"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -23,7 +33,10 @@
         "en": "Native PC port of The Legend of Zelda: Majora's Mask, made with N64Recomp. Widescreen, high frame rates, gyro aiming, autosave and mod support.",
         "de": "Nativer PC-Port von The Legend of Zelda: Majora's Mask, erstellt mit N64Recomp. Breitbild, hohe Bildraten, Gyro-Zielen, Autosave und Mod-Support."
       },
-      "credits": ["Zelda64Recomp contributors", "N64Recomp by Mr-Wiseguy"],
+      "credits": [
+        "Zelda64Recomp contributors",
+        "N64Recomp by Mr-Wiseguy"
+      ],
       "license": "GPL-3.0",
       "homepage": "https://github.com/Zelda64Recomp/Zelda64Recomp"
     },
@@ -35,8 +48,18 @@
       "repo": "hedge-dev/UnleashedRecomp",
       "asset_pattern": "(?i)^UnleashedRecomp-Windows\\.zip$",
       "exe": "UnleashedRecomp.exe",
-      "preserve": ["game/**", "dlc/**", "update/**", "patched/**", "mods/**", "*.toml", "*.ini"],
-      "user_data_paths": ["%APPDATA%\\UnleashedRecomp"],
+      "preserve": [
+        "game/**",
+        "dlc/**",
+        "update/**",
+        "patched/**",
+        "mods/**",
+        "*.toml",
+        "*.ini"
+      ],
+      "user_data_paths": [
+        "%APPDATA%\\UnleashedRecomp"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -48,7 +71,10 @@
         "en": "Native PC port of Sonic Unleashed (Xbox 360), made with XenonRecomp. High resolutions, high frame rates and many enhancements.",
         "de": "Nativer PC-Port von Sonic Unleashed (Xbox 360), erstellt mit XenonRecomp. Hohe Auflösungen, hohe Bildraten und viele Verbesserungen."
       },
-      "credits": ["hedge-dev contributors", "XenonRecomp"],
+      "credits": [
+        "hedge-dev contributors",
+        "XenonRecomp"
+      ],
       "license": "GPL-3.0",
       "homepage": "https://github.com/hedge-dev/UnleashedRecomp"
     },
@@ -60,8 +86,18 @@
       "repo": "sonicdcer/Starfox64Recomp",
       "asset_pattern": "(?i)^Starfox64Recompiled.*-Windows(-[a-z]+)?\\.zip$",
       "exe": "Starfox64Recompiled.exe",
-      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
-      "user_data_paths": ["%LOCALAPPDATA%\\Starfox64Recompiled"],
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**",
+        "general.json",
+        "graphics.json",
+        "controls.json",
+        "sound.json"
+      ],
+      "user_data_paths": [
+        "%LOCALAPPDATA%\\Starfox64Recompiled"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -73,7 +109,10 @@
         "en": "Native PC port of Star Fox 64, made with N64Recomp.",
         "de": "Nativer PC-Port von Star Fox 64, erstellt mit N64Recomp."
       },
-      "credits": ["sonicdcer and contributors", "N64Recomp by Mr-Wiseguy"],
+      "credits": [
+        "sonicdcer and contributors",
+        "N64Recomp by Mr-Wiseguy"
+      ],
       "license": "GPL-3.0",
       "homepage": "https://github.com/sonicdcer/Starfox64Recomp"
     },
@@ -85,8 +124,18 @@
       "repo": "sonicdcer/MarioKart64Recomp",
       "asset_pattern": "(?i)^MarioKart64Recompiled.*-Windows(-[a-z]+)?\\.zip$",
       "exe": "MarioKart64Recompiled.exe",
-      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
-      "user_data_paths": ["%LOCALAPPDATA%\\MarioKart64Recompiled"],
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**",
+        "general.json",
+        "graphics.json",
+        "controls.json",
+        "sound.json"
+      ],
+      "user_data_paths": [
+        "%LOCALAPPDATA%\\MarioKart64Recompiled"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -98,7 +147,10 @@
         "en": "Native PC port of Mario Kart 64, made with N64Recomp.",
         "de": "Nativer PC-Port von Mario Kart 64, erstellt mit N64Recomp."
       },
-      "credits": ["sonicdcer and contributors", "N64Recomp by Mr-Wiseguy"],
+      "credits": [
+        "sonicdcer and contributors",
+        "N64Recomp by Mr-Wiseguy"
+      ],
       "license": "GPL-3.0",
       "homepage": "https://github.com/sonicdcer/MarioKart64Recomp"
     },
@@ -110,8 +162,18 @@
       "repo": "BanjoRecomp/BanjoRecomp",
       "asset_pattern": "(?i)^BanjoRecompiled.*-Windows\\.zip$",
       "exe": "BanjoRecompiled.exe",
-      "preserve": ["portable.txt", "saves/**", "mods/**", "general.json", "graphics.json", "controls.json", "sound.json"],
-      "user_data_paths": ["%LOCALAPPDATA%\\BanjoRecompiled"],
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**",
+        "general.json",
+        "graphics.json",
+        "controls.json",
+        "sound.json"
+      ],
+      "user_data_paths": [
+        "%LOCALAPPDATA%\\BanjoRecompiled"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -123,7 +185,10 @@
         "en": "Native PC port of Banjo-Kazooie, made with N64Recomp.",
         "de": "Nativer PC-Port von Banjo-Kazooie, erstellt mit N64Recomp."
       },
-      "credits": ["BanjoRecomp contributors", "N64Recomp by Mr-Wiseguy"],
+      "credits": [
+        "BanjoRecomp contributors",
+        "N64Recomp by Mr-Wiseguy"
+      ],
       "license": "GPL-3.0",
       "homepage": "https://github.com/BanjoRecomp/BanjoRecomp"
     },
@@ -135,7 +200,12 @@
       "repo": "HarbourMasters/Shipwright",
       "asset_pattern": "(?i)(win64|windows).*\\.zip$",
       "exe": "soh.exe",
-      "preserve": ["mods/**", "shipofharkinian.json", "oot.o2r", "oot-mq.o2r"],
+      "preserve": [
+        "mods/**",
+        "shipofharkinian.json",
+        "oot.o2r",
+        "oot-mq.o2r"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -147,7 +217,10 @@
         "en": "PC port of The Legend of Zelda: Ocarina of Time, based on the OoT decompilation.",
         "de": "PC-Port von The Legend of Zelda: Ocarina of Time auf Basis der OoT-Dekompilierung."
       },
-      "credits": ["Harbour Masters", "ZeldaRET (decompilation)"],
+      "credits": [
+        "Harbour Masters",
+        "ZeldaRET (decompilation)"
+      ],
       "license": "NOASSERTION",
       "homepage": "https://github.com/HarbourMasters/Shipwright",
       "icon_url": "https://raw.githubusercontent.com/HarbourMasters/Shipwright/develop/soh/macosx/sohIcon.png"
@@ -160,7 +233,10 @@
       "repo": "2ship2harkinian/2ship2harkinian",
       "asset_pattern": "(?i)(win64|windows).*\\.zip$",
       "exe": "2ship.exe",
-      "preserve": ["mods/**", "2ship2harkinian.json"],
+      "preserve": [
+        "mods/**",
+        "2ship2harkinian.json"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -172,7 +248,10 @@
         "en": "PC port of The Legend of Zelda: Majora's Mask, based on the MM decompilation.",
         "de": "PC-Port von The Legend of Zelda: Majora's Mask auf Basis der MM-Dekompilierung."
       },
-      "credits": ["Harbour Masters", "ZeldaRET (decompilation)"],
+      "credits": [
+        "Harbour Masters",
+        "ZeldaRET (decompilation)"
+      ],
       "license": "CC0-1.0",
       "homepage": "https://github.com/2ship2harkinian/2ship2harkinian",
       "icon_url": "https://raw.githubusercontent.com/2ship2harkinian/2ship2harkinian/develop/mm/assets/custom/textures/icons/g2ShipIcon.png"
@@ -185,7 +264,11 @@
       "repo": "HarbourMasters/Starship",
       "asset_pattern": "(?i)(win64|windows).*\\.zip$",
       "exe": "Starship.exe",
-      "preserve": ["mods/**", "starship.cfg.json", "sf64.o2r"],
+      "preserve": [
+        "mods/**",
+        "starship.cfg.json",
+        "sf64.o2r"
+      ],
       "game_data": {
         "mode": "port_handles_it",
         "hint": {
@@ -197,7 +280,10 @@
         "en": "PC port of Star Fox 64, based on the SF64 decompilation.",
         "de": "PC-Port von Star Fox 64 auf Basis der SF64-Dekompilierung."
       },
-      "credits": ["Harbour Masters", "sf64 decompilation contributors"],
+      "credits": [
+        "Harbour Masters",
+        "sf64 decompilation contributors"
+      ],
       "license": "CC0-1.0",
       "homepage": "https://github.com/HarbourMasters/Starship",
       "icon_url": "https://raw.githubusercontent.com/HarbourMasters/Starship/main/logo.png"
@@ -211,17 +297,37 @@
       "asset_pattern": "^pd-x86_64-windows\\.zip$",
       "release_tag": "ci-dev-build",
       "exe": "pd.x86_64.exe",
-      "preserve": ["data/**", "*.ini", "*.cfg"],
+      "preserve": [
+        "data/**",
+        "*.ini",
+        "*.cfg"
+      ],
       "game_data": {
         "mode": "copy_file",
         "target": "data/pd.ntsc-final.z64",
         "accepted_hashes": [
-          { "md5": "e03b088b6ac9e0080440efed07c1e40f", "region": "US", "version": "1.1 (ntsc-final)" }
+          {
+            "md5": "e03b088b6ac9e0080440efed07c1e40f",
+            "region": "US",
+            "version": "1.1 (ntsc-final)"
+          }
         ],
         "other_known_hashes": [
-          { "md5": "7f4171b0c8d17815be37913f535e4e93", "region": "US", "version": "1.0 (ntsc-1.0)" },
-          { "md5": "538d2b75945eae069b29c46193e74790", "region": "JP", "version": "final (jpn-final)" },
-          { "md5": "d9b5cd305d228424891ce38e71bc9213", "region": "EU", "version": "PAL final (pal-final)" }
+          {
+            "md5": "7f4171b0c8d17815be37913f535e4e93",
+            "region": "US",
+            "version": "1.0 (ntsc-1.0)"
+          },
+          {
+            "md5": "538d2b75945eae069b29c46193e74790",
+            "region": "JP",
+            "version": "final (jpn-final)"
+          },
+          {
+            "md5": "d9b5cd305d228424891ce38e71bc9213",
+            "region": "EU",
+            "version": "PAL final (pal-final)"
+          }
         ],
         "hint": {
           "en": "Select your own Perfect Dark ROM (US V1.1 / Rev 1). RecompHub checks it and copies it to data\\pd.ntsc-final.z64.",
@@ -232,7 +338,10 @@
         "en": "Port of the Perfect Dark decompilation to modern platforms. Work in progress; builds come from the project's rolling CI release.",
         "de": "Port der Perfect-Dark-Dekompilierung auf moderne Plattformen. In Arbeit; Builds stammen aus dem fortlaufenden CI-Release des Projekts."
       },
-      "credits": ["fgsfdsfgs (port)", "n64decomp/perfect_dark (decompilation)"],
+      "credits": [
+        "fgsfdsfgs (port)",
+        "n64decomp/perfect_dark (decompilation)"
+      ],
       "license": "MIT",
       "homepage": "https://github.com/fgsfdsfgs/perfect_dark"
     },
@@ -244,15 +353,2199 @@
       "repo": "Rosalie241/RMG",
       "asset_pattern": "^RMG-Portable-Windows64-.*\\.zip$",
       "exe": "RMG.exe",
-      "preserve": ["Config/**", "Data/**", "Save/**", "Screenshots/**", "Cache/**", "portable.txt"],
-      "game_data": { "mode": "none" },
+      "preserve": [
+        "Config/**",
+        "Data/**",
+        "Save/**",
+        "Screenshots/**",
+        "Cache/**",
+        "portable.txt"
+      ],
+      "game_data": {
+        "mode": "none"
+      },
       "description": {
         "en": "Free and open-source mupen64plus front-end. Portable build; RecompHub keeps its config and saves on updates.",
         "de": "Freies Open-Source-Frontend für mupen64plus. Portable Version; RecompHub behält Konfiguration und Spielstände bei Updates."
       },
-      "credits": ["Rosalie241", "mupen64plus contributors"],
+      "credits": [
+        "Rosalie241",
+        "mupen64plus contributors"
+      ],
       "license": "GPL-3.0",
       "homepage": "https://github.com/Rosalie241/RMG"
+    },
+    {
+      "id": "dusklight",
+      "name": "The Legend of Zelda: Twilight Princess (Dusklight)",
+      "category": "game",
+      "system": "gc",
+      "repo": "TwilitRealm/dusklight",
+      "asset_pattern": "(?i)^Dusklight-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-win32-x86_64\\.zip$",
+      "exe": "dusklight.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "PC/mobile port of Twilight Princess built on the zeldaret/tp decompilation, with fixes and enhancements."
+      },
+      "credits": [
+        "TwilitRealm"
+      ],
+      "license": "CC0-1.0",
+      "homepage": "https://github.com/TwilitRealm/dusklight"
+    },
+    {
+      "id": "symphonyrecomp",
+      "name": "Castlevania: Symphony of the Night",
+      "category": "game",
+      "system": "ps1",
+      "repo": "BlackLabelHQ/SymphonyRecomp",
+      "asset_pattern": "(?i)^SymphonyRecomp-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x64\\.zip$",
+      "exe": "sotn.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Recompilation project for Castlevania: Symphony of the Night"
+      },
+      "credits": [
+        "BlackLabelHQ"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/BlackLabelHQ/SymphonyRecomp"
+    },
+    {
+      "id": "ghostship",
+      "name": "Super Mario 64 (Ghostship)",
+      "category": "game",
+      "system": "n64",
+      "repo": "HarbourMasters/Ghostship",
+      "asset_pattern": "(?i)^Nautilus-Alfa-Win64\\.zip$",
+      "exe": "Ghostship.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Super Mario 64 reimplementation for PC."
+      },
+      "credits": [
+        "HarbourMasters"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/HarbourMasters/Ghostship"
+    },
+    {
+      "id": "reblue",
+      "name": "Blue Dragon",
+      "category": "game",
+      "system": "x360",
+      "repo": "zolaware/reblue",
+      "asset_pattern": "(?i)^reblue-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-win-amd64\\.zip$",
+      "exe": "reblue.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Recompilation of Blue Dragon"
+      },
+      "credits": [
+        "zolaware"
+      ],
+      "license": "BSD-3-Clause",
+      "homepage": "https://github.com/zolaware/reblue"
+    },
+    {
+      "id": "black-xberecomp",
+      "name": "Black (Black - XBE Recomp)",
+      "category": "game",
+      "system": "xbox",
+      "repo": "TGP482/BLACK-XBERecomp",
+      "asset_pattern": "(?i)^BLACK-XBERecomp\\.zip$",
+      "exe": "BLACK.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "An unofficial original Xbox version PC port of BLACK (2006) via static recompilation."
+      },
+      "credits": [
+        "TGP482"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/TGP482/BLACK-XBERecomp"
+    },
+    {
+      "id": "donkey-kong-64-recompiled",
+      "name": "Donkey Kong 64",
+      "category": "game",
+      "system": "n64",
+      "repo": "Rainchus/Donkey-Kong-64-Recompiled",
+      "asset_pattern": "(?i)^DK64Recompiled-Windows-Release-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "DK64Recompiled.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "DK64 Rekongpiled brings Donkey Kong 64 to PC."
+      },
+      "credits": [
+        "Rainchus"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/Rainchus/Donkey-Kong-64-Recompiled"
+    },
+    {
+      "id": "edgeoftimerecomp",
+      "name": "Edge Of Time Recomp",
+      "category": "game",
+      "system": "x360",
+      "repo": "goliathret/EdgeOfTimeRecomp",
+      "asset_pattern": "(?i)^EdgeOfTimeRecomp-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-win-amd64\\.zip$",
+      "exe": "EdgeOfTimeRecomp.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "An unofficial PC port of the Xbox 360 version of Spider-Man: Edge of Time created through the process of static recompilation."
+      },
+      "credits": [
+        "goliathret"
+      ],
+      "license": "BSD-3-Clause",
+      "homepage": "https://github.com/goliathret/EdgeOfTimeRecomp"
+    },
+    {
+      "id": "goemon64recomp",
+      "name": "Mystical Ninja Starring Goemon",
+      "category": "game",
+      "system": "n64",
+      "repo": "klorfmorf/Goemon64Recomp",
+      "asset_pattern": "(?i)^Goemon64Recompiled-Windows-RelWithDebInfo\\.zip$",
+      "exe": "Goemon64Recompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "An unofficial PC port of Mystical Ninja Starring Goemon achieved via static recompilation."
+      },
+      "credits": [
+        "klorfmorf"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/klorfmorf/Goemon64Recomp"
+    },
+    {
+      "id": "killzone-shadowfall-pc",
+      "name": "Killzone: Shadow Fall (killzone-shadowfall-pc)",
+      "category": "game",
+      "system": "ps4",
+      "repo": "lesca-191204/killzone-shadowfall-pc",
+      "asset_pattern": "(?i)^KillzoneShadowFall-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows\\.zip$",
+      "exe": "bin/KillzoneShadowFall.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Killzone: Shadow Fall (killzone-shadowfall-pc)"
+      },
+      "credits": [
+        "lesca-191204"
+      ],
+      "license": "GPL-2.0",
+      "homepage": "https://github.com/lesca-191204/killzone-shadowfall-pc"
+    },
+    {
+      "id": "bm64recomp",
+      "name": "Bomberman 64",
+      "category": "game",
+      "system": "n64",
+      "repo": "RevoSucks/BM64Recomp",
+      "asset_pattern": "(?i)^BM64Recompiled-Windows-RelWithDebInfo\\.zip$",
+      "exe": "BM64Recompiled.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Bomberman 64: Recompiled brings Bomberman 64 to PC."
+      },
+      "credits": [
+        "RevoSucks"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/RevoSucks/BM64Recomp"
+    },
+    {
+      "id": "quest64-recomp",
+      "name": "Quest 64",
+      "category": "game",
+      "system": "n64",
+      "repo": "Rainchus/Quest64-Recomp",
+      "asset_pattern": "(?i)^Quest64Recompiled(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "Quest64Recompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Quest 64: Recompiled brings Quest 64 to PC."
+      },
+      "credits": [
+        "Rainchus"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/Rainchus/Quest64-Recomp"
+    },
+    {
+      "id": "megaman64recompiled",
+      "name": "Mega Man 64",
+      "category": "game",
+      "system": "n64",
+      "repo": "MegaMan64Recomp/MegaMan64Recompiled",
+      "asset_pattern": "(?i)^MegaMan64Recompiled-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows\\.zip$",
+      "exe": "MegaMan64Recompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Recompilation of Mega Man 64"
+      },
+      "credits": [
+        "MegaMan64Recomp"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/MegaMan64Recomp/MegaMan64Recompiled"
+    },
+    {
+      "id": "condemned2recomp",
+      "name": "Condemned 2: Bloodshot",
+      "category": "game",
+      "system": "x360",
+      "repo": "psxrestore/Condemned2Recomp",
+      "asset_pattern": "(?i)^condemned2recomp(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})_windows\\.zip$",
+      "exe": "condemned2recomp.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "A static recompilation of Condemned 2: Bloodshot done with RexGlue."
+      },
+      "credits": [
+        "psxrestore"
+      ],
+      "license": "BSD-3-Clause",
+      "homepage": "https://github.com/psxrestore/Condemned2Recomp"
+    },
+    {
+      "id": "tip-recomp",
+      "name": "Viva Pinata: Trouble In Paradise",
+      "category": "game",
+      "system": "x360",
+      "repo": "SolarCookies/TiP-Recomp",
+      "asset_pattern": "(?i)^retip_(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})_windows_amd64\\.zip$",
+      "exe": "retip.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "A Recompilation of Viva Pinata: Trouble In Paradise"
+      },
+      "credits": [
+        "SolarCookies"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/SolarCookies/TiP-Recomp"
+    },
+    {
+      "id": "pgr4-recomp",
+      "name": "Project Gotham Racing 4",
+      "category": "game",
+      "system": "x360",
+      "repo": "beatrixzy/PGR4-Recomp",
+      "asset_pattern": "(?i)^PGR4-Recomp-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "pgr4_recompiled.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "A Recompilation of Project Gotham Racing 4"
+      },
+      "credits": [
+        "beatrixzy"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/beatrixzy/PGR4-Recomp"
+    },
+    {
+      "id": "medievilrecomp",
+      "name": "MediEvil",
+      "category": "game",
+      "system": "ps1",
+      "repo": "BlackLabelHQ/MediEvilRecomp",
+      "asset_pattern": "(?i)^MediEvilRecomp-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x64\\.zip$",
+      "exe": "medievil.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Static Recomp of PSX USA MediEvil, By BlackLabelHQ"
+      },
+      "credits": [
+        "BlackLabelHQ"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/BlackLabelHQ/MediEvilRecomp"
+    },
+    {
+      "id": "crash-team-racing-high-octane",
+      "name": "Crash Team Racing (High Octane)",
+      "category": "game",
+      "system": "ps1",
+      "repo": "Rinnegatamante/Crash-Team-Racing-High-Octane",
+      "asset_pattern": "(?i)^ctr-high-octane-x64\\.win\\.zip$",
+      "exe": "Crash Team Racing - High Octane.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Advanced sourceport of Crash Team Racing for PSVita, PC and Web Browser."
+      },
+      "credits": [
+        "Rinnegatamante"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/Rinnegatamante/Crash-Team-Racing-High-Octane"
+    },
+    {
+      "id": "dnzhrecomp",
+      "name": "Duke Nukem Zero Hour",
+      "category": "game",
+      "system": "n64",
+      "repo": "sonicdcer/DNZHRecomp",
+      "asset_pattern": "(?i)^DNZHRecompiled-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows-RelWithDebInfo\\.zip$",
+      "exe": "DNZHRecompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Recompilation of Duke Nukem Zero Hour"
+      },
+      "credits": [
+        "sonicdcer"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/sonicdcer/DNZHRecomp"
+    },
+    {
+      "id": "moderngekko",
+      "name": "Kirby's Return to Dream Land (Kirby Wii Recomp)",
+      "category": "game",
+      "system": "wii",
+      "repo": "ExpansionPak/ModernGekko",
+      "asset_pattern": "(?i)^KirbyWiiRecomp-Windows-x86_64\\.zip$",
+      "exe": "KirbyRecomp.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Runtime for recompilations of GameCube games"
+      },
+      "credits": [
+        "ExpansionPak"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/ExpansionPak/ModernGekko"
+    },
+    {
+      "id": "harvestmoon64recomp",
+      "name": "Harvest Moon 64",
+      "category": "game",
+      "system": "n64",
+      "repo": "HarvestMoon64Recomp/HarvestMoon64Recomp",
+      "asset_pattern": "(?i)^HarvestMoon64Recompiled-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows\\.zip$",
+      "exe": "HarvestMoon64Recompiled.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "PC Port of Harvest Moon 64 made using N64: Recompiled (Windows/Linux/Mac)"
+      },
+      "credits": [
+        "HarvestMoon64Recomp"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/HarvestMoon64Recomp/HarvestMoon64Recomp"
+    },
+    {
+      "id": "eternalsonatareprise",
+      "name": "Eternal Sonata",
+      "category": "game",
+      "system": "x360",
+      "repo": "birabittoh/EternalSonataReprise",
+      "asset_pattern": "(?i)^eternalsonata-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-win-amd64\\.zip$",
+      "exe": "eternalsonata.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Eternal Sonata, recompiled for PC."
+      },
+      "credits": [
+        "birabittoh"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/birabittoh/EternalSonataReprise"
+    },
+    {
+      "id": "sdoj-recomp",
+      "name": "DoDonPachi Saidaioujou",
+      "category": "game",
+      "system": "x360",
+      "repo": "eandis/SDOJ-Recomp",
+      "asset_pattern": "(?i)^sdoj\\.recomp\\.(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.win-amd64\\.vulkan\\.zip$",
+      "exe": "DoDonPachi SaiDaiOuJou.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "SDOJ-Recomp is a Windows and Linux recompilation of Dodonpachi Saidaioujou for Xbox 360."
+      },
+      "credits": [
+        "eandis"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/eandis/SDOJ-Recomp"
+    },
+    {
+      "id": "mw2-recompiled",
+      "name": "Call of Duty: Modern Warfare 2",
+      "category": "game",
+      "system": "x360",
+      "repo": "PaulCombal/mw2-recompiled",
+      "asset_pattern": "(?i)^mw2-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-lan\\.zip$",
+      "exe": "mw2-mp.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Call of Duty: Modern Warfare 2 (2009) for Xbox 360 recompiled for Windows & Linux"
+      },
+      "credits": [
+        "PaulCombal"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/PaulCombal/mw2-recompiled"
+    },
+    {
+      "id": "initial-d-arcade-stage-3-native-sh-4-recompilation-wip",
+      "name": "Initial D Arcade Stage Ver.3",
+      "category": "game",
+      "system": "arcade",
+      "repo": "distilledorion-sketch/Initial-D-Arcade-Stage-3-Native-SH-4-Recompilation-WIP-",
+      "asset_pattern": "(?i)^Initial\\.D\\.Arcade\\.Stage\\.(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.Recompiled\\.(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "Initial D Arcade Stage 3 Recompiled Runtime.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Native SH-4 AOT recompilation of Initial D Arcade Stage 3 (NAOMI 2) — BIOS-free Vulkan public early demo (WIP)."
+      },
+      "credits": [
+        "distilledorion-sketch"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/distilledorion-sketch/Initial-D-Arcade-Stage-3-Native-SH-4-Recompilation-WIP-"
+    },
+    {
+      "id": "killzonerecomp",
+      "name": "Killzone",
+      "category": "game",
+      "system": "ps2",
+      "repo": "drakolordx7/KillzoneRecomp",
+      "asset_pattern": "(?i)^Killzone-PC-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})zip$",
+      "exe": "killzone.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Native PC port of Killzone (PS2) via static recompilation. Mouse and keyboard, 120+ fps, upscaling. Bring your own disc."
+      },
+      "credits": [
+        "drakolordx7"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/drakolordx7/KillzoneRecomp"
+    },
+    {
+      "id": "svr07-recomp",
+      "name": "WWE SmackDown vs. Raw 2007",
+      "category": "game",
+      "system": "x360",
+      "repo": "HollywoodAkeem/SVR07-Recomp",
+      "asset_pattern": "(?i)^svr07\\.zip$",
+      "exe": "svr07.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Using rexglue. Programs runs"
+      },
+      "credits": [
+        "HollywoodAkeem"
+      ],
+      "license": "BSD-3-Clause",
+      "homepage": "https://github.com/HollywoodAkeem/SVR07-Recomp"
+    },
+    {
+      "id": "drmario64-recomp-plus",
+      "name": "Dr. Mario 64",
+      "category": "game",
+      "system": "n64",
+      "repo": "theboy181/drmario64_recomp_plus",
+      "asset_pattern": "(?i)^Dr\\.Mario\\.(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.Recompiled-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows\\.zip$",
+      "exe": "drmario64_recomp.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Recompilation of Dr. Mario 64"
+      },
+      "credits": [
+        "theboy181"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/theboy181/drmario64_recomp_plus"
+    },
+    {
+      "id": "re-code-veronica-ps3-hd-recomp-pc",
+      "name": "Resident Evil – Code: Veronica X",
+      "category": "game",
+      "system": "ps3",
+      "repo": "kastieloficial/RE-Code-Veronica-PS3-HD-Recomp-PC",
+      "asset_pattern": "(?i)^CodeVeronica-PC-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "Code Veronica.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Resident Evil Code: Veronica X HD - PS3 static recompilation port (hobby, no game data)"
+      },
+      "credits": [
+        "kastieloficial"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/kastieloficial/RE-Code-Veronica-PS3-HD-Recomp-PC"
+    },
+    {
+      "id": "hl360-forza4",
+      "name": "Forza Motorsport 4 (hl360-forza4)",
+      "category": "game",
+      "system": "x360",
+      "repo": "0herculabs/hl360-forza4",
+      "asset_pattern": "(?i)^FM4-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x64\\.zip$",
+      "exe": "fm4.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Forza Motorsport 4 native on PC"
+      },
+      "credits": [
+        "0herculabs"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/0herculabs/hl360-forza4"
+    },
+    {
+      "id": "darkwatchdarkeredition",
+      "name": "Darkwatch (Darkwatch: Darker Edition)",
+      "category": "game",
+      "system": "xbox",
+      "repo": "linkssy2/DarkwatchDarkerEdition",
+      "asset_pattern": "(?i)^Darkwatch-Darker-Edition-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows-x64\\.zip$",
+      "exe": "Play Darkwatch.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Darkwatch: Darker Edition — PC port powered by XboxXBERecomp. Bring your own Xbox ISO."
+      },
+      "credits": [
+        "linkssy2"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/linkssy2/DarkwatchDarkerEdition"
+    },
+    {
+      "id": "f15se2-re",
+      "name": "F-15 II",
+      "category": "game",
+      "system": "dos",
+      "repo": "neuviemeporte/f15se2-re",
+      "asset_pattern": "(?i)^f15_se2-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "egame.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Reconstructed source code for the Microprose game F-15 Strike Eagle 2 for MS-DOS"
+      },
+      "credits": [
+        "neuviemeporte"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/neuviemeporte/f15se2-re"
+    },
+    {
+      "id": "yugiohforbiddenmemoriesrecomp",
+      "name": "Yu-Gi-Oh! Forbidden Memories",
+      "category": "game",
+      "system": "ps1",
+      "repo": "Unchiga/YuGiOhForbiddenMemoriesRecomp",
+      "asset_pattern": "(?i)^ygofm-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-win-x64\\.zip$",
+      "exe": "Yu_Gi_Oh_Forbidden_Memories_Recompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Static recompilation of Yu-Gi-Oh! Forbidden Memories (PS1) into a native executable - with a live duel-rank meter, a fusion assistant, adjustable card drops and a cheat menu. Bring your own disc."
+      },
+      "credits": [
+        "Unchiga"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/Unchiga/YuGiOhForbiddenMemoriesRecomp"
+    },
+    {
+      "id": "armyoftworecompilation",
+      "name": "Army of Two",
+      "category": "game",
+      "system": "x360",
+      "repo": "OpenPortroid/ArmyOfTwoRecompilation",
+      "asset_pattern": "(?i)^ArmyOfTwo-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "armyoftworecomp.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Unofficial PC port of the Xbox 360 version of Army of Two (2008). Online co-op supported."
+      },
+      "credits": [
+        "OpenPortroid"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/OpenPortroid/ArmyOfTwoRecompilation"
+    },
+    {
+      "id": "phase-distorter",
+      "name": "EarthBound (Phase Distorter)",
+      "category": "game",
+      "system": "snes",
+      "repo": "TheRunaway5/Phase-Distorter",
+      "asset_pattern": "(?i)^Phase-Distorter-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x86_64\\.zip$",
+      "exe": "Phase Distorter.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "A Mother 2/EarthBound PC Port"
+      },
+      "credits": [
+        "TheRunaway5"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/TheRunaway5/Phase-Distorter"
+    },
+    {
+      "id": "aloneinthedarkrehaunted",
+      "name": "Alone in the Dark (AloneInTheDarkReHaunted)",
+      "category": "game",
+      "system": "dos",
+      "repo": "spacefarergames/AloneInTheDarkReHaunted",
+      "asset_pattern": "(?i)^AITD_REHAUNTED_(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})_Win64\\.zip$",
+      "exe": "Tatou.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "A heavily enhanced port and dynamic recomp of Alone In The Dark 1, with Textured Models, HD-4K background replacements, QOL improvements, controller support and so much more."
+      },
+      "credits": [
+        "spacefarergames"
+      ],
+      "license": "GPL-2.0",
+      "homepage": "https://github.com/spacefarergames/AloneInTheDarkReHaunted"
+    },
+    {
+      "id": "dbz1",
+      "name": "Dragon Ball Z: Budokai HD Collection",
+      "category": "game",
+      "system": "x360",
+      "repo": "WistfulHopes/DBZ1",
+      "asset_pattern": "(?i)^dbz1\\.exe$",
+      "exe": "dbz1.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Dragon Ball Z Budokai HD Recompiled"
+      },
+      "credits": [
+        "WistfulHopes"
+      ],
+      "license": "BSD-3-Clause",
+      "homepage": "https://github.com/WistfulHopes/DBZ1"
+    },
+    {
+      "id": "bmherorecomp",
+      "name": "Bomberman Hero",
+      "category": "game",
+      "system": "n64",
+      "repo": "RevoSucks/BMHeroRecomp",
+      "asset_pattern": "(?i)^BMHeroRecompiled-Windows-RelWithDebInfo\\.zip$",
+      "exe": "BMHeroRecompiled.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Bomberman Hero: Recompiled brings Bomberman Hero to PC."
+      },
+      "credits": [
+        "RevoSucks"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/RevoSucks/BMHeroRecomp"
+    },
+    {
+      "id": "opentricky",
+      "name": "SSX Tricky",
+      "category": "game",
+      "system": "xbox",
+      "repo": "GiZcesi/OpenTricky",
+      "asset_pattern": "(?i)^OpenTricky-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-win64\\.zip$",
+      "exe": "OpenTricky.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "OpenTricky is an unofficial PC port of SSX Tricky, made by static recompilation. Bring your own disc."
+      },
+      "credits": [
+        "GiZcesi"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/GiZcesi/OpenTricky"
+    },
+    {
+      "id": "007frwl-xberecomp",
+      "name": "007: From Russia with Love (007FRWL-XBERecomp)",
+      "category": "game",
+      "system": "xbox",
+      "repo": "TGP482/007FRWL-XBERecomp",
+      "asset_pattern": "(?i)^(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})FRWL-XBERecomp\\.zip$",
+      "exe": "007FRWL.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "An unofficial original Xbox version PC port of 007: From Russia With Love via static recompilation."
+      },
+      "credits": [
+        "TGP482"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/TGP482/007FRWL-XBERecomp"
+    },
+    {
+      "id": "gears-of-war-2-pc-port",
+      "name": "Gears of War 2 (Gears of War 2 PC port)",
+      "category": "game",
+      "system": "x360",
+      "repo": "santiquiroz/gears-of-war-2-pc-port",
+      "asset_pattern": "(?i)^gow2-recomp-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-win64\\.zip$",
+      "exe": "gow2.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Gears of War 2 native PC port: the Xbox 360 game statically recompiled to x64 (not an emulator). 1440p/4K, FSR, 4K texture packs, keyboard & mouse, Android in progress. Bring your own copy."
+      },
+      "credits": [
+        "santiquiroz"
+      ],
+      "license": "BSD-3-Clause",
+      "homepage": "https://github.com/santiquiroz/gears-of-war-2-pc-port"
+    },
+    {
+      "id": "recharged",
+      "name": "Mario Strikers Charged (mscharged-port)",
+      "category": "game",
+      "system": "wii",
+      "repo": "previouslevelgames/recharged",
+      "asset_pattern": "(?i)^recharged-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x86_64\\.zip$",
+      "exe": "recharged.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Mario Strikers Charged for PC, Mac & Linux. Ported from decompiled code. Not a recompilation."
+      },
+      "credits": [
+        "previouslevelgames"
+      ],
+      "license": "CC0-1.0",
+      "homepage": "https://github.com/previouslevelgames/recharged"
+    },
+    {
+      "id": "snowboardkids2-recomp",
+      "name": "Snowboard Kids 2",
+      "category": "game",
+      "system": "n64",
+      "repo": "cdlewis/snowboardkids2-recomp",
+      "asset_pattern": "(?i)^SnowboardKids2Recompiled-Windows\\.zip$",
+      "exe": "SnowboardKids2Recompiled.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Snowboard Kids 2 for PC (Windows/Linux/MacOS)"
+      },
+      "credits": [
+        "cdlewis"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/cdlewis/snowboardkids2-recomp"
+    },
+    {
+      "id": "estacado-the-darkness-recomp",
+      "name": "The Darkness",
+      "category": "game",
+      "system": "x360",
+      "repo": "invinceble55-wq/Estacado-The-Darkness-Recomp",
+      "asset_pattern": "(?i)^Estacado-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x64\\.zip$",
+      "exe": "TheDarkness.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Estacado: a native PC recompilation of The Darkness (Xbox 360). Unofficial fan port; bring your own copy of the game."
+      },
+      "credits": [
+        "invinceble55-wq"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/invinceble55-wq/Estacado-The-Darkness-Recomp"
+    },
+    {
+      "id": "sssv-recomp",
+      "name": "Space Station Silicon Valley",
+      "category": "game",
+      "system": "n64",
+      "repo": "Cellenseres/SSSV_Recomp",
+      "asset_pattern": "(?i)^SSSVRecompiled_(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})_Windows\\.zip$",
+      "exe": "SSSVRecompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Space Station Silicon Valley Recompilation Project"
+      },
+      "credits": [
+        "Cellenseres"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/Cellenseres/SSSV_Recomp"
+    },
+    {
+      "id": "banjo-tooie-scurvy-dog-port",
+      "name": "Banjo-Tooie",
+      "category": "game",
+      "system": "n64",
+      "repo": "some-scurvy-dog/banjo-tooie-scurvy-dog-port",
+      "asset_pattern": "(?i)^BanjoTooieScurvyDogPort-Alpha[0-9.]+-Windows-x64\\.zip$",
+      "exe": "BanjoTooieScurvyDogPort.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Banjo-Tooie Scurvy Dog Port: a static PC recompilation of Banjo-Tooie. **Not affiliated with the Banjo: Recompiled team**"
+      },
+      "credits": [
+        "some-scurvy-dog"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/some-scurvy-dog/banjo-tooie-scurvy-dog-port"
+    },
+    {
+      "id": "swrots-pc",
+      "name": "Star Wars: Episode III – Revenge of the Sith (SWROTS-PC)",
+      "category": "game",
+      "system": "xbox",
+      "repo": "jedijosh920/SWROTS-PC",
+      "asset_pattern": "(?i)^SWROTS-PC-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "swrots.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Unofficial native Windows port of Star Wars: Episode III - Revenge of the Sith (Xbox). Bring your own copy."
+      },
+      "credits": [
+        "jedijosh920"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/jedijosh920/SWROTS-PC"
+    },
+    {
+      "id": "wwe2k14-recomp",
+      "name": "WWE 2K14 (WWE 2K14 Recomp)",
+      "category": "game",
+      "system": "x360",
+      "repo": "PromethenDev/wwe2k14-recomp",
+      "asset_pattern": "(?i)^WWE2K14-Recomp-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-x64\\.zip$",
+      "exe": "wwe2k14.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "WWE 2K14 (WWE 2K14 Recomp)"
+      },
+      "credits": [
+        "PromethenDev"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/PromethenDev/wwe2k14-recomp"
+    },
+    {
+      "id": "nfs-recompiled",
+      "name": "Need for Speed II: Special Edition / Need for Speed III: Hot Pursuit",
+      "category": "game",
+      "system": "pc",
+      "repo": "motor-dev/nfs-recompiled",
+      "asset_pattern": "(?i)^nfs_recompiled\\.zip$",
+      "exe": "nfs3hp.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Need for Speed II: Special Edition / Need for Speed III: Hot Pursuit"
+      },
+      "credits": [
+        "motor-dev"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/motor-dev/nfs-recompiled"
+    },
+    {
+      "id": "bloodyroar2recomp",
+      "name": "Bloody Roar 2",
+      "category": "game",
+      "system": "ps1",
+      "repo": "novapowers0/BloodyRoar2Recomp",
+      "asset_pattern": "(?i)^BloodyRoar2-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "BloodyRoar2_Recompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "PSX recompilation of Bloody Roar II (SLES-01722 EU / SCUS-94424 USA). Anti-copyright: bring your own disc. Dual-region builds, from-scratch widescreen + curated mods."
+      },
+      "credits": [
+        "novapowers0"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/novapowers0/BloodyRoar2Recomp"
+    },
+    {
+      "id": "fifa09-recomp",
+      "name": "FIFA 09",
+      "category": "game",
+      "system": "x360",
+      "repo": "ChunchunQ/fifa09-recomp",
+      "asset_pattern": "(?i)^NOBK-FIFA09-[0-9.]+\\.zip$",
+      "exe": "FIFA09 Launcher.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "FIFA 09 PC Port based on Xbox 360 Version."
+      },
+      "credits": [
+        "ChunchunQ"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/ChunchunQ/fifa09-recomp"
+    },
+    {
+      "id": "skate2-recompile-pc",
+      "name": "Skate 2",
+      "category": "game",
+      "system": "x360",
+      "repo": "christianortel/skate2-recompile-pc",
+      "asset_pattern": "(?i)^Skate2-PC-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows-x64\\.zip$",
+      "exe": "skate2.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Community Windows PC port of Skate 2, built with ReXGlue. Controller support, adjustable rendering quality, and unlocked FPS. Original game files required."
+      },
+      "credits": [
+        "christianortel"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/christianortel/skate2-recompile-pc"
+    },
+    {
+      "id": "tekken3recompiled",
+      "name": "Tekken 3",
+      "category": "game",
+      "system": "ps1",
+      "repo": "FishB0nes98/Tekken3Recompiled",
+      "asset_pattern": "(?i)^Tekken3Recompiled-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Easy-Setup\\.zip$",
+      "exe": "Play Tekken 3.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Tekken 3 hybrid recompilation preview with Jun Kazama, widescreen, custom skins and local asset import tools."
+      },
+      "credits": [
+        "FishB0nes98"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/FishB0nes98/Tekken3Recompiled"
+    },
+    {
+      "id": "underworld-exhumed",
+      "name": "Underworld Exhumed",
+      "category": "game",
+      "system": "dos",
+      "repo": "abedegno/underworld-exhumed",
+      "asset_pattern": "(?i)^UW1-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x86_64\\.zip$",
+      "exe": "uw1port.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Underworld Exhumed: Ultima Underworld I and II as byte-matching source code and native ports for macOS, Windows and Linux"
+      },
+      "credits": [
+        "abedegno"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/abedegno/underworld-exhumed"
+    },
+    {
+      "id": "project-helghast",
+      "name": "Killzone 3",
+      "category": "game",
+      "system": "ps3",
+      "repo": "undecuple/project-helghast",
+      "asset_pattern": "(?i)^Project-Helghast-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-portable\\.zip$",
+      "exe": "Project Helghast.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Killzone 3 // Unofficial PC Port (static recompilation). Work in progress, partly playable. Builds on your PC from your own game."
+      },
+      "credits": [
+        "undecuple"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/undecuple/project-helghast"
+    },
+    {
+      "id": "xenogears-recomp",
+      "name": "Xenogears",
+      "category": "game",
+      "system": "ps1",
+      "repo": "OpokXeno/xenogears-recomp",
+      "asset_pattern": "(?i)^XenogearsRecomp-windows-x86_64\\.zip$",
+      "exe": "XenogearsRecomp.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Static recompilation of Xenogears for PC"
+      },
+      "credits": [
+        "OpokXeno"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/OpokXeno/xenogears-recomp"
+    },
+    {
+      "id": "naughtybear-restuff",
+      "name": "Naughty Bear",
+      "category": "game",
+      "system": "x360",
+      "repo": "MaxDeadBear/NaughtyBear_ReStuff",
+      "asset_pattern": "(?i)^restuff-win-x64\\.zip$",
+      "exe": "restuff.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "ReStuff brings Naughty Bear Gold Edition to PC."
+      },
+      "credits": [
+        "MaxDeadBear"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/MaxDeadBear/NaughtyBear_ReStuff"
+    },
+    {
+      "id": "project-pyrrhus",
+      "name": "Killzone 2",
+      "category": "game",
+      "system": "ps3",
+      "repo": "undecuple/project-pyrrhus",
+      "asset_pattern": "(?i)^Project-Pyrrhus-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-portable\\.zip$",
+      "exe": "Project Pyrrhus.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Killzone 2 // Unofficial PC Port (static recompilation). Work in progress, partly playable. Builds on your PC from your own game."
+      },
+      "credits": [
+        "undecuple"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/undecuple/project-pyrrhus"
+    },
+    {
+      "id": "acfa-port",
+      "name": "Armored Core: For Answer (ACFA-Port)",
+      "category": "game",
+      "system": "x360",
+      "repo": "SulphurS16/ACFA-Port",
+      "asset_pattern": "(?i)^ACFA-Port-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "ACFA-Launcher.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Unofficial native Windows port of ARMORED CORE for Answer (PS3), built from your own copy of the game. Part of Project Glintburn."
+      },
+      "credits": [
+        "SulphurS16"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/SulphurS16/ACFA-Port"
+    },
+    {
+      "id": "perfectdarkzerorecomp",
+      "name": "Perfect Dark Zero",
+      "category": "game",
+      "system": "x360",
+      "repo": "nikolaygorb/PerfectDarkZeroRecomp",
+      "asset_pattern": "(?i)^PDZrecomp-win64\\.zip$",
+      "exe": "perfectdarkzerorecomp.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Perfect Dark Zero [Xbox360] game static recompilation project based on RexGlue-SDK"
+      },
+      "credits": [
+        "nikolaygorb"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/nikolaygorb/PerfectDarkZeroRecomp"
+    },
+    {
+      "id": "chameleontwist1-jp-recomp",
+      "name": "Chameleon Twist",
+      "category": "game",
+      "system": "n64",
+      "repo": "Rainchus/ChameleonTwist1-JP-Recomp",
+      "asset_pattern": "(?i)^ChameleonTwistJPRecompiled\\.zip$",
+      "exe": "ChameleonTwistJPRecompiled.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Chameleon Twist: Recompiled brings Chameleon Twist to PC."
+      },
+      "credits": [
+        "Rainchus"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/Rainchus/ChameleonTwist1-JP-Recomp"
+    },
+    {
+      "id": "re-cherry",
+      "name": "Lollipop Chainsaw",
+      "category": "game",
+      "system": "x360",
+      "repo": "MaxDeadBear/Re-Cherry",
+      "asset_pattern": "(?i)^re-cherry\\.Beta\\.zip$",
+      "exe": "re_cherry.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Lollipop Chainsaw"
+      },
+      "credits": [
+        "MaxDeadBear"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/MaxDeadBear/Re-Cherry"
+    },
+    {
+      "id": "rampagere",
+      "name": "Rampage: Total Destruction",
+      "category": "game",
+      "system": "ps2",
+      "repo": "jjmhalew/RampageRE",
+      "asset_pattern": "(?i)^RampageRE-windows-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "RampageRE.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "A native PC / Android / Linux / Switch / Steam Deck port of Rampage: Total Destruction (PS2)"
+      },
+      "credits": [
+        "jjmhalew"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/jjmhalew/RampageRE"
+    },
+    {
+      "id": "wetrecomp",
+      "name": "Wet",
+      "category": "game",
+      "system": "x360",
+      "repo": "nikolaygorb/WetRecomp",
+      "asset_pattern": "(?i)^wet-recomp-win64\\.zip$",
+      "exe": "wetrecomp.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Wet [Xbox360] game static recompilation project based on RexGlue-SDK"
+      },
+      "credits": [
+        "nikolaygorb"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/nikolaygorb/WetRecomp"
+    },
+    {
+      "id": "partyboard",
+      "name": "Mario Party 4",
+      "category": "game",
+      "system": "gc",
+      "repo": "mariopartyrd/partyboard",
+      "asset_pattern": "(?i)^partyboard_alpha_(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})_x64\\.zip$",
+      "exe": "partyboard.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "A WIP PC port of Mario Party 4."
+      },
+      "credits": [
+        "mariopartyrd"
+      ],
+      "license": "CC0-1.0",
+      "homepage": "https://github.com/mariopartyrd/partyboard"
+    },
+    {
+      "id": "wwe12-pc",
+      "name": "WWE '12 (wwe12-pc)",
+      "category": "game",
+      "system": "x360",
+      "repo": "iMrBurn/wwe12-pc",
+      "asset_pattern": "(?i)^WWE12-PC-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})zip$",
+      "exe": "wwe12.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "WWE '12 on PC ! Native render (Still W.I.P)"
+      },
+      "credits": [
+        "iMrBurn"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/iMrBurn/wwe12-pc"
+    },
+    {
+      "id": "mgs-reintegral",
+      "name": "Metal Gear Solid (mgs-reintegral)",
+      "category": "game",
+      "system": "ps1",
+      "repo": "Drommedhar/mgs-reintegral",
+      "asset_pattern": "(?i)^reintegral-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-windows-x86\\.zip$",
+      "exe": "build/windows-x86-godot/mgs-integral-native.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Metal Gear Solid (mgs-reintegral)"
+      },
+      "credits": [
+        "Drommedhar"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/Drommedhar/mgs-reintegral"
+    },
+    {
+      "id": "ultimate-mortal-kombat-3-ios-decompiled",
+      "name": "Ultimate MK3 iOS",
+      "category": "game",
+      "system": "mobile",
+      "repo": "MaryNCRT/Ultimate-Mortal-Kombat-3-iOS-Decompiled",
+      "asset_pattern": "(?i)^UMK3-PC-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})zip$",
+      "exe": "UMK3-Launcher.exe",
+      "include_prereleases": true,
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Decompiled Ultimate Mortal Kombat 3 (iOS v1.2.59) with a playable native PC port featuring DirectX, Vulkan, OpenGL, widescreen support, HD textures, and multiplayer. Original game assets required."
+      },
+      "credits": [
+        "MaryNCRT"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/MaryNCRT/Ultimate-Mortal-Kombat-3-iOS-Decompiled"
+    },
+    {
+      "id": "blastcorps-recomp",
+      "name": "Blast Corps",
+      "category": "game",
+      "system": "n64",
+      "repo": "SlaveOfIDO/blastcorps-recomp",
+      "asset_pattern": "(?i)^BlastCorpsRecompiled-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows-RelWithDebInfo\\.zip$",
+      "exe": "BlastCorpsRecompiled.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "BlastCorps for PC (Windows/Linux/MacOS)"
+      },
+      "credits": [
+        "SlaveOfIDO"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/SlaveOfIDO/blastcorps-recomp"
+    },
+    {
+      "id": "spideyps1recomp",
+      "name": "OpenSpideyPS1",
+      "category": "game",
+      "system": "ps1",
+      "repo": "GTTeancum/SpideyPS1recomp",
+      "asset_pattern": "(?i)^Spider-Man-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})-Windows-x64\\.zip$",
+      "exe": "SpiderMan2.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Native recompilations of Neversoft's PlayStation Spider-Man games, built with RecompOne. Games are siloed; only the recompiler and runtime are shared."
+      },
+      "credits": [
+        "GTTeancum"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/GTTeancum/SpideyPS1recomp"
+    },
+    {
+      "id": "broken-bond-recomp",
+      "name": "Naruto: The Broken Bond",
+      "category": "game",
+      "system": "x360",
+      "repo": "jorjbarbosa/broken-bond-recomp",
+      "asset_pattern": "(?i)^broken-bond-recomp-win-amd64\\.zip$",
+      "exe": "broken_bond.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "broken-bond-recomp is a PC port of Naruto: The Broken Bond with a native Direct3D 12 renderer and streamed audio fixes."
+      },
+      "credits": [
+        "jorjbarbosa"
+      ],
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/jorjbarbosa/broken-bond-recomp"
+    },
+    {
+      "id": "ac4-port",
+      "name": "Armored Core 4 (AC4-Port)",
+      "category": "game",
+      "system": "ps3",
+      "repo": "SulphurS16/AC4-Port",
+      "asset_pattern": "(?i)^AC4-Port-(?:v?[0-9][0-9._+-]*(?:(?:alpha|beta|rc|dev|b)[0-9._-]*)?(?:\\+?g[0-9a-f]{7,})?|[0-9a-f]{7,40})\\.zip$",
+      "exe": "AC4-Launcher.exe",
+      "maturity": "experimental",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Unofficial native Windows port of ARMORED CORE 4 (PS3), built from your own copy of the game. Part of Project Glintburn."
+      },
+      "credits": [
+        "SulphurS16"
+      ],
+      "license": "MIT",
+      "homepage": "https://github.com/SulphurS16/AC4-Port"
+    },
+    {
+      "id": "littleplanet",
+      "name": "Sonic CD (Little Planet)",
+      "category": "game",
+      "system": "segacd",
+      "repo": "carl0srmz/littleplanet",
+      "asset_pattern": "(?i)^littleplanet-windows-portable\\.zip$",
+      "exe": "Little Planet.exe",
+      "maturity": "playable",
+      "preserve": [
+        "portable.txt",
+        "saves/**",
+        "mods/**"
+      ],
+      "game_data": {
+        "mode": "port_handles_it",
+        "hint": {
+          "en": "Needs files from your own copy of the game. The port asks for them on first start or explains where to put them; the project page says which version it supports.",
+          "de": "Braucht Dateien aus deiner eigenen Kopie des Spiels. Der Port fragt beim ersten Start danach oder erklärt, wohin sie gehören; auf der Projektseite steht, welche Version unterstützt wird."
+        }
+      },
+      "description": {
+        "en": "Sonic the Hedgehog CD recompilation"
+      },
+      "credits": [
+        "carl0srmz"
+      ],
+      "license": "NOASSERTION",
+      "homepage": "https://github.com/carl0srmz/littleplanet"
     }
   ]
 }

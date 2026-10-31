@@ -35,6 +35,7 @@ function customEntry(url: string): CatalogEntry {
     system: "n64",
     repo: "example/example-port",
     asset_pattern: "(?i)windows.*\\.zip$",
+    maturity: "experimental",
     exe: "example.exe",
     preserve: [],
     user_data_paths: [],
@@ -50,7 +51,15 @@ function customEntry(url: string): CatalogEntry {
 function catalog(): LoadedCatalog {
   const raw = catalogJson.entries as unknown as Partial<CatalogEntry>[];
   const entries = raw.map(
-    (e) => ({ preserve: [], user_data_paths: [], credits: [], ...e, source: { kind: "official" } }) as CatalogEntry,
+    (e) =>
+      ({
+        preserve: [],
+        user_data_paths: [],
+        credits: [],
+        maturity: "playable",
+        ...e,
+        source: { kind: "official" },
+      }) as CatalogEntry,
   );
   const first = settings.custom_sources[0];
   if (first) entries.push(customEntry(first));

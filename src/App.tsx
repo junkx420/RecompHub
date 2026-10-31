@@ -6,8 +6,8 @@ import { Discover } from "./pages/Discover";
 import { Library } from "./pages/Library";
 import { Settings } from "./pages/Settings";
 
-type Tab = "discover" | "library" | "settings";
-const TABS: Tab[] = ["discover", "library", "settings"];
+type Tab = "discover" | "experimental" | "library" | "settings";
+const TABS: Tab[] = ["discover", "experimental", "library", "settings"];
 
 export function App() {
   const { t } = useTranslation();
@@ -49,7 +49,9 @@ export function App() {
         {detailId !== null ? (
           <Detail id={detailId} onBack={() => setDetailId(null)} />
         ) : tab === "discover" ? (
-          <Discover onOpen={setDetailId} />
+          <Discover key="playable" maturity="playable" onOpen={setDetailId} />
+        ) : tab === "experimental" ? (
+          <Discover key="experimental" maturity="experimental" onOpen={setDetailId} />
         ) : tab === "library" ? (
           <Library onOpen={setDetailId} />
         ) : (

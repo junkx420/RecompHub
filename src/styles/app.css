@@ -676,3 +676,15 @@ ul.code-list {
   color: var(--danger-text);
   border-color: transparent;
 }
+/* Experimental tab and system filter */
+.system-filter {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+.page > .hint {
+  margin: 0 0 12px;
+}

@@ -15,9 +15,10 @@ on GitHub. Ports need your own legally obtained copy of each game.
 
 ## Features
 
-- **Catalog** of curated ports (`catalog/catalog.json`), loaded from this
-  repository with an offline fallback. Custom catalogs can be added in
-  Settings; their entries are marked "Not verified".
+- **Catalog** of more than 80 ports (`catalog/catalog.json`), loaded from
+  this repository with an offline fallback. Early ports that start but are
+  not finished yet live in their own Experimental tab. Custom catalogs can
+  be added in Settings; their entries are marked "Not verified".
 - **Install** with download resume, SHA-256 check against the digest GitHub
   publishes for each asset, zip and 7z support, and protection against
   archives that try to write outside their folder. Folders that RecompHub

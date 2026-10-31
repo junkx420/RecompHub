@@ -6,7 +6,8 @@
   "tabs": {
     "discover": "Entdecken",
     "library": "Bibliothek",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "experimental": "Experimentell"
   },
   "common": {
     "loading": "Wird geladen …",
@@ -28,7 +29,10 @@
     "search": "Ports durchsuchen",
     "empty": "Keine Ports passen zu deiner Suche.",
     "count_one": "{{count}} Port",
-    "count_other": "{{count}} Ports"
+    "count_other": "{{count}} Ports",
+    "experimentalHint": "Frühe Ports: Sie starten, können aber abstürzen, Inhalte fehlen lassen oder Umwege brauchen. Lies vor dem Spielen die Projektseite.",
+    "system": "System",
+    "allSystems": "Alle Systeme"
   },
   "catalog": {
     "origin": {
@@ -132,7 +136,8 @@
     "unknown_dump": "Diese Datei ist kein bekannter Dump dieses Spiels (SHA-1 {{sha1}}).",
     "not_a_rom": "Diese Datei ist kein N64-ROM.",
     "steam_not_found": "Steam ist nicht installiert.",
-    "steam_running": "Schließe zuerst Steam und versuche es dann erneut."
+    "steam_running": "Schließe zuerst Steam und versuche es dann erneut.",
+    "blocked_by_antivirus": "Dein Virenscanner hat diesen Download blockiert. RecompHub installiert keine Dateien, die ein Scanner meldet."
   },
   "install": {
     "title": "Installieren",
@@ -230,5 +235,32 @@
     "cancel": "Abbrechen",
     "done": "Deinstalliert.",
     "doneKept": "Deinstalliert. Deine Spielstände liegen in {{path}} und kommen bei einer Neuinstallation zurück."
+  },
+  "systems": {
+    "n64": "Nintendo 64",
+    "x360": "Xbox 360",
+    "xbox": "Xbox",
+    "ps1": "PlayStation",
+    "ps2": "PlayStation 2",
+    "ps3": "PlayStation 3",
+    "ps4": "PlayStation 4",
+    "wii": "Wii",
+    "wiiu": "Wii U",
+    "gc": "GameCube",
+    "gba": "Game Boy Advance",
+    "gb": "Game Boy",
+    "gbc": "Game Boy Color",
+    "snes": "Super Nintendo",
+    "nes": "NES",
+    "dos": "DOS",
+    "arcade": "Arcade",
+    "pc": "PC",
+    "segacd": "Sega CD / 32X",
+    "psp": "PSP",
+    "nds": "Nintendo DS",
+    "md": "Mega Drive",
+    "dc": "Dreamcast",
+    "mobile": "Mobil",
+    "other": "Sonstige"
   }
 }

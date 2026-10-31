@@ -87,6 +87,8 @@
         "repo": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
         "asset_pattern": { "type": "string", "minLength": 1, "description": "Regex (Rust regex syntax) on the Windows x64 asset name. Must match exactly one asset of the release." },
         "release_tag": { "type": "string", "pattern": "^[A-Za-z0-9._+-]+$", "description": "Fixed tag instead of the latest release, for rolling CI releases." },
+        "include_prereleases": { "type": "boolean", "description": "Use the newest release even if it is a pre-release." },
+        "maturity": { "enum": ["playable", "experimental"], "description": "Experimental entries are listed separately; default playable." },
         "exe": { "$ref": "#/$defs/relativePath", "description": "Executable relative to the game folder. Glob allowed." },
         "preserve": { "type": "array", "items": { "$ref": "#/$defs/relativePath" }, "description": "Globs that updates never overwrite (saves, mods, configs)." },
         "user_data_paths": {

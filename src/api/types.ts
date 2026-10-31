@@ -4,6 +4,8 @@ export type LocalizedText = string | Record<string, string>;
 
 export type Category = "game" | "emulator" | "tool";
 
+export type Maturity = "playable" | "experimental";
+
 export type EntrySource = { kind: "official" } | { kind: "custom"; url: string };
 
 export interface KnownDump {
@@ -32,6 +34,9 @@ export interface CatalogEntry {
   repo: string;
   asset_pattern: string;
   release_tag?: string;
+  include_prereleases?: boolean;
+  /** "experimental" entries are listed in their own tab. */
+  maturity: Maturity;
   exe: string;
   preserve: string[];
   user_data_paths: string[];

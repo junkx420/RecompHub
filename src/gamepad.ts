@@ -78,7 +78,8 @@ function back() {
 }
 
 function switchTab(step: number) {
-  const tabs = [...document.querySelectorAll<HTMLElement>('[role="tab"]')];
+  // Only the main navigation; filter chips are tabs too.
+  const tabs = [...document.querySelectorAll<HTMLElement>('.topbar [role="tab"]')];
   const active = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true");
   const next = tabs[(active + step + tabs.length) % tabs.length];
   next?.click();

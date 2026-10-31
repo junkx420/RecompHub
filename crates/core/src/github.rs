@@ -16,6 +16,8 @@ pub struct Release {
     #[serde(default)]
     pub prerelease: bool,
     #[serde(default)]
+    pub draft: bool,
+    #[serde(default)]
     pub published_at: Option<DateTime<Utc>>,
     pub html_url: String,
     pub assets: Vec<Asset>,
@@ -46,9 +48,29 @@ impl Release {
     }
 }
 
-/// Fetch the release the entry points to (latest, or its fixed tag).
+/// Fetch the release the entry points to: latest, its fixed tag, or with
+/// `include_prereleases` the newest published release of any kind.
 pub async fn fetch_release(http: &Http, entry: &CatalogEntry) -> Result<Release> {
-    fetch_release_from(http, &entry.release_api_url()).await
+    let url = entry.release_api_url();
+    if entry.include_prereleases && entry.release_tag.is_none() {
+        return newest_release(http, &url).await;
+    }
+    fetch_release_from(http, &url).await
+}
+
+async fn newest_release(http: &Http, url: &str) -> Result<Release> {
+    let fetched = http.get_cached(url, true).await?;
+    let releases: Vec<Release> =
+        serde_json::from_slice(&fetched.body).map_err(|e| AppError::Network {
+            message: format!("unexpected GitHub response from {url}: {e}"),
+        })?;
+    // GitHub lists newest first; drafts only appear for repo owners.
+    releases
+        .into_iter()
+        .find(|r| !r.draft)
+        .ok_or_else(|| AppError::NotFound {
+            what: format!("{url}: no published release"),
+        })
 }
 
 pub async fn fetch_release_from(http: &Http, url: &str) -> Result<Release> {

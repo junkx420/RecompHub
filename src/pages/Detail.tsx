@@ -70,6 +70,11 @@ export function Detail({ id, onBack }: { id: string; onBack: () => void }) {
                 <span className="badge">{entry.system.toUpperCase()}</span>
                 <span className="muted">{t(`category.${entry.category}`)}</span>
                 <SourceBadge source={entry.source} />
+                {entry.maturity === "experimental" && (
+                  <span className="badge badge-warning" title={t("discover.experimentalHint")}>
+                    {t("tabs.experimental")}
+                  </span>
+                )}
               </div>
             </div>
           </header>

@@ -147,6 +147,16 @@ exist, tests, then `tauri-action` builds with
 `src-tauri/tauri.release.conf.json` (`createUpdaterArtifacts`) and creates a
 draft release with `latest.json`.
 
+## Catalog maturity
+
+Entries carry `maturity` (`playable` by default, or `experimental`) and
+optionally `include_prereleases` (use the newest release even if it is a
+pre-release; `github::fetch_release` then reads the release list). The UI
+shows playable entries under Discover and experimental ones in their own
+tab. How the 31 October 2026 expansion was selected is in
+`catalog/RESEARCH.md`. A download the virus scanner blocks (Windows error
+225/226) is reported as `blocked_by_antivirus`.
+
 ## Uninstall
 
 `uninstall(id, keep_saves)` (`crates/core/src/uninstall.rs`): refuses while

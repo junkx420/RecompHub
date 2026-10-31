@@ -66,6 +66,7 @@ impl Fixture {
             name: None,
             body: None,
             prerelease: false,
+            draft: false,
             published_at: None,
             html_url: "https://github.com/o/r".into(),
             assets: vec![Asset {

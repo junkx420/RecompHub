@@ -37,6 +37,36 @@ any pattern it reports before relying on it.
 The sonicdcer ports add a build type (`-RelWithDebInfo`) after `-Windows`,
 so their patterns allow an optional `-<word>` suffix.
 
+## Expansion of 31 October 2026
+
+72 more entries came from the rated
+[awesome-decomp-games](https://github.com/SubmitGame/awesome-decomp-games)
+data (CC0), filtered and checked like this:
+
+1. Static recompilations of any platform and source ports of console
+   games; not archived, still active, not flagged as AI-generated, at
+   least 50 GitHub stars, at least one release.
+2. The latest release (or, if there is none, the newest pre-release; these
+   entries get `include_prereleases`) must have a Windows zip, 7z or exe.
+   Builds for Linux, macOS, Android, iOS, 3DS, Switch and debug-symbol
+   archives are ignored.
+3. The executable was read from the zip's central directory (HTTP range
+   requests, nothing executed), then every entry was installed for real
+   with the `live_install` test. Windows Defender blocked the Skate 3 and
+   The Simpsons Game recomp downloads, so they are not in the catalog.
+4. `asset_pattern` replaces version numbers with a version-only wildcard,
+   so new releases still match; `verify-catalog` passes for all entries.
+5. `maturity` is `playable` for stable releases at version 1.0 or later,
+   or with high completeness and at least 300 stars; everything else
+   (0.x versions, alpha/beta/dev tags, pre-releases) is `experimental`.
+
+Left out on purpose: builder tools for other consoles (3DS, PSP, DS),
+Switch titles, a Pokémon fan remake, engine demos, duplicate forks, bare
+launchers that download more content themselves, and Dinosaur Planet (the
+game was never released). Generated entries have a generic game data hint
+and a minimal `preserve` list; files the port creates are kept on updates
+regardless.
+
 ## Verified details
 
 - Zelda64Recomp saves: `%LOCALAPPDATA%\Zelda64Recompiled\saves`; portable
