@@ -8,9 +8,9 @@ made by the recompilation and decompilation community.**
 Find a port, install it with one click, keep it updated without losing your saves,
 and start it from the app, the start menu or Steam.
 
-[**Download for Windows**](https://github.com/junkx420/ReCompX-Store/releases/latest) ·
-[What's new](https://github.com/junkx420/ReCompX-Store/releases) ·
-[Report a problem](https://github.com/junkx420/ReCompX-Store/issues)
+[**Download for Windows**](https://github.com/junkx420/RecompHub/releases/latest) ·
+[What's new](https://github.com/junkx420/RecompHub/releases) ·
+[Report a problem](https://github.com/junkx420/RecompHub/issues)
 
 <img src="docs/screenshot.png" alt="RecompHub showing the catalog of ports" width="820">
 
@@ -39,7 +39,7 @@ and start it from the app, the start menu or Steam.
 ## Install
 
 1. Download `RecompHub_<version>_x64-setup.exe` from the
-   [latest release](https://github.com/junkx420/ReCompX-Store/releases/latest).
+   [latest release](https://github.com/junkx420/RecompHub/releases/latest).
 2. Run it. It installs for your user only and needs no administrator rights.
 
 Requires Windows 10 or 11, 64-bit.
@@ -73,7 +73,7 @@ check the project page.
 **A port does not work.**
 Problems with a game itself belong to that port's project (link on its detail page).
 Problems with installing, updating or the app go
-[here](https://github.com/junkx420/ReCompX-Store/issues).
+[here](https://github.com/junkx420/RecompHub/issues).
 
 ## Thanks
 

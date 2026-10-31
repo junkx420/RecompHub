@@ -10,7 +10,12 @@ use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
 pub const DEFAULT_CATALOG_URL: &str =
-    "https://raw.githubusercontent.com/junkx420/ReCompX-Store/main/catalog/catalog.json";
+    "https://raw.githubusercontent.com/junkx420/RecompHub/main/catalog/catalog.json";
+
+/// Earlier defaults (the repository was called ReCompX-Store); saved
+/// settings still holding one get the current default.
+const OLD_DEFAULT_CATALOG_URLS: &[&str] =
+    &["https://raw.githubusercontent.com/junkx420/ReCompX-Store/main/catalog/catalog.json"];
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "lowercase")]
@@ -63,8 +68,13 @@ impl Settings {
     /// aside to `settings.json.broken` and defaults are used.
     pub fn load(path: &Path) -> Self {
         match std::fs::read(path) {
-            Ok(bytes) => match serde_json::from_slice(&bytes) {
-                Ok(settings) => settings,
+            Ok(bytes) => match serde_json::from_slice::<Self>(&bytes) {
+                Ok(mut settings) => {
+                    if OLD_DEFAULT_CATALOG_URLS.contains(&settings.catalog_url.as_str()) {
+                        settings.catalog_url = DEFAULT_CATALOG_URL.to_owned();
+                    }
+                    settings
+                }
                 Err(err) => {
                     tracing::warn!(%err, "settings.json is invalid, using defaults");
                     let _ = std::fs::rename(path, path.with_extension("json.broken"));
@@ -141,6 +151,21 @@ mod tests {
         };
         changed.save(&path).unwrap();
         assert_eq!(Settings::load(&path), changed);
+    }
+
+    #[test]
+    fn old_default_catalog_url_is_migrated() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("settings.json");
+        let old = format!(r#"{{"catalog_url":"{}"}}"#, OLD_DEFAULT_CATALOG_URLS[0]);
+        std::fs::write(&path, old).unwrap();
+        assert_eq!(Settings::load(&path).catalog_url, DEFAULT_CATALOG_URL);
+        // A URL the user chose stays.
+        std::fs::write(&path, r#"{"catalog_url":"https://example.com/c.json"}"#).unwrap();
+        assert_eq!(
+            Settings::load(&path).catalog_url,
+            "https://example.com/c.json"
+        );
     }
 
     #[test]

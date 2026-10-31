@@ -34,7 +34,7 @@
     "active": true,
     "targets": ["nsis"],
     "publisher": "RecompHub contributors",
-    "homepage": "https://github.com/junkx420/ReCompX-Store",
+    "homepage": "https://github.com/junkx420/RecompHub",
     "license": "GPL-3.0-or-later",
     "category": "Game",
     "shortDescription": "Store for native PC ports of recompiled and decompiled games",
@@ -56,7 +56,7 @@
   "plugins": {
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENEMzY3NjE1MjQ1NEQ2NzQKUldSMDFsUWtGWFkyelc3UnU1TmlHTHgwZy9sV1ZLcWxrOXNNOGRJbmJ6SEtENE00V2pxVXZMR00K",
-      "endpoints": ["https://github.com/junkx420/ReCompX-Store/releases/latest/download/latest.json"],
+      "endpoints": ["https://github.com/junkx420/RecompHub/releases/latest/download/latest.json"],
       "windows": { "installMode": "passive" }
     }
   }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/junkx420/ReCompX-Store/catalog/catalog.schema.json",
+  "$id": "https://github.com/junkx420/RecompHub/catalog/catalog.schema.json",
   "title": "RecompHub catalog",
   "description": "List of native PC ports that RecompHub can install. Entries point to official GitHub release assets only; never to ROMs, ISOs or other game data.",
   "type": "object",

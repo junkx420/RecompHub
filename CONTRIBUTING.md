@@ -4,7 +4,7 @@ Thanks for helping. There are three common ways to contribute.
 
 ## Report a problem
 
-Open an [issue](https://github.com/junkx420/ReCompX-Store/issues) with what you did,
+Open an [issue](https://github.com/junkx420/RecompHub/issues) with what you did,
 what happened, and the RecompHub version (Settings, About). Logs are in
 `%LOCALAPPDATA%\RecompHub\logs`; each game's own output is in `logs\<id>.log`.
 

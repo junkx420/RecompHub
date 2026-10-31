@@ -23,7 +23,7 @@ Handover notes so any session (cloud or local) can continue the work.
   and stores the private key as GitHub secret `TAURI_SIGNING_PRIVATE_KEY`.
   Only the public key goes into `tauri.conf.json`.
 - Default catalog URL:
-  `https://raw.githubusercontent.com/junkx420/ReCompX-Store/main/catalog/catalog.json`.
+  `https://raw.githubusercontent.com/junkx420/RecompHub/main/catalog/catalog.json`.
 - Catalog extensions beyond the original spec: `release_tag` (rolling CI
   releases), `user_data_paths` (saves outside the game folder), `md5` as an
   alternative to `sha1` in known dumps, `other_known_hashes` for precise
@@ -193,5 +193,8 @@ record, the previous-version backup, shortcuts and Steam entries go.
 
 - Catalog asset patterns are unverified except Perfect Dark; the CI job
   `verify-catalog` checks them (see `catalog/RESEARCH.md`).
-- The app is called RecompHub; the repository is ReCompX-Store. Rename not
-  decided yet.
+- The repository was renamed from ReCompX-Store to RecompHub on 31 October
+  2026. Version 0.1.0 has the old URLs built in and relies on GitHub's
+  redirects: never create a new repository named `junkx420/ReCompX-Store`,
+  or those installs lose catalog and updates. Saved settings with the old
+  catalog URL are migrated on load (`settings.rs`).

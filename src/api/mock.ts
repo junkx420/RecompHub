@@ -20,7 +20,7 @@ let settings: Settings = {
   language: "system",
   theme: "system",
   library_dir: null,
-  catalog_url: "https://raw.githubusercontent.com/junkx420/ReCompX-Store/main/catalog/catalog.json",
+  catalog_url: "https://raw.githubusercontent.com/junkx420/RecompHub/main/catalog/catalog.json",
   check_updates: true,
   desktop_shortcut: false,
   custom_sources: [],
